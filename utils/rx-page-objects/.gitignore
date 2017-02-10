@@ -9,5 +9,7 @@ typings/
 # eventually, all src/*.page.js files
 # can be ignored with a glob.
 src/rxComponent.js
+src/rxAccountInfo.page.js
+test/rxAccountInfo.midway.js
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
