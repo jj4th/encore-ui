@@ -13,6 +13,8 @@ src/rxAccountInfo.page.js
 test/rxAccountInfo.midway.js
 src/rxActionMenu.page.js
 test/rxActionMenu.midway.js
+src/rxAge.page.js
+test/rxAge.midway.js
 
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
