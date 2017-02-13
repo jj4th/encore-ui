@@ -3,9 +3,8 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import {rxActionMenu, rxAction} from '../index';
+import {rxActionMenu, rxAction, rxMisc} from '../index';
 
-let rxMisc = require('../src/rxMisc.page').rxMisc;
 let rxNotify = require('../src/rxNotify.page').rxNotify;
 let demoPage = require('../../demo.page');
 
