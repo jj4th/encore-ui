@@ -3,9 +3,8 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import {rxAccountInfo, rxAccountInfoBadge} from '../index';
+import {rxAccountInfo, rxAccountInfoBadge, rxNotify} from '../index';
 
-let notifications = require('../src/rxNotify.page').rxNotify;
 let demoPage = require('../../demo.page');
 
 describe('elements:account', () => {
@@ -101,12 +100,12 @@ describe('elements:account', () => {
 
         it('should show an error notification when it cannot load badges', () => {
             var errorMessage = 'Error retrieving badges for this account';
-            expect(notifications.byStack('badgeError').isPresent(errorMessage)).to.eventually.be.true;
+            expect(rxNotify.byStack('badgeError').isPresent(errorMessage)).to.eventually.be.true;
         });
 
         it('should show an error notification when it cannot load account name', () => {
             var errorMessage = 'Error retrieving account name';
-            expect(notifications.byStack('nameError').isPresent(errorMessage)).to.eventually.be.true;
+            expect(rxNotify.byStack('nameError').isPresent(errorMessage)).to.eventually.be.true;
         });
     });
 
