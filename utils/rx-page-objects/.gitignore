@@ -15,6 +15,7 @@ src/rxActionMenu.page.js
 test/rxActionMenu.midway.js
 src/rxAge.page.js
 test/rxAge.midway.js
+test/rxAutoSave.midway.js
 
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
