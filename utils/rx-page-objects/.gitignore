@@ -17,3 +17,5 @@ test/rxActionMenu.midway.js
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
 src/rxMisc.page.js
+src/rxNotify.page.js
+test/rxNotify.midway.js
