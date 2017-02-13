@@ -1,6 +1,7 @@
 export {rxComponentElement} from './src/rxComponent';
 export {rxAccountInfo, rxAccountInfoBadge} from './src/rxAccountInfo.page';
 export {rxActionMenu, rxAction} from './src/rxActionMenu.page';
+export {rxAge} from './src/rxAge.page';
 export {rxDatePicker} from './src/rxDatePicker.page';
 export {rxMisc} from './src/rxMisc.page';
 export {rxNotify, rxNotification} from './src/rxNotify.page';
