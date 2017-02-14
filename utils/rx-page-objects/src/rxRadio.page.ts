@@ -1,23 +1,23 @@
 'use strict';
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-const protractor_1 = require("protractor");
-const rxComponent_1 = require("./rxComponent");
-const _ = require("lodash");
+
+import {ElementFinder, ElementArrayFinder} from 'protractor';
+import {$, $$, browser, by} from 'protractor';
+import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
+import * as _ from 'lodash';
+
 /**
  * @class
  */
-class rxRadio extends rxComponent_1.rxComponentElement {
+
+export class rxRadio extends rxComponentElement {
     get eleWrapper() {
-        return this.element(protractor_1.by.xpath('..'));
+        return this.element(by.xpath('..'));
     }
+
     get eleFakeRadio() {
         return this.eleWrapper.$('.fake-checkbox');
     }
+
     /**
      * @description Whether or not the element in question is a radio button.
      * Useful for situations where input types might change in the future, ensuring that the expected one is being used.
@@ -27,6 +27,7 @@ class rxRadio extends rxComponent_1.rxComponentElement {
             return type === 'radio';
         });
     }
+
     /**
      * @description Whether the radio button is valid.
      */
@@ -35,17 +36,21 @@ class rxRadio extends rxComponent_1.rxComponentElement {
             return _.includes(classes.split(' '), 'ng-valid');
         });
     }
+
     /**
      * @description Whether the radio element is currently displayed.
      */
+    @OverrideWebdriver
     isDisplayed() {
         return this.eleFakeRadio.isPresent().then((isFakeRadio) => {
             return isFakeRadio ? this.eleFakeRadio.isDisplayed() : this.isDisplayed();
         });
     }
+
     /**
      * @description Whether or not the radio element is enabled.
      */
+    @OverrideWebdriver
     isEnabled() {
         return this.eleFakeRadio.isPresent().then((isFakeRadio) => {
             if (isFakeRadio) {
@@ -56,6 +61,7 @@ class rxRadio extends rxComponent_1.rxComponentElement {
             return this.isEnabled();
         });
     }
+
     /**
      * @description Makes sure that the radio button is selected. If the radio button is already
      * selected, this function will do nothing.
@@ -68,15 +74,9 @@ class rxRadio extends rxComponent_1.rxComponentElement {
         });
     }
 }
-__decorate([
-    rxComponent_1.OverrideWebdriver
-], rxRadio.prototype, "isDisplayed", null);
-__decorate([
-    rxComponent_1.OverrideWebdriver
-], rxRadio.prototype, "isEnabled", null);
-exports.rxRadio = rxRadio;
-function rxRadioAccessor(elem) {
-    return (target, propertyKey) => {
+
+export function rxRadioAccessor(elem: ElementFinder) {
+    return (target, propertyKey): any => {
         let radio = new rxRadio(elem);
         return {
             get: function () {
@@ -89,7 +89,5 @@ function rxRadioAccessor(elem) {
                 }
             }
         };
-    };
-}
-exports.rxRadioAccessor = rxRadioAccessor;
-;
+    }
+};

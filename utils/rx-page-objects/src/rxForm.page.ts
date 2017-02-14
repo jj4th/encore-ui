@@ -1,6 +1,12 @@
 'use strict';
-const _ = require("lodash");
+
+import {ElementFinder, ElementArrayFinder} from 'protractor';
+import {$, $$, browser, by} from 'protractor';
+import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
+import * as _ from 'lodash';
+
 let rxFieldName = require('./rxFieldName.page').rxFieldName;
+
 /**
  * @description
  * Generates a getter and a setter for a text field on your page.
@@ -15,8 +21,8 @@ let rxFieldName = require('./rxFieldName.page').rxFieldName;
  *     expect(yourPage.plainTextbox).to.eventually.equal('My Username'); // getter
  * });
  */
-function textFieldAccessor(elem) {
-    return function (target, propertyKey) {
+export function textFieldAccessor(elem: ElementFinder) {
+    return function (target, propertyKey): any {
         return {
             get: function () {
                 return elem.getAttribute('value');
@@ -25,20 +31,15 @@ function textFieldAccessor(elem) {
                 elem.clear();
                 elem.sendKeys(input);
             }
-        };
+        }
     };
 }
-exports.textFieldAccessor = textFieldAccessor;
+
 /**
  * @class rxForm
  */
-class rxForm {
-    constructor() {
-        /**
-         * @description **ALIASED** Directly uses {@link rxFieldName}.
-         */
-        this.fieldName = rxFieldName;
-    }
+export class rxForm {
+
     /**
      * @description
      * Set `value` in `formData` to the page object's current method `key`.
@@ -76,6 +77,9 @@ class rxForm {
             page[key] = value;
         });
     }
-}
-exports.rxForm = rxForm;
-;
+
+    /**
+     * @description **ALIASED** Directly uses {@link rxFieldName}.
+     */
+    fieldName = rxFieldName;
+};

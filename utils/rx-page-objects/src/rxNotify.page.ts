@@ -3,7 +3,7 @@
 
 import {ElementFinder, ElementArrayFinder} from 'protractor';
 import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
+import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
 
 /**
  * @description Functions for interacting with a single notification.
@@ -40,8 +40,9 @@ export class rxNotification extends rxComponentElement {
      *     expect(notificationText).to.eventually.equal('Something bad happened: Contact joe@rackspace.com');
      * });
      */
-    getMessage() {
-        return this.getText().then((text) => {
+    @OverrideWebdriver
+    getText() {
+        return this.element(by.xpath('.')).getText().then((text) => {
             // Remove any lingering '× ' characters.
             return text.split('\n')[0].trim();
         });
