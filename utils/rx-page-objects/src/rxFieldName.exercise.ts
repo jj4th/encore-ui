@@ -1,15 +1,23 @@
-var _ = require('lodash');
+'use strict';
+
+import {expect} from 'chai';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+
+import * as component from './rxFieldName.page';
+import {Promise} from './rxComponent';
+
+interface rxFieldNameExerciseOptions {
+    instance?: component.rxFieldName;
+    visible?: boolean,
+    present?: boolean,
+    required?: boolean
+}
 
 /**
  * rxFieldName exercises.
- * @exports exercise/rxFieldName
- * @param {Object} options - Test options. Used to build valid tests.
- * @param {rxFieldName} options.instance - Component to exercise.
- * @param {string} [options.visible=true] - Determines if the field name is visible.
- * @param {string} [options.present=true] - Determines if the field name is present in the DOM.
- * @param {string} [options.required=false] - Determines if the field name displays as a required field.
  */
-exports.rxFieldName = function (options) {
+export function rxFieldName (options: rxFieldNameExerciseOptions) {
     if (options === undefined) {
         options = {};
     }
@@ -20,41 +28,41 @@ exports.rxFieldName = function (options) {
         required: false
     });
 
-    return function () {
+    return () => {
         var component;
 
-        before(function () {
+        before(() => {
             component = options.instance;
         });
 
-        it('should ' + (options.visible ? 'be' : 'not be') + ' visible', function () {
+        it('should ' + (options.visible ? 'be' : 'not be') + ' visible', () => {
             expect(component.isDisplayed()).to.eventually.eq(options.visible);
         });
 
         if (options.present === true) {
-            it('should be present', function () {
+            it('should be present', () => {
                 expect(component.isPresent()).to.eventually.be.true;
             });
 
-            it('should have a symbol present', function () {
+            it('should have a symbol present', () => {
                 expect(component.isSymbolPresent()).to.eventually.be.true;
             });
         } else {
-            it('should not be present', function () {
+            it('should not be present', () => {
                 expect(component.isPresent()).to.eventually.be.false;
             });
 
-            it('should not have a symbol present', function () {
+            it('should not have a symbol present', () => {
                 expect(component.isSymbolPresent()).to.eventually.be.false;
             });
         }
 
         if (options.required === true) {
-            it('should have a symbol visible', function () {
+            it('should have a symbol visible', () => {
                 expect(component.isSymbolDisplayed()).to.eventually.be.true;
             });
         } else {
-            it('should not have a symbol visible', function () {
+            it('should not have a symbol visible', () => {
                 expect(component.isSymbolDisplayed()).to.eventually.be.false;
             });
         }

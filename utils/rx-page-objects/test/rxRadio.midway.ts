@@ -1,220 +1,229 @@
-var rxRadioPage = encore.rxRadio;
+'use strict';
 
-describe('rxRadio', function () {
+import {expect} from 'chai';
+import {$, $$} from 'protractor';
+import * as moment from 'moment';
+import * as _ from 'lodash';
+
+import * as encore from '../index';
+
+let demoPage = require('../../demo.page');
+
+describe('rxRadio', () => {
     var subject;
 
-    before(function () {
+    before(() => {
         demoPage.go('#/elements/Forms');
     });
 
     describe('(State) Valid Enabled Selected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radValidEnabledOne')),
+        instance: new encore.rxRadio($('#radValidEnabledOne')),
         disabled: false,
         selected: true,
         valid: true
     }));
 
     describe('(State) Valid Enabled Unselected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radValidEnabledTwo')),
+        instance: new encore.rxRadio($('#radValidEnabledTwo')),
         disabled: false,
         selected: false,
         valid: true
     }));
 
     describe('(State) Valid Disabled Selected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radValidDisabledOne')),
+        instance: new encore.rxRadio($('#radValidDisabledOne')),
         disabled: true,
         selected: true,
         valid: true
     }));
 
     describe('(State) Valid Disabled Unselected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radValidDisabledTwo')),
+        instance: new encore.rxRadio($('#radValidDisabledTwo')),
         disabled: true,
         selected: false,
         valid: true
     }));
 
     describe('(State) Valid NG-Disabled Selected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radValidNgDisabledOne')),
+        instance: new encore.rxRadio($('#radValidNgDisabledOne')),
         disabled: true,
         selected: true,
         valid: true
     }));
 
     describe('(State) Valid NG-Disabled Unselected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radValidNgDisabledTwo')),
+        instance: new encore.rxRadio($('#radValidNgDisabledTwo')),
         disabled: true,
         selected: false,
         valid: true
     }));
 
     describe('(State) Invalid Enabled Selected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radInvalidEnabledOne')),
+        instance: new encore.rxRadio($('#radInvalidEnabledOne')),
         disabled: false,
         selected: true,
         valid: false
     }));
 
     describe('(State) Invalid Enabled Unselected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radInvalidEnabledTwo')),
+        instance: new encore.rxRadio($('#radInvalidEnabledTwo')),
         disabled: false,
         selected: false,
         valid: false
     }));
 
     describe('(State) Invalid Disabled Selected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radInvalidDisabledOne')),
+        instance: new encore.rxRadio($('#radInvalidDisabledOne')),
         disabled: true,
         selected: true,
         valid: false
     }));
 
     describe('(State) Invalid Disabled Unselected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radInvalidDisabledTwo')),
+        instance: new encore.rxRadio($('#radInvalidDisabledTwo')),
         disabled: true,
         selected: false,
         valid: false
     }));
 
     describe('(State) Invalid NG-Disabled Selected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radInvalidNgDisabledOne')),
+        instance: new encore.rxRadio($('#radInvalidNgDisabledOne')),
         disabled: true,
         selected: true,
         valid: false
     }));
 
     describe('(State) Invalid NG-Disabled Unselected', encore.exercise.rxRadio({
-        instance: encore.rxRadio.initialize($('#radInvalidNgDisabledTwo')),
+        instance: new encore.rxRadio($('#radInvalidNgDisabledTwo')),
         disabled: true,
         selected: false,
         valid: false
     }));
 
-    describe('plain HTML radio buttons', function () {
+    describe('plain HTML radio buttons', () => {
         describe('Valid Enabled Unchecked', encore.exercise.rxRadio({
-            instance: encore.rxRadio.initialize($('#plainRadNormal')),
+            instance: new encore.rxRadio($('#plainRadNormal')),
             disabled: false,
             selected: false,
             valid: false
         }));
 
         describe('Valid Disabled Unchecked', encore.exercise.rxRadio({
-            instance: encore.rxRadio.initialize($('#plainRadDisabled')),
+            instance: new encore.rxRadio($('#plainRadDisabled')),
             disabled: true,
             selected: false
         }));
 
         describe('Valid Enabled Checked', encore.exercise.rxRadio({
-            instance: encore.rxRadio.initialize($('#plainRadChecked')),
+            instance: new encore.rxRadio($('#plainRadChecked')),
             disabled: false,
             selected: false
         }));
     });
 
-    describe('Show/Hide Input', function () {
+    describe('Show/Hide Input', () => {
         var radHate, radLike, radLove;
 
-        before(function () {
-            radHate = rxRadioPage.initialize($('#radHateBacon'));
-            radLike = rxRadioPage.initialize($('#radLikeBacon'));
-            radLove = rxRadioPage.initialize($('#radLoveBacon'));
+        before(() => {
+            radHate = new encore.rxRadio($('#radHateBacon'));
+            radLike = new encore.rxRadio($('#radLikeBacon'));
+            radLove = new encore.rxRadio($('#radLoveBacon'));
         });
 
-        describe('"I hate bacon"', function () {
-            before(function () {
+        describe('"I hate bacon"', () => {
+            before(() => {
                 subject = radHate;
             });
 
-            it('should be visible', function () {
+            it('should be visible', () => {
                 expect(subject.isDisplayed()).to.eventually.be.true;
             });
 
-            it('should not be valid', function () {
+            it('should not be valid', () => {
                 expect(subject.isValid()).to.eventually.be.false;
             });
         });
 
-        describe('"Actually, I LOVE bacon"', function () {
-            before(function () {
+        describe('"Actually, I LOVE bacon"', () => {
+            before(() => {
                 subject = radLove;
             });
 
-            it('should not be visible', function () {
+            it('should not be visible', () => {
                 expect(subject.isDisplayed()).to.eventually.be.false;
             });
 
-            it('should not be valid', function () {
+            it('should not be valid', () => {
                 expect(subject.isValid()).to.eventually.be.false;
             });
         });
 
-        describe('"I like bacon"', function () {
-            before(function () {
+        describe('"I like bacon"', () => {
+            before(() => {
                 subject = radLike;
             });
 
-            it('should be visible', function () {
+            it('should be visible', () => {
                 expect(subject.isDisplayed()).to.eventually.be.true;
             });
 
-            it('should not be valid', function () {
+            it('should not be valid', () => {
                 expect(subject.isValid()).to.eventually.be.false;
             });
 
-            describe('when selected', function () {
-                before(function () {
+            describe('when selected', () => {
+                before(() => {
                     subject.select();
                 });
 
-                it('should be valid', function () {
+                it('should be valid', () => {
                     expect(subject.isValid()).to.eventually.be.true;
                 });
 
-                describe('"I hate bacon"', function () {
-                    it('should be valid', function () {
+                describe('"I hate bacon"', () => {
+                    it('should be valid', () => {
                         expect(radHate.isValid()).to.eventually.be.true;
                     });
                 });
 
-                describe('"Actually, I LOVE bacon"', function () {
-                    before(function () {
+                describe('"Actually, I LOVE bacon"', () => {
+                    before(() => {
                         subject = radLove;
                     });
 
-                    it('should be visible', function () {
+                    it('should be visible', () => {
                         expect(subject.isDisplayed()).to.eventually.be.true;
                     });
 
-                    it('should be valid', function () {
+                    it('should be valid', () => {
                         expect(subject.isValid()).to.eventually.be.true;
                     });
                 });
             });
         });
 
-        describe('plain HTML radio buttons', function () {
+        describe('plain HTML radio buttons', () => {
             var willHide;
             var willBeHidden;
             var otherRadio;
 
-            before(function () {
-                willHide = encore.rxRadio.initialize($('#plainRadRemoveRadio'));
-                willBeHidden = encore.rxRadio.initialize($('#plainRadRemoveable'));
-                otherRadio = encore.rxRadio.initialize($('#plainRadNormal'));
+            before(() => {
+                willHide = new encore.rxRadio($('#plainRadRemoveRadio'));
+                willBeHidden = new encore.rxRadio($('#plainRadRemoveable'));
+                otherRadio = new encore.rxRadio($('#plainRadNormal'));
             });
 
-            it('should show the radio button by default', function () {
+            it('should show the radio button by default', () => {
                 expect(willBeHidden.isPresent()).to.eventually.be.false;
             });
 
-            it('should remove the radio button from the DOM', function () {
+            it('should remove the radio button from the DOM', () => {
                 willHide.select();
                 expect(willBeHidden.isDisplayed()).to.eventually.be.true;
                 expect(willBeHidden.isPresent()).to.eventually.be.true;
             });
 
-            it('should put the radio button back', function () {
+            it('should put the radio button back', () => {
                 otherRadio.select();
                 expect(willBeHidden.isPresent()).to.eventually.be.false;
             });
@@ -222,54 +231,54 @@ describe('rxRadio', function () {
         });
     });//Show/Hide Input
 
-    describe('Destroy Input', function () {
+    describe('Destroy Input', () => {
         var radCreated, radDestroyed, radTargetCreated;
 
-        before(function () {
-            radCreated = rxRadioPage.initialize($('#radCreated'));
-            radDestroyed = rxRadioPage.initialize($('#radDestroyed'));
-            radTargetCreated = rxRadioPage.initialize($('#radTargetCreated'));
+        before(() => {
+            radCreated = new encore.rxRadio($('#radCreated'));
+            radDestroyed = new encore.rxRadio($('#radDestroyed'));
+            radTargetCreated = new encore.rxRadio($('#radTargetCreated'));
         });
 
-        it('"Destroyed" should be selected', function () {
+        it('"Destroyed" should be selected', () => {
             expect(radDestroyed.isSelected()).to.eventually.be.true;
         });
 
-        it('"Created" should not be selected', function () {
+        it('"Created" should not be selected', () => {
             expect(radCreated.isSelected()).to.eventually.be.false;
         });
 
-        it('target radio should not be present', function () {
-            radTargetCreated = rxRadioPage.initialize($('#radTargetCreated'));
+        it('target radio should not be present', () => {
+            radTargetCreated = new encore.rxRadio($('#radTargetCreated'));
             expect(radTargetCreated.isPresent()).to.eventually.be.false;
         });
 
-        describe('when "Created" is selected', function () {
-            before(function () {
+        describe('when "Created" is selected', () => {
+            before(() => {
                 radCreated.select();
             });
 
-            it('"Destroyed" should not be selected', function () {
+            it('"Destroyed" should not be selected', () => {
                 expect(radDestroyed.isSelected()).to.eventually.be.false;
             });
 
-            it('target radio should be present', function () {
-                radTargetCreated = rxRadioPage.initialize($('#selTargetCreated'));
+            it('target radio should be present', () => {
+                radTargetCreated = new encore.rxRadio($('#selTargetCreated'));
                 expect(radTargetCreated.isPresent()).to.eventually.be.true;
             });
         });
 
-        describe('when "Destroyed" is selected again', function () {
-            before(function () {
+        describe('when "Destroyed" is selected again', () => {
+            before(() => {
                 radDestroyed.select();
             });
 
-            it('"Created" should not be selected', function () {
+            it('"Created" should not be selected', () => {
                 expect(radCreated.isSelected()).to.eventually.be.false;
             });
 
-            it('target radio should not be present', function () {
-                radTargetCreated = rxRadioPage.initialize($('#radTargetCreated'));
+            it('target radio should not be present', () => {
+                radTargetCreated = new encore.rxRadio($('#radTargetCreated'));
                 expect(radTargetCreated.isPresent()).to.eventually.be.false;
             });
         });

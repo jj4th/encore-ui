@@ -1,12 +1,23 @@
-describe('rxSelect', function () {
+'use strict';
+
+import {expect} from 'chai';
+import {$, $$} from 'protractor';
+import * as moment from 'moment';
+import * as _ from 'lodash';
+
+import * as encore from '../index';
+
+let demoPage = require('../../demo.page');
+
+describe('rxSelect', () => {
     var subject;
 
-    before(function () {
+    before(() => {
         demoPage.go('#/elements/Forms');
     });
 
     describe('(State) Valid Enabled', encore.exercise.rxSelect({
-        instance: encore.rxSelect.initialize($('#selValidEnabled')),
+        instance: new encore.rxSelect($('#selValidEnabled')),
         disabled: false,
         visible: true,
         valid: true,
@@ -14,7 +25,7 @@ describe('rxSelect', function () {
     }));
 
     describe('(State) Valid NG-Disabled', encore.exercise.rxSelect({
-        instance: encore.rxSelect.initialize($('#selValidNgDisabled')),
+        instance: new encore.rxSelect($('#selValidNgDisabled')),
         disabled: true,
         visible: true,
         valid: true,
@@ -22,7 +33,7 @@ describe('rxSelect', function () {
     }));
 
     describe('(State) Valid Disabled', encore.exercise.rxSelect({
-        instance: encore.rxSelect.initialize($('#selValidDisabled')),
+        instance: new encore.rxSelect($('#selValidDisabled')),
         disabled: true,
         visible: true,
         valid: true,
@@ -30,7 +41,7 @@ describe('rxSelect', function () {
     }));
 
     describe('(State) Invalid Enabled', encore.exercise.rxSelect({
-        instance: encore.rxSelect.initialize($('#selInvalidEnabled')),
+        instance: new encore.rxSelect($('#selInvalidEnabled')),
         disabled: false,
         visible: true,
         valid: false,
@@ -38,7 +49,7 @@ describe('rxSelect', function () {
     }));
 
     describe('(State) Invalid NG-Disabled', encore.exercise.rxSelect({
-        instance: encore.rxSelect.initialize($('#selInvalidNgDisabled')),
+        instance: new encore.rxSelect($('#selInvalidNgDisabled')),
         disabled: true,
         visible: true,
         valid: false,
@@ -46,63 +57,63 @@ describe('rxSelect', function () {
     }));
 
     describe('(State) Invalid Disabled', encore.exercise.rxSelect({
-        instance: encore.rxSelect.initialize($('#selInvalidDisabled')),
+        instance: new encore.rxSelect($('#selInvalidDisabled')),
         disabled: true,
         visible: true,
         valid: false,
         selectedText: 'Disabled by \'disabled\' attribute'
     }));
 
-    describe('plain HTML select elements', function () {
+    describe('plain HTML select elements', () => {
         describe('Enabled Default Starting Value', encore.exercise.rxSelect({
-            instance: encore.rxSelect.initialize($('#plainSelNormal')),
+            instance: new encore.rxSelect($('#plainSelNormal')),
             disabled: false,
             valid: false,
             selectedText: 'Plain HTML Select Option'
         }));
 
         describe('Disabled', encore.exercise.rxSelect({
-            instance: encore.rxSelect.initialize($('#plainSelDisabled')),
+            instance: new encore.rxSelect($('#plainSelDisabled')),
             disabled: true,
             valid: false,
             selectedText: 'Disabled HTML Select Option'
         }));
 
         describe('Valid Enabled Non-Default Starting Value', encore.exercise.rxSelect({
-            instance: encore.rxSelect.initialize($('#plainSelSecondSelected')),
+            instance: new encore.rxSelect($('#plainSelSecondSelected')),
             disabled: false,
             valid: true,
             selectedText: 'Non Default Starting Option'
         }));
     });
 
-    describe('How do you like your bacon?', function () {
+    describe('How do you like your bacon?', () => {
         var slowClick = false;
-        before(function () {
-            subject = encore.rxSelect.initialize($('#selBaconPrep'));
+        before(() => {
+            subject = new encore.rxSelect($('#selBaconPrep'));
         });
 
-        it('should be invalid', function () {
+        it('should be invalid', () => {
             expect(subject.isValid()).to.eventually.be.false;
         });
 
-        it('should have 5 options', function () {
-            expect(subject.optionCount()).to.eventually.equal(5);
+        it('should have 5 options', () => {
+            expect(subject.options.count()).to.eventually.equal(5);
         });
 
-        it('should contain desired option', function () {
-            expect(subject.optionExists('Thick (borderline jerky)')).to.eventually.be.true;
+        it('should contain desired option', () => {
+            expect(subject.option('Thick (borderline jerky)').isPresent()).to.eventually.be.true;
         });
 
-        it('should not contain undesired option', function () {
-            expect(subject.optionExists('no preference')).to.eventually.be.false;
+        it('should not contain undesired option', () => {
+            expect(subject.option('no preference').isPresent()).to.eventually.be.false;
         });
 
-        it('should not report a different option as selected', function () {
+        it('should not report a different option as selected', () => {
             expect(subject.option('Thick (borderline jerky)').isSelected()).to.eventually.be.false;
         });
 
-        it('should have expected options', function () {
+        it('should have expected options', () => {
             var opts = [
                 'I do not like bacon',
                 'Thin (light and crispy)',
@@ -110,74 +121,74 @@ describe('rxSelect', function () {
                 'Thick (borderline jerky)',
                 'Crumbled (great on salads)',
             ];
-            expect(subject.options).to.eventually.eql(opts);
+            expect(subject.options.getText()).to.eventually.eql(opts);
         });
 
-        it('should have expected values', function () {
+        it('should have expected values', () => {
             var vals = [ '', 'thin', 'medium', 'thick', 'crumbled' ];
-            expect(subject.values).to.eventually.eql(vals);
+            expect(subject.options.getAttribute('value')).to.eventually.eql(vals);
         });
 
-        it('should have a selected option by default', function () {
+        it('should have a selected option by default', () => {
             /* redundant test, but moved from rxForm.midway.js */
             expect(subject.selectedOption.isSelected()).to.eventually.be.true;
         });
 
-        describe('selecting "Thin (light and crispy)"', function () {
+        describe('selecting "Thin (light and crispy)"', () => {
             var txt = 'Thin (light and crispy)';
             var val = 'thin';
 
-            beforeEach(function () {
+            beforeEach(() => {
                 subject.select(txt, slowClick);
             });
 
-            afterEach(function () {
+            afterEach(() => {
                 subject.select('I do not like bacon', slowClick);
             });
 
-            it('should be valid', function () {
+            it('should be valid', () => {
                 expect(subject.isValid()).to.eventually.be.true;
             });
 
-            it('should display correct text', function () {
+            it('should display correct text', () => {
                 expect(subject.selectedOption.getText()).to.eventually.eq(txt);
             });
 
-            it('should have correct value', function () {
-                expect(subject.selectedOption.value).to.eventually.eq(val);
+            it('should have correct value', () => {
+                expect(subject.selectedOption.getAttribute('value')).to.eventually.eq(val);
             });
         });
 
-        describe('Selecting "I do not like bacon"', function () {
-            before(function () {
+        describe('Selecting "I do not like bacon"', () => {
+            before(() => {
                 subject.select('I do not like bacon', slowClick);
             });
 
-            it('should not be valid', function () {
+            it('should not be valid', () => {
                 expect(subject.isValid()).to.eventually.be.false;
             });
         });
 
-        describe('plain HTML select elements', function () {
+        describe('plain HTML select elements', () => {
             var willHide;
             var willBeHidden;
 
-            before(function () {
-                willHide = encore.rxSelect.initialize($('#plainSelShowSelect'));
-                willBeHidden = encore.rxSelect.initialize($('#plainSelRemoveable'));
+            before(() => {
+                willHide = new encore.rxSelect($('#plainSelShowSelect'));
+                willBeHidden = new encore.rxSelect($('#plainSelRemoveable'));
             });
 
-            it('should show the select element by default', function () {
+            it('should show the select element by default', () => {
                 expect(willBeHidden.isPresent()).to.eventually.be.true;
                 expect(willBeHidden.isDisplayed()).to.eventually.be.true;
             });
 
-            it('should remove the select element to the DOM', function () {
+            it('should remove the select element to the DOM', () => {
                 willHide.select('Hide Next Select Box', slowClick);
                 expect(willBeHidden.isPresent()).to.eventually.be.false;
             });
 
-            it('should add the select element back', function () {
+            it('should add the select element back', () => {
                 willHide.select('Show Next Select Box', slowClick);
                 expect(willBeHidden.isPresent()).to.eventually.be.true;
                 expect(willBeHidden.isDisplayed()).to.eventually.be.true;
@@ -185,60 +196,60 @@ describe('rxSelect', function () {
         });
     });
 
-    describe('Show/Hide Select', function () {
+    describe('Show/Hide Select', () => {
         var checkbox;
 
-        before(function () {
-            checkbox = encore.rxCheckbox.initialize($('#chkShow'));
-            subject = encore.rxSelect.initialize($('#selTargetShow'));
+        before(() => {
+            checkbox = new encore.rxCheckbox($('#chkShow'));
+            subject = new encore.rxSelect($('#selTargetShow'));
         });
 
-        describe('when checkbox checked', function () {
-            before(function () {
+        describe('when checkbox checked', () => {
+            before(() => {
                 checkbox.select();
             });
 
-            it('should be visible', function () {
+            it('should be visible', () => {
                 expect(subject.isDisplayed()).to.eventually.be.true;
             });
         });
 
-        describe('when checkbox unchecked', function () {
-            before(function () {
+        describe('when checkbox unchecked', () => {
+            before(() => {
                 checkbox.deselect();
             });
 
-            it('should not be visible', function () {
+            it('should not be visible', () => {
                 expect(subject.isDisplayed()).to.eventually.be.false;
             });
         });
     });
 
-    describe('Destroy Select', function () {
+    describe('Destroy Select', () => {
         var radDestroyed, radCreated;
 
-        before(function () {
-            radDestroyed = encore.rxRadio.initialize($('#radDestroyed'));
-            radCreated = encore.rxRadio.initialize($('#radCreated'));
-            subject = encore.rxSelect.initialize($('#selTargetCreated'));
+        before(() => {
+            radDestroyed = new encore.rxRadio($('#radDestroyed'));
+            radCreated = new encore.rxRadio($('#radCreated'));
+            subject = new encore.rxSelect($('#selTargetCreated'));
         });
 
-        describe('when created', function () {
-            before(function () {
+        describe('when created', () => {
+            before(() => {
                 radCreated.select();
             });
 
-            it('should be present', function () {
+            it('should be present', () => {
                 expect(subject.isPresent()).to.eventually.be.true;
             });
         });
 
-        describe('when destroyed', function () {
-            before(function () {
+        describe('when destroyed', () => {
+            before(() => {
                 radDestroyed.select();
             });
 
-            it('should not be present', function () {
+            it('should not be present', () => {
                 expect(subject.isPresent()).to.eventually.be.false;
             });
         });

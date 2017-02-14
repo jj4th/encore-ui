@@ -4,8 +4,7 @@ import {expect} from 'chai';
 import {$$, $, element, by, browser} from 'protractor';
 import {rxNotify} from '../index';
 import * as _ from 'lodash';
-let rxForm = require('../src/rxForm.page').rxForm;
-let rxCheckbox = require('../src/rxCheckbox.page').rxCheckbox;
+import * as encore from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -17,16 +16,16 @@ let forAutoSaveToClear = () => {
 // anonymous page object
 class AutoSaving {
     fillForm(formData: any) {
-        rxForm.fill(this, formData);
+        encore.rxForm.fill(this, formData);
     }
 
     get checkbox () {
         let elem = element(by.model('formData.checkbox'));
-        return rxCheckbox.initialize(elem).isSelected();
+        return new encore.rxCheckbox(elem).isSelected();
     }
     set checkbox (enable) {
         let elem = element(by.model('formData.checkbox'));
-        let checkbox = rxCheckbox.initialize(elem);
+        let checkbox = new encore.rxCheckbox(elem);
         enable ? checkbox.select() : checkbox.deselect();
     }
 

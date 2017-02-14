@@ -1,18 +1,22 @@
-var _ = require('lodash');
+'use strict';
 
+import {expect} from 'chai';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+
+import * as component from './rxCheckbox.page';
+
+interface rxCheckboxExerciseOptions {
+    instance?: component.rxCheckbox;
+    selected?: boolean,
+    disabled?: boolean,
+    visible?: boolean,
+    valid?: boolean
+}
 /**
- * @function
  * @description rxCheckbox exercises
- * @exports exercise/rxCheckbox
- * @returns {function} A function to be passed to mocha's `describe`.
- * @param {Object} options - Test options. Used to build valid tests.
- * @param {rxCheckbox} options.instance - Component to exercise.
- * @param {Boolean} [options.disabled=false] - Whether the checkbox is disabled at the start of the exercise
- * @param {Boolean} [options.selected=false] - Whether the checkbox is selected at the start of the exercise
- * @param {Boolean} [options.visible=true] - Whether the checkbox is visible at the start of the exercise
- * @param {Boolean} [options.valid=true] - Whether the checkbox is valid at the start of the exercise
  */
-exports.rxCheckbox = function (options) {
+export function rxCheckbox(options: rxCheckboxExerciseOptions) {
     if (options === undefined) {
         options = {};
     }
@@ -24,35 +28,35 @@ exports.rxCheckbox = function (options) {
         valid: true
     });
 
-    return function () {
+    return () => {
         var component;
 
-        before(function () {
+        before(() => {
             component = options.instance;
         });
 
-        it('should be present', function () {
+        it('should be present', () => {
             expect(component.isPresent()).to.eventually.be.true;
         });
 
-        it('should be a checkbox', function () {
+        it('should be a checkbox', () => {
             expect(component.isCheckbox()).to.eventually.be.true;
         });
 
-        it('should ' + (options.visible ? 'be' : 'not be') + ' visible', function () {
+        it('should ' + (options.visible ? 'be' : 'not be') + ' visible', () => {
             expect(component.isDisplayed()).to.eventually.eq(options.visible);
         });
 
-        it('should ' + (options.disabled ? 'be' : 'not be') + ' disabled', function () {
+        it('should ' + (options.disabled ? 'be' : 'not be') + ' disabled', () => {
             expect(component.isEnabled()).to.eventually.eq(!options.disabled);
         });
 
-        it('should ' + (options.selected ? 'be' : 'not be') + ' selected', function () {
+        it('should ' + (options.selected ? 'be' : 'not be') + ' selected', () => {
             expect(component.isSelected()).to.eventually.eq(options.selected);
         });
 
         if (options.disabled) {
-            it('should not respond to selecting and unselecting', function () {
+            it('should not respond to selecting and unselecting', () => {
                 component.isSelected().then(function (selected) {
                     selected ? component.deselect() : component.select();
                     expect(component.isSelected()).to.eventually.equal(selected);
@@ -65,7 +69,7 @@ exports.rxCheckbox = function (options) {
                 });
             });
         } else {
-            it('should respond to selecting and unselecting', function () {
+            it('should respond to selecting and unselecting', () => {
                 component.isSelected().then(function (selected) {
                     selected ? component.deselect() : component.select();
                     expect(component.isSelected()).to.eventually.not.equal(selected);
@@ -77,7 +81,7 @@ exports.rxCheckbox = function (options) {
             });
         }
 
-        it('should ' + (options.valid ? 'be' : 'not be') + ' valid', function () {
+        it('should ' + (options.valid ? 'be' : 'not be') + ' valid', () => {
             expect(component.isValid()).to.eventually.eq(options.valid);
         });
     };
