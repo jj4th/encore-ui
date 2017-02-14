@@ -3,7 +3,7 @@
 
 import {ElementFinder, ElementArrayFinder} from 'protractor';
 import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
+import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
 
 /**
  * @description Functions for interacting with a single notification.
@@ -40,8 +40,9 @@ export class rxNotification extends rxComponentElement {
      *     expect(notificationText).to.eventually.equal('Something bad happened: Contact joe@rackspace.com');
      * });
      */
-    getMessage() {
-        return this.getText().then((text) => {
+    @OverrideWebdriver
+    getText() {
+        return this.element(by.xpath('.')).getText().then((text) => {
             // Remove any lingering '× ' characters.
             return text.split('\n')[0].trim();
         });
@@ -148,10 +149,6 @@ export class rxNotify {
     }
 
     /**
-     * @function
-     * @instance
-     * @param {String} notificationText - The text to search for in the current scope of notifications.
-     * @returns {rxNotify.notification}
      * @description The resulting notification object that matches the `notificationText`. This notification
      * is searched for using a partial text matching strategy. If more than one notification contains
      * `notificationText`, only the first will be returned.
@@ -167,8 +164,6 @@ export class rxNotify {
     }
 
     /**
-     * @function
-     * @instance
      * @description Close all notifications in the current scope of notifications.
      * @example
      * it('should close some notifications', function () {

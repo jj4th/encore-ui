@@ -62,7 +62,7 @@ describe('rxNotify', () => {
             });
 
             it('should have helpful information', () => {
-                expect(info.getMessage()).to.eventually.equal('Helpful Information');
+                expect(info.getText()).to.eventually.equal('Helpful Information');
             });
 
             it('should be dismissable', () => {
@@ -99,7 +99,7 @@ describe('rxNotify', () => {
             });
 
             it('should have done it', () => {
-                expect(success.getMessage()).to.eventually.equal('You did it!');
+                expect(success.getText()).to.eventually.equal('You did it!');
             });
 
         });
@@ -227,7 +227,7 @@ describe('rxNotify', () => {
         });
 
         it('should say hello', () => {
-            expect(notification.getMessage()).to.eventually.equal('Hello, world! This is a link.');
+            expect(notification.getText()).to.eventually.equal('Hello, world! This is a link.');
         });
 
         it('should not be dismissable', () => {

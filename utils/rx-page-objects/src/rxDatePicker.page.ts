@@ -48,7 +48,7 @@ export class rxDatePicker extends rxComponentElement {
         return this.isOpen().then(isOpen => {
             this.open(); // you have to in order to get to the dropdown
 
-            return rxSelect.initialize(currentMonth).selectedOption.getText().then(month => {
+            return new rxSelect(currentMonth).selectedOption.getText().then(month => {
                 // if datepicker was closed before starting, put it back
                 if (!isOpen) {
                     this.close();
@@ -68,7 +68,7 @@ export class rxDatePicker extends rxComponentElement {
         }
 
         let slowClick = false;
-        rxSelect.initialize(this.element(by.model('currentMonth'))).select(dropdownExpectedValue, slowClick);
+        new rxSelect(this.element(by.model('currentMonth'))).select(dropdownExpectedValue, slowClick);
     }
 
     /**
@@ -84,7 +84,7 @@ export class rxDatePicker extends rxComponentElement {
     get year(): AccessorPromiseString {
         return this.isOpen().then(isOpen => {
             this.open(); // you have to in order to get to the dropdown
-            let year = rxSelect.initialize(this.element(by.model('currentYear'))).selectedOption.getText();
+            let year = new rxSelect(this.element(by.model('currentYear'))).selectedOption.getText();
 
             // if datepicker was closed before starting, put it back
             if (!isOpen) {
@@ -97,7 +97,7 @@ export class rxDatePicker extends rxComponentElement {
     set year(value: AccessorPromiseString) {
         this.open();
         let slowClick = false;
-        rxSelect.initialize(this.element(by.model('currentYear'))).select(value, slowClick);
+        new rxSelect(this.element(by.model('currentYear'))).select(value, slowClick);
     }
 
     /**

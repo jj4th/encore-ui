@@ -2,6 +2,7 @@ var _ = require('lodash');
 var moment = require('moment');
 
 var rxSelect = require('./rxSelect.page').rxSelect;
+var rxSelectAccessor = require('./rxSelect.page').rxSelectAccessor;
 
 /**
  * @class
@@ -68,8 +69,8 @@ function rxTimePicker (rxTimePickerElement) {
     this.txtDisplayValue = this.rootElement.$('.displayValue');
 
     // Private Page Objects
-    this.pagePeriod = rxSelect.initialize(this.selPeriod);
-    this.pageUtcOffset = rxSelect.initialize(this.selUtcOffset);
+    this.pagePeriod = new rxSelect(this.selPeriod);
+    this.pageUtcOffset = new rxSelect(this.selUtcOffset);
 
     // Properties
     Object.defineProperties(this, {
@@ -99,9 +100,9 @@ function rxTimePicker (rxTimePickerElement) {
             }
         },//minutes
 
-        period: rxSelect.generateAccessor(this.selPeriod),
+        period: rxSelectAccessor(this.selPeriod)(),
 
-        utcOffset: rxSelect.generateAccessor(this.selUtcOffset),
+        utcOffset: rxSelectAccessor(this.selUtcOffset)(),
 
         time: {
             get: function () {

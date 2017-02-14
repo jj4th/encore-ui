@@ -287,11 +287,11 @@ describe('rxTimePicker', function () {
 
             describe('period', function () {
                 it('should default to AM', function () {
-                    expect(picker.period.value).to.eventually.eq('AM');
+                    expect(picker.period).to.eventually.eq('AM');
                 });
 
                 it('should only have valid inputs', function () {
-                    expect(picker.pagePeriod.options).to.eventually.deep.eq(['AM', 'PM']);
+                    expect(picker.pagePeriod.options.getText()).to.eventually.deep.eq(['AM', 'PM']);
                 });
 
                 // ensure we can continue with remaining tests
@@ -302,7 +302,7 @@ describe('rxTimePicker', function () {
 
             describe('UTC Offset', function () {
                 it('should default to "+00:00"', function () {
-                    expect(picker.utcOffset.value).to.eventually.eq('+00:00');
+                    expect(picker.utcOffset).to.eventually.eq('+00:00');
                 });
             });//utc offset
         });

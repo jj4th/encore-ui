@@ -5,11 +5,11 @@ var rxActionMenu = require('./rxActionMenu.page').rxActionMenu;
 var rxCheckbox = require('./rxCheckbox.page').rxCheckbox;
 
 var rxBulkSelectDefaultRowFn = function (rowElement) {
-    return rxCheckbox.initialize(rowElement.$('input[type="checkbox"]'));
+    return new rxCheckbox(rowElement.$('input[type="checkbox"]'));
 };
 
 var rxBatchActionMenu = function (rootElement) {
-    var actionMenu = rxActionMenu.initialize(rootElement);
+    var actionMenu = new rxActionMenu(rootElement);
 
     // Need to override several properties styles and the ng-hide attribute
     // compared to what is seen in rxActionMenu.
@@ -95,7 +95,7 @@ var rxBulkSelect = {
     selectAllCheckbox: {
         get: function () {
             var eleCheckbox = this.rootElement.$('[rx-bulk-select-header-check]').$('input[type="checkbox"]');
-            return rxCheckbox.initialize(eleCheckbox);
+            return new rxCheckbox(eleCheckbox);
         }
     },
 
@@ -165,7 +165,7 @@ var rxBulkSelect = {
      *         },
      *
      *         get checkbox() {
-     *             return encore.rxCheckbox.initialize(rootElement.$('input[type="checkbox"]'));
+     *             return encore.new rxCheckbox(rootElement.$('input[type="checkbox"]'));
      *         }
      *     };
      * };
