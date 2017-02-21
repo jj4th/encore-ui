@@ -15,9 +15,9 @@ class customActionMenuItem extends rxAction {
 }
 
 describe('rxActionMenu', () => {
-    var globalDismiss, localDismiss, customActions;
+    let globalDismiss: rxActionMenu, localDismiss: rxActionMenu, customActions: rxActionMenu;
 
-    var clickSomewhereElse = () => {
+    let clickSomewhereElse = () => {
         $('#typical-usage').click();
     };
 
@@ -76,7 +76,7 @@ describe('rxActionMenu', () => {
     });
 
     describe('default action menu items', () => {
-        var actionItem;
+        let actionItem: rxAction;
 
         before(() => {
             actionItem = globalDismiss.action('Add');
@@ -87,7 +87,7 @@ describe('rxActionMenu', () => {
         });
 
         it('should include custom functionality for a modal', () => {
-            var modal = actionItem.openModal({});
+            let modal = actionItem.openModal({});
             expect(modal.title).to.eventually.equal('Add Action');
             modal.cancel();
         });
@@ -95,10 +95,10 @@ describe('rxActionMenu', () => {
     });
 
     describe('custom action menu items', () => {
-        var actionItem;
+        let actionItem: customActionMenuItem;
 
         before(() => {
-            actionItem = customActions.action('Delete');
+            actionItem = <customActionMenuItem> customActions.action('Delete');
         });
 
         it('should offer custom functionality', () => {

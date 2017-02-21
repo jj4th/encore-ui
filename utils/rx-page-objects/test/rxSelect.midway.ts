@@ -5,59 +5,59 @@ import {$, $$} from 'protractor';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
-import * as encore from '../index';
+import {rxSelect, rxCheckbox, rxRadio, exercise} from '../index';
 
 let demoPage = require('../../demo.page');
 
 describe('rxSelect', () => {
-    var subject;
+    let subject: rxSelect;
 
     before(() => {
         demoPage.go('#/elements/Forms');
     });
 
-    describe('(State) Valid Enabled', encore.exercise.rxSelect({
-        instance: new encore.rxSelect($('#selValidEnabled')),
+    describe('(State) Valid Enabled', exercise.rxSelect({
+        instance: new rxSelect($('#selValidEnabled')),
         disabled: false,
         visible: true,
         valid: true,
         selectedText: 'Third'
     }));
 
-    describe('(State) Valid NG-Disabled', encore.exercise.rxSelect({
-        instance: new encore.rxSelect($('#selValidNgDisabled')),
+    describe('(State) Valid NG-Disabled', exercise.rxSelect({
+        instance: new rxSelect($('#selValidNgDisabled')),
         disabled: true,
         visible: true,
         valid: true,
         selectedText: 'Disabled by \'ng-disabled\' attribute'
     }));
 
-    describe('(State) Valid Disabled', encore.exercise.rxSelect({
-        instance: new encore.rxSelect($('#selValidDisabled')),
+    describe('(State) Valid Disabled', exercise.rxSelect({
+        instance: new rxSelect($('#selValidDisabled')),
         disabled: true,
         visible: true,
         valid: true,
         selectedText: 'Disabled by \'disabled\' attribute'
     }));
 
-    describe('(State) Invalid Enabled', encore.exercise.rxSelect({
-        instance: new encore.rxSelect($('#selInvalidEnabled')),
+    describe('(State) Invalid Enabled', exercise.rxSelect({
+        instance: new rxSelect($('#selInvalidEnabled')),
         disabled: false,
         visible: true,
         valid: false,
         selectedText: 'Fourth'
     }));
 
-    describe('(State) Invalid NG-Disabled', encore.exercise.rxSelect({
-        instance: new encore.rxSelect($('#selInvalidNgDisabled')),
+    describe('(State) Invalid NG-Disabled', exercise.rxSelect({
+        instance: new rxSelect($('#selInvalidNgDisabled')),
         disabled: true,
         visible: true,
         valid: false,
         selectedText: 'Disabled by \'ng-disabled\' attribute'
     }));
 
-    describe('(State) Invalid Disabled', encore.exercise.rxSelect({
-        instance: new encore.rxSelect($('#selInvalidDisabled')),
+    describe('(State) Invalid Disabled', exercise.rxSelect({
+        instance: new rxSelect($('#selInvalidDisabled')),
         disabled: true,
         visible: true,
         valid: false,
@@ -65,22 +65,22 @@ describe('rxSelect', () => {
     }));
 
     describe('plain HTML select elements', () => {
-        describe('Enabled Default Starting Value', encore.exercise.rxSelect({
-            instance: new encore.rxSelect($('#plainSelNormal')),
+        describe('Enabled Default Starting Value', exercise.rxSelect({
+            instance: new rxSelect($('#plainSelNormal')),
             disabled: false,
             valid: false,
             selectedText: 'Plain HTML Select Option'
         }));
 
-        describe('Disabled', encore.exercise.rxSelect({
-            instance: new encore.rxSelect($('#plainSelDisabled')),
+        describe('Disabled', exercise.rxSelect({
+            instance: new rxSelect($('#plainSelDisabled')),
             disabled: true,
             valid: false,
             selectedText: 'Disabled HTML Select Option'
         }));
 
-        describe('Valid Enabled Non-Default Starting Value', encore.exercise.rxSelect({
-            instance: new encore.rxSelect($('#plainSelSecondSelected')),
+        describe('Valid Enabled Non-Default Starting Value', exercise.rxSelect({
+            instance: new rxSelect($('#plainSelSecondSelected')),
             disabled: false,
             valid: true,
             selectedText: 'Non Default Starting Option'
@@ -88,9 +88,8 @@ describe('rxSelect', () => {
     });
 
     describe('How do you like your bacon?', () => {
-        var slowClick = false;
         before(() => {
-            subject = new encore.rxSelect($('#selBaconPrep'));
+            subject = new rxSelect($('#selBaconPrep'));
         });
 
         it('should be invalid', () => {
@@ -114,7 +113,7 @@ describe('rxSelect', () => {
         });
 
         it('should have expected options', () => {
-            var opts = [
+            let opts = [
                 'I do not like bacon',
                 'Thin (light and crispy)',
                 'Medium (perfect balance of flavor)',
@@ -125,7 +124,7 @@ describe('rxSelect', () => {
         });
 
         it('should have expected values', () => {
-            var vals = [ '', 'thin', 'medium', 'thick', 'crumbled' ];
+            let vals = [ '', 'thin', 'medium', 'thick', 'crumbled' ];
             expect(subject.options.getAttribute('value')).to.eventually.eql(vals);
         });
 
@@ -135,15 +134,15 @@ describe('rxSelect', () => {
         });
 
         describe('selecting "Thin (light and crispy)"', () => {
-            var txt = 'Thin (light and crispy)';
-            var val = 'thin';
+            let txt = 'Thin (light and crispy)';
+            let val = 'thin';
 
             beforeEach(() => {
-                subject.select(txt, slowClick);
+                subject.select(txt);
             });
 
             afterEach(() => {
-                subject.select('I do not like bacon', slowClick);
+                subject.select('I do not like bacon');
             });
 
             it('should be valid', () => {
@@ -161,7 +160,7 @@ describe('rxSelect', () => {
 
         describe('Selecting "I do not like bacon"', () => {
             before(() => {
-                subject.select('I do not like bacon', slowClick);
+                subject.select('I do not like bacon');
             });
 
             it('should not be valid', () => {
@@ -170,12 +169,12 @@ describe('rxSelect', () => {
         });
 
         describe('plain HTML select elements', () => {
-            var willHide;
-            var willBeHidden;
+            let willHide: rxSelect;
+            let willBeHidden: rxSelect;
 
             before(() => {
-                willHide = new encore.rxSelect($('#plainSelShowSelect'));
-                willBeHidden = new encore.rxSelect($('#plainSelRemoveable'));
+                willHide = new rxSelect($('#plainSelShowSelect'));
+                willBeHidden = new rxSelect($('#plainSelRemoveable'));
             });
 
             it('should show the select element by default', () => {
@@ -184,12 +183,12 @@ describe('rxSelect', () => {
             });
 
             it('should remove the select element to the DOM', () => {
-                willHide.select('Hide Next Select Box', slowClick);
+                willHide.select('Hide Next Select Box');
                 expect(willBeHidden.isPresent()).to.eventually.be.false;
             });
 
             it('should add the select element back', () => {
-                willHide.select('Show Next Select Box', slowClick);
+                willHide.select('Show Next Select Box');
                 expect(willBeHidden.isPresent()).to.eventually.be.true;
                 expect(willBeHidden.isDisplayed()).to.eventually.be.true;
             });
@@ -197,11 +196,11 @@ describe('rxSelect', () => {
     });
 
     describe('Show/Hide Select', () => {
-        var checkbox;
+        let checkbox: rxCheckbox;
 
         before(() => {
-            checkbox = new encore.rxCheckbox($('#chkShow'));
-            subject = new encore.rxSelect($('#selTargetShow'));
+            checkbox = new rxCheckbox($('#chkShow'));
+            subject = new rxSelect($('#selTargetShow'));
         });
 
         describe('when checkbox checked', () => {
@@ -226,12 +225,12 @@ describe('rxSelect', () => {
     });
 
     describe('Destroy Select', () => {
-        var radDestroyed, radCreated;
+        let radDestroyed: rxRadio, radCreated: rxRadio;
 
         before(() => {
-            radDestroyed = new encore.rxRadio($('#radDestroyed'));
-            radCreated = new encore.rxRadio($('#radCreated'));
-            subject = new encore.rxSelect($('#selTargetCreated'));
+            radDestroyed = new rxRadio($('#radDestroyed'));
+            radCreated = new rxRadio($('#radCreated'));
+            subject = new rxSelect($('#selTargetCreated'));
         });
 
         describe('when created', () => {

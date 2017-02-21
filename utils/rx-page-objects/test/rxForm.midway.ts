@@ -4,31 +4,32 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import * as encore from '../index';
+import {rxForm, textFieldAccessor, rxRadioAccessor, rxCheckboxAccessor, rxSelectAccessor} from '../index';
+import {rxFieldName, rxCheckbox, exercise} from '../index';
 
 let demoPage = require('../../demo.page');
 
 // an anonymous page object to prove that form filling works
 class FormPageObject {
-    set form(formData) {
-        encore.rxForm.fill(this, formData);
+    set form(formData: Object) {
+        rxForm.fill(this, formData);
     }
 
-    @encore.textFieldAccessor($('#txtPlain')) plainTextbox;
+    @textFieldAccessor($('#txtPlain')) plainTextbox;
 
-    @encore.rxCheckboxAccessor($('#chkVolumeNameRequired')) requireName;
+    @rxCheckboxAccessor($('#chkVolumeNameRequired')) requireName;
 
     get options() {
         class FormPageOptions {
-            @encore.rxRadioAccessor($('#favBeatle_0')) first;
-            @encore.rxRadioAccessor($('#favBeatle_1')) second;
+            @rxRadioAccessor($('#favBeatle_0')) first;
+            @rxRadioAccessor($('#favBeatle_1')) second;
         }
         return new FormPageOptions();
     }
 
     get volumeTypeSelect() {
         class VolumeType {
-            @encore.rxSelectAccessor($('#selVolumeType')) type;
+            @rxSelectAccessor($('#selVolumeType')) type;
         }
         return new VolumeType();
     }
@@ -42,24 +43,24 @@ describe('rxForm', () => {
     });
 
     describe('rxFieldName', () => {
-        describe('"Plain Textbox"', encore.exercise.rxFieldName({
-            instance: new encore.rxFieldName($('#fieldNamePlainTextbox')),
+        describe('"Plain Textbox"', exercise.rxFieldName({
+            instance: new rxFieldName($('#fieldNamePlainTextbox')),
             visible: true,
             required: false
         }));
 
-        describe('"Required Textarea"', encore.exercise.rxFieldName({
-            instance: new encore.rxFieldName($('#fieldNameRequiredTextarea')),
+        describe('"Required Textarea"', exercise.rxFieldName({
+            instance: new rxFieldName($('#fieldNameRequiredTextarea')),
             visible: true,
             required: true
         }));
 
         describe('Example', () => {
-            var checkbox, subject;
+            let checkbox: rxCheckbox, subject: rxFieldName;
 
             before(() => {
-                checkbox = new encore.rxCheckbox($('#chkVolumeNameRequired'));
-                subject = new encore.rxFieldName($('#fieldNameVolumeName'));
+                checkbox = new rxCheckbox($('#chkVolumeNameRequired'));
+                subject = new rxFieldName($('#fieldNameVolumeName'));
             });
 
             describe('when checkbox checked', () => {
@@ -85,7 +86,7 @@ describe('rxForm', () => {
     });
 
     describe('form filling', () => {
-        var formData = {
+        let formData = {
             plainTextbox: 'This is a plain textbox',
             requireName: false,
             options: {
