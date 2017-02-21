@@ -3,9 +3,8 @@
 import {ElementFinder, ElementArrayFinder} from 'protractor';
 import {$, $$, browser, by} from 'protractor';
 import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
+import {rxFieldName} from './rxFieldName.page';
 import * as _ from 'lodash';
-
-let rxFieldName = require('./rxFieldName.page').rxFieldName;
 
 /**
  * @description
