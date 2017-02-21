@@ -5,7 +5,7 @@ import {$, $$} from 'protractor';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
-import * as encore from '../index';
+import {rxCheckbox, exercise} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -14,107 +14,107 @@ describe('rxCheckbox', () => {
         demoPage.go('#/elements/Forms');
     });
 
-    describe('(State) Valid Enabled Checked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkValidEnabledOne')),
+    describe('(State) Valid Enabled Checked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkValidEnabledOne')),
         disabled: false,
         selected: true,
         valid: true
     }));
 
-    describe('(State) Valid Enabled UnChecked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkValidEnabledTwo')),
+    describe('(State) Valid Enabled UnChecked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkValidEnabledTwo')),
         disabled: false,
         selected: false,
         valid: true
     }));
 
-    describe('(State) Valid Ng-Disabled Checked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkValidNgDisabledOne')),
+    describe('(State) Valid Ng-Disabled Checked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkValidNgDisabledOne')),
         disabled: true,
         selected: true,
         valid: true
     }));
 
-    describe('(State) Valid Ng-Disabled Unchecked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkValidNgDisabledTwo')),
+    describe('(State) Valid Ng-Disabled Unchecked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkValidNgDisabledTwo')),
         disabled: true,
         selected: false,
         valid: true
     }));
 
-    describe('(State) Valid Disabled Checked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkValidDisabledOne')),
+    describe('(State) Valid Disabled Checked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkValidDisabledOne')),
         disabled: true,
         selected: true,
         valid: true
     }));
 
-    describe('(State) Valid Disabled Unchecked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkValidDisabledTwo')),
+    describe('(State) Valid Disabled Unchecked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkValidDisabledTwo')),
         disabled: true,
         selected: false,
         valid: true
     }));
 
-    describe('(State) Invalid Enabled Checked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkInvalidEnabledOne')),
+    describe('(State) Invalid Enabled Checked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkInvalidEnabledOne')),
         disabled: false,
         selected: true,
         valid: false
     }));
 
-    describe('(State) Invalid Enabled UnChecked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkInvalidEnabledTwo')),
+    describe('(State) Invalid Enabled UnChecked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkInvalidEnabledTwo')),
         disabled: false,
         selected: false,
         valid: false
     }));
 
-    describe('(State) Invalid Ng-Disabled Checked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkInvalidNgDisabledOne')),
+    describe('(State) Invalid Ng-Disabled Checked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkInvalidNgDisabledOne')),
         disabled: true,
         selected: true,
         valid: false
     }));
 
-    describe('(State) Invalid Ng-Disabled Unchecked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkInvalidNgDisabledTwo')),
+    describe('(State) Invalid Ng-Disabled Unchecked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkInvalidNgDisabledTwo')),
         disabled: true,
         selected: false,
         valid: false
     }));
 
-    describe('(State) Invalid Disabled Checked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkInvalidDisabledOne')),
+    describe('(State) Invalid Disabled Checked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkInvalidDisabledOne')),
         disabled: true,
         selected: true,
         valid: false
     }));
 
-    describe('(State) Invalid Disabled Unchecked', encore.exercise.rxCheckbox({
-        instance: new encore.rxCheckbox($('#chkInvalidDisabledTwo')),
+    describe('(State) Invalid Disabled Unchecked', exercise.rxCheckbox({
+        instance: new rxCheckbox($('#chkInvalidDisabledTwo')),
         disabled: true,
         selected: false,
         valid: false
     }));
 
     describe('plain HTML checkboxes', () => {
-        describe('Valid Enabled Unchecked', encore.exercise.rxCheckbox({
-            instance: new encore.rxCheckbox($('#plainHtmlNormal')),
+        describe('Valid Enabled Unchecked', exercise.rxCheckbox({
+            instance: new rxCheckbox($('#plainHtmlNormal')),
             disabled: false,
             selected: false,
             valid: false
         }));
 
-        describe('Valid Disabled Unchecked', encore.exercise.rxCheckbox({
-            instance: new encore.rxCheckbox($('#plainHtmlDisabled')),
+        describe('Valid Disabled Unchecked', exercise.rxCheckbox({
+            instance: new rxCheckbox($('#plainHtmlDisabled')),
             disabled: true,
             selected: false,
             valid: false
         }));
 
-        describe('Valid Enabled Checked', encore.exercise.rxCheckbox({
-            instance: new encore.rxCheckbox($('#plainHtmlChecked')),
+        describe('Valid Enabled Checked', exercise.rxCheckbox({
+            instance: new rxCheckbox($('#plainHtmlChecked')),
             disabled: false,
             selected: true,
             valid: false
@@ -123,11 +123,11 @@ describe('rxCheckbox', () => {
     });
 
     describe('Show/Hide Input', () => {
-        var chkSure, chkReallySure;
+        let chkSure: rxCheckbox, chkReallySure: rxCheckbox;
 
         before(() => {
-            chkSure = new encore.rxCheckbox($('#chkAmSure'));
-            chkReallySure = new encore.rxCheckbox($('#chkAmReallySure'));
+            chkSure = new rxCheckbox($('#chkAmSure'));
+            chkReallySure = new rxCheckbox($('#chkAmReallySure'));
         });
 
         describe('"Are you sure?"', () => {
@@ -165,12 +165,11 @@ describe('rxCheckbox', () => {
         });
 
         describe('plain HTML checkboxes', () => {
-            var willHide;
-            var willBeHidden;
+            let willHide: rxCheckbox, willBeHidden: rxCheckbox;
 
             before(() => {
-                willHide = new encore.rxCheckbox($('#plainChkRemoveCheckbox'));
-                willBeHidden = new encore.rxCheckbox($('#plainChkRemoveable'));
+                willHide = new rxCheckbox($('#plainChkRemoveCheckbox'));
+                willBeHidden = new rxCheckbox($('#plainChkRemoveable'));
             });
 
             it('should show the checkbox by default', () => {
@@ -193,11 +192,11 @@ describe('rxCheckbox', () => {
     });
 
     describe('Destroy Input', () => {
-        var chkRemove, chkRemoveable;
+        let chkRemove: rxCheckbox, chkRemoveable: rxCheckbox;
 
         before(() => {
-            chkRemove = new encore.rxCheckbox($('#chkRemoveCheckbox'));
-            chkRemoveable = new encore.rxCheckbox($('#chkRemoveable'));
+            chkRemove = new rxCheckbox($('#chkRemoveCheckbox'));
+            chkRemoveable = new rxCheckbox($('#chkRemoveable'));
         });
 
         describe('when checked', () => {

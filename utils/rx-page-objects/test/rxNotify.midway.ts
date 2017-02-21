@@ -14,18 +14,13 @@ describe('rxNotify', () => {
     });
 
     describe('auto dismissal', () => {
-        var addToCustomStack;
-
-        before(() => {
-            addToCustomStack = function (type, timeout) {
-                var input = $('input[ng-model="options.timeout"]');
-                input.clear();
-                input.sendKeys(timeout);
-                $('input[value="' + type + '"]').click();
-                element(by.buttonText('Add to Custom Stack')).click();
-            };
-
-        });
+        let addToCustomStack = function (type, timeout) {
+            let input = $('input[ng-model="options.timeout"]');
+            input.clear();
+            input.sendKeys(timeout);
+            $('input[value="' + type + '"]').click();
+            element(by.buttonText('Add to Custom Stack')).click();
+        };
 
         it('should add a new success message that dismisses itself', () => {
             addToCustomStack('success', '.5');
@@ -41,7 +36,6 @@ describe('rxNotify', () => {
             addToCustomStack('success', -1);
             expect(rxNotify.all.byText('My message').getType()).to.eventually.equal('success');
         });
-
     });
 
     describe('by stack -- demo', () => {
@@ -51,14 +45,14 @@ describe('rxNotify', () => {
         });
 
         describe('info type', () => {
-            var info;
+            let info: rxNotification;
 
             before(() => {
                 info = rxNotify.byStack('demo').byText('Helpful Information');
             });
 
             it('should be type "info"', () => {
-                expect(info.type).to.eventually.equal('info');
+                expect(info.getType()).to.eventually.equal('info');
             });
 
             it('should have helpful information', () => {
@@ -88,14 +82,14 @@ describe('rxNotify', () => {
         });
 
         describe('by type', () => {
-            var success;
+            let success: rxNotification;
 
             before(() => {
                 success = rxNotify.all.byText('You did it!');
             });
 
             it('should be type "success"', () => {
-                expect(success.type).to.eventually.equal('success');
+                expect(success.getType()).to.eventually.equal('success');
             });
 
             it('should have done it', () => {
@@ -160,16 +154,16 @@ describe('rxNotify', () => {
         });
 
         describe('with ondismiss function', () => {
-            var browserName;
-            var msgText = 'Testing On Dismiss Method';
+            let browserName: string;
+            let msgText = 'Testing On Dismiss Method';
 
             before(() => {
                 // https://git.io/vKHN1
                 browser.getCapabilities().then(function (capabilities) {
                     browserName = capabilities.get('browserName');
                     if (browserName !== 'chrome') {
-                        var chkOnDismiss = $('input[ng-model="ondismiss.should"]');
-                        var txtMessage = $('input[ng-model="message"]');
+                        let chkOnDismiss = $('input[ng-model="ondismiss.should"]');
+                        let txtMessage = $('input[ng-model="message"]');
 
                         txtMessage.clear();
                         txtMessage.sendKeys(msgText);
@@ -216,7 +210,7 @@ describe('rxNotify', () => {
     });
 
     describe('stackless notifications', () => {
-        var notification;
+        let notification: rxNotification;
 
         before(() => {
             notification = new rxNotification($('rx-notification[type="error"] .rx-notification'));

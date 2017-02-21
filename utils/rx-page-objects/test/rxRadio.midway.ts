@@ -5,129 +5,129 @@ import {$, $$} from 'protractor';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
-import * as encore from '../index';
+import {rxRadio, exercise} from '../index';
 
 let demoPage = require('../../demo.page');
 
 describe('rxRadio', () => {
-    var subject;
+    let subject: rxRadio;
 
     before(() => {
         demoPage.go('#/elements/Forms');
     });
 
-    describe('(State) Valid Enabled Selected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radValidEnabledOne')),
+    describe('(State) Valid Enabled Selected', exercise.rxRadio({
+        instance: new rxRadio($('#radValidEnabledOne')),
         disabled: false,
         selected: true,
         valid: true
     }));
 
-    describe('(State) Valid Enabled Unselected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radValidEnabledTwo')),
+    describe('(State) Valid Enabled Unselected', exercise.rxRadio({
+        instance: new rxRadio($('#radValidEnabledTwo')),
         disabled: false,
         selected: false,
         valid: true
     }));
 
-    describe('(State) Valid Disabled Selected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radValidDisabledOne')),
+    describe('(State) Valid Disabled Selected', exercise.rxRadio({
+        instance: new rxRadio($('#radValidDisabledOne')),
         disabled: true,
         selected: true,
         valid: true
     }));
 
-    describe('(State) Valid Disabled Unselected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radValidDisabledTwo')),
+    describe('(State) Valid Disabled Unselected', exercise.rxRadio({
+        instance: new rxRadio($('#radValidDisabledTwo')),
         disabled: true,
         selected: false,
         valid: true
     }));
 
-    describe('(State) Valid NG-Disabled Selected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radValidNgDisabledOne')),
+    describe('(State) Valid NG-Disabled Selected', exercise.rxRadio({
+        instance: new rxRadio($('#radValidNgDisabledOne')),
         disabled: true,
         selected: true,
         valid: true
     }));
 
-    describe('(State) Valid NG-Disabled Unselected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radValidNgDisabledTwo')),
+    describe('(State) Valid NG-Disabled Unselected', exercise.rxRadio({
+        instance: new rxRadio($('#radValidNgDisabledTwo')),
         disabled: true,
         selected: false,
         valid: true
     }));
 
-    describe('(State) Invalid Enabled Selected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radInvalidEnabledOne')),
+    describe('(State) Invalid Enabled Selected', exercise.rxRadio({
+        instance: new rxRadio($('#radInvalidEnabledOne')),
         disabled: false,
         selected: true,
         valid: false
     }));
 
-    describe('(State) Invalid Enabled Unselected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radInvalidEnabledTwo')),
+    describe('(State) Invalid Enabled Unselected', exercise.rxRadio({
+        instance: new rxRadio($('#radInvalidEnabledTwo')),
         disabled: false,
         selected: false,
         valid: false
     }));
 
-    describe('(State) Invalid Disabled Selected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radInvalidDisabledOne')),
+    describe('(State) Invalid Disabled Selected', exercise.rxRadio({
+        instance: new rxRadio($('#radInvalidDisabledOne')),
         disabled: true,
         selected: true,
         valid: false
     }));
 
-    describe('(State) Invalid Disabled Unselected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radInvalidDisabledTwo')),
+    describe('(State) Invalid Disabled Unselected', exercise.rxRadio({
+        instance: new rxRadio($('#radInvalidDisabledTwo')),
         disabled: true,
         selected: false,
         valid: false
     }));
 
-    describe('(State) Invalid NG-Disabled Selected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radInvalidNgDisabledOne')),
+    describe('(State) Invalid NG-Disabled Selected', exercise.rxRadio({
+        instance: new rxRadio($('#radInvalidNgDisabledOne')),
         disabled: true,
         selected: true,
         valid: false
     }));
 
-    describe('(State) Invalid NG-Disabled Unselected', encore.exercise.rxRadio({
-        instance: new encore.rxRadio($('#radInvalidNgDisabledTwo')),
+    describe('(State) Invalid NG-Disabled Unselected', exercise.rxRadio({
+        instance: new rxRadio($('#radInvalidNgDisabledTwo')),
         disabled: true,
         selected: false,
         valid: false
     }));
 
     describe('plain HTML radio buttons', () => {
-        describe('Valid Enabled Unchecked', encore.exercise.rxRadio({
-            instance: new encore.rxRadio($('#plainRadNormal')),
+        describe('Valid Enabled Unchecked', exercise.rxRadio({
+            instance: new rxRadio($('#plainRadNormal')),
             disabled: false,
             selected: false,
             valid: false
         }));
 
-        describe('Valid Disabled Unchecked', encore.exercise.rxRadio({
-            instance: new encore.rxRadio($('#plainRadDisabled')),
+        describe('Valid Disabled Unchecked', exercise.rxRadio({
+            instance: new rxRadio($('#plainRadDisabled')),
             disabled: true,
             selected: false
         }));
 
-        describe('Valid Enabled Checked', encore.exercise.rxRadio({
-            instance: new encore.rxRadio($('#plainRadChecked')),
+        describe('Valid Enabled Checked', exercise.rxRadio({
+            instance: new rxRadio($('#plainRadChecked')),
             disabled: false,
             selected: false
         }));
     });
 
     describe('Show/Hide Input', () => {
-        var radHate, radLike, radLove;
+        let radHate: rxRadio, radLike: rxRadio, radLove: rxRadio;
 
         before(() => {
-            radHate = new encore.rxRadio($('#radHateBacon'));
-            radLike = new encore.rxRadio($('#radLikeBacon'));
-            radLove = new encore.rxRadio($('#radLoveBacon'));
+            radHate = new rxRadio($('#radHateBacon'));
+            radLike = new rxRadio($('#radLikeBacon'));
+            radLove = new rxRadio($('#radLoveBacon'));
         });
 
         describe('"I hate bacon"', () => {
@@ -203,14 +203,12 @@ describe('rxRadio', () => {
         });
 
         describe('plain HTML radio buttons', () => {
-            var willHide;
-            var willBeHidden;
-            var otherRadio;
+            let willHide: rxRadio, willBeHidden: rxRadio, otherRadio: rxRadio;
 
             before(() => {
-                willHide = new encore.rxRadio($('#plainRadRemoveRadio'));
-                willBeHidden = new encore.rxRadio($('#plainRadRemoveable'));
-                otherRadio = new encore.rxRadio($('#plainRadNormal'));
+                willHide = new rxRadio($('#plainRadRemoveRadio'));
+                willBeHidden = new rxRadio($('#plainRadRemoveable'));
+                otherRadio = new rxRadio($('#plainRadNormal'));
             });
 
             it('should show the radio button by default', () => {
@@ -232,12 +230,12 @@ describe('rxRadio', () => {
     });//Show/Hide Input
 
     describe('Destroy Input', () => {
-        var radCreated, radDestroyed, radTargetCreated;
+        let radCreated: rxRadio, radDestroyed: rxRadio, radTargetCreated: rxRadio;
 
         before(() => {
-            radCreated = new encore.rxRadio($('#radCreated'));
-            radDestroyed = new encore.rxRadio($('#radDestroyed'));
-            radTargetCreated = new encore.rxRadio($('#radTargetCreated'));
+            radCreated = new rxRadio($('#radCreated'));
+            radDestroyed = new rxRadio($('#radDestroyed'));
+            radTargetCreated = new rxRadio($('#radTargetCreated'));
         });
 
         it('"Destroyed" should be selected', () => {
@@ -249,7 +247,7 @@ describe('rxRadio', () => {
         });
 
         it('target radio should not be present', () => {
-            radTargetCreated = new encore.rxRadio($('#radTargetCreated'));
+            radTargetCreated = new rxRadio($('#radTargetCreated'));
             expect(radTargetCreated.isPresent()).to.eventually.be.false;
         });
 
@@ -263,7 +261,7 @@ describe('rxRadio', () => {
             });
 
             it('target radio should be present', () => {
-                radTargetCreated = new encore.rxRadio($('#selTargetCreated'));
+                radTargetCreated = new rxRadio($('#selTargetCreated'));
                 expect(radTargetCreated.isPresent()).to.eventually.be.true;
             });
         });
@@ -278,7 +276,7 @@ describe('rxRadio', () => {
             });
 
             it('target radio should not be present', () => {
-                radTargetCreated = new encore.rxRadio($('#radTargetCreated'));
+                radTargetCreated = new rxRadio($('#radTargetCreated'));
                 expect(radTargetCreated.isPresent()).to.eventually.be.false;
             });
         });
