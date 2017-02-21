@@ -13,6 +13,7 @@ src/rxComponent.js
 src/rxAccountInfo.page.js
 src/rxActionMenu.page.js
 src/rxAge.page.js
+src/rxBreadcrumbs.page.js
 src/rxCheckbox.page.js
 src/rxCheckbox.exercise.js
 src/rxDatePicker.page.js
@@ -31,6 +32,7 @@ test/rxAccountInfo.midway.js
 test/rxActionMenu.midway.js
 test/rxAge.midway.js
 test/rxAutoSave.midway.js
+test/rxBreadcrumbs.midway.js
 test/rxCheckbox.midway.js
 test/rxForm.midway.js
 test/rxNotify.midway.js
