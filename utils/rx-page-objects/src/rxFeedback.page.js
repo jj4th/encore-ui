@@ -179,6 +179,6 @@ exports.rxFeedback = {
         rxFeedback.eleFeedback = {
             get: function () { return rxFeedbackElement; }
         };
-        return rxModalAction.initialize(rxFeedback);
+        return new rxModalAction(rxFeedback);
     }
 };

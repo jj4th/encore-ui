@@ -3,16 +3,9 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import {rxActionMenu, rxAction, rxMisc} from '../index';
+import {rxActionMenu, rxAction, rxNotify} from '../index';
 
-let rxNotify = require('../src/rxNotify.page').rxNotify;
 let demoPage = require('../../demo.page');
-
-class customActionMenuItem extends rxAction {
-    triggerNotification() {
-        rxMisc.slowClick(this.$('.trigger'));
-    }
-}
 
 describe('rxActionMenu', () => {
     let globalDismiss: rxActionMenu, localDismiss: rxActionMenu, customActions: rxActionMenu;
@@ -25,7 +18,7 @@ describe('rxActionMenu', () => {
         demoPage.go('#/elements/ActionMenu');
         globalDismiss = new rxActionMenu($('rx-action-menu#globalDismissal'));
         localDismiss = new rxActionMenu($('rx-action-menu[global-dismiss="false"]'));
-        customActions = new rxActionMenu($('rx-action-menu#custom'), customActionMenuItem);
+        customActions = new rxActionMenu($('rx-action-menu#custom'));
     });
 
     it('should be visible', () => {
@@ -85,27 +78,5 @@ describe('rxActionMenu', () => {
         it('should have two items', () => {
             expect(globalDismiss.actionCount()).to.eventually.equal(2);
         });
-
-        it('should include custom functionality for a modal', () => {
-            let modal = actionItem.openModal({});
-            expect(modal.title).to.eventually.equal('Add Action');
-            modal.cancel();
-        });
-
     });
-
-    describe('custom action menu items', () => {
-        let actionItem: customActionMenuItem;
-
-        before(() => {
-            actionItem = <customActionMenuItem> customActions.action('Delete');
-        });
-
-        it('should offer custom functionality', () => {
-            actionItem.triggerNotification();
-            expect(rxNotify.all.count()).to.eventually.equal(1);
-        });
-
-    });
-
 });

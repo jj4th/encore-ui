@@ -2,29 +2,16 @@
 
 import {ElementFinder, ElementArrayFinder} from 'protractor';
 import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
+import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
+import {rxModalAction} from './rxModalAction.page';
 import * as _ from 'lodash';
 
-let rxModalAction = require('./rxModalAction.page').rxModalAction;
-
-/**
- * @description Clicking an action menu item will create an instance of this class.
- */
 export class rxAction extends rxComponentElement {
-    /**
-     * @description Returns a modal object to manipulate later, with given `customFunctionality`.
-     * See {@link rxModalAction.initialize} for more information about what `customFunctionality` means here.
-     * Using a modal object is the default action since many instances of the action menu serve to launch
-     * modals. If you're not using rxActionMenu to launch modals, over-ride this entire section
-     * when calling <a href="#encore.module_rxActionMenu.initialize">rxActionMenu.initialize</a>,
-     * where you can pass in a custom `actionConstructorFn`.
-     */
-    openModal(customFunctionality) {
-        this.$('.modal-link').click();
-        return rxModalAction.initialize(customFunctionality);
+    @OverrideWebdriver
+    click() {
+        return this.$('.modal-link').click();
     }
 }
-
 /**
  * @description Functions for querying actions in an action menu, and launching those actions.
  * @class
@@ -38,14 +25,9 @@ export class rxActionMenu extends rxComponentElement {
      * sort of element list. This exposes a hook into the html for matching text or counting nodes.
      */
     cssFirstAny = '.actions-area > *';
-    actionClass = rxAction;
 
-
-    constructor(rootElement: ElementFinder, actionClass?: typeof rxAction) {
+    constructor(rootElement: ElementFinder) {
         super(rootElement);
-        if (actionClass) {
-            this.actionClass = actionClass;
-        }
     }
 
     get icoCog() {
@@ -89,19 +71,15 @@ export class rxActionMenu extends rxComponentElement {
      */
     hasAction(actionName) {
         this.expand();
-        let actionElement = this.element(by.cssContainingText(this.cssFirstAny, actionName));
-        return actionElement.isDisplayed().then((displayed) => displayed, () => false);
+        return this.action(actionName).isDisplayed().then((displayed) => displayed, () => false);
     }
 
     /**
-     * @description Defaults to returning an {@link rxActionMenu.action} object if none was specified at
-     * initialization. See {@link rxActionMenu.initialize} for more details about passing in a custom action item
-     * function.
+     * @description Returns an action's element.
      */
     action(actionName) {
         this.expand();
-        var actionElement = this.element(by.cssContainingText(this.cssFirstAny, actionName));
-        return new this.actionClass(actionElement);
+        return new rxAction(this.element(by.cssContainingText(this.cssFirstAny, actionName)));
     }
 
     /**

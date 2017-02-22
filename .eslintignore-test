@@ -16,6 +16,9 @@
 *rxAutoSave.midway.js
 *rxBreadcrumbs.page.js
 *rxBreadcrumbs.midway.js
+*rxBulkSelect.page.js
+*rxBulkSelect.exercise.js
+*rxBulkSelect.midway.js
 *rxCheckbox.page.js
 *rxCheckbox.exercise.js
 *rxCheckbox.midway.js
@@ -27,6 +30,8 @@
 *rxForm.page.js
 *rxForm.midway.js
 *rxMisc.page.js
+*rxModalAction.page.js
+*rxModalAction.midway.js
 *rxNotify.page.js
 *rxNotify.midway.js
 *rxRadio.page.js
