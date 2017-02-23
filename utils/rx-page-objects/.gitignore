@@ -20,6 +20,8 @@ src/rxCheckbox.page.js
 src/rxCheckbox.exercise.js
 src/rxCharacterCount.page.js
 src/rxCharacterCount.exercise.js
+src/rxCollapse.page.js
+src/rxCollapse.exercise.js
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
 src/rxFieldName.page.js
@@ -41,6 +43,7 @@ test/rxBreadcrumbs.midway.js
 test/rxBulkSelect.midway.js
 test/rxCheckbox.midway.js
 test/rxCharacterCount.midway.js
+test/rxCollapse.midway.js
 test/rxForm.midway.js
 test/rxModalAction.midway.js
 test/rxNotify.midway.js

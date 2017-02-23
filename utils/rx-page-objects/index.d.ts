@@ -5,6 +5,7 @@ export {rxAge} from './src/rxAge.page';
 export {rxBreadcrumbs, rxBreadcrumb} from './src/rxBreadcrumbs.page';
 export {rxCheckbox, rxCheckboxAccessor} from './src/rxCheckbox.page';
 export {rxCharacterCount} from './src/rxCharacterCount.page';
+export {rxCollapse} from './src/rxCollapse.page';
 export {rxDatePicker} from './src/rxDatePicker.page';
 export {rxFieldName} from './src/rxFieldName.page';
 export {rxForm, textFieldAccessor} from './src/rxForm.page';
@@ -17,6 +18,7 @@ export {rxBulkSelect, rxBulkSelectRow} from './src/rxBulkSelect.page';
 
 import {rxCheckbox as rxCheckboxExercise} from './src/rxCheckbox.exercise';
 import {rxCharacterCount as rxCharacterCountExercise} from './src/rxCharacterCount.exercise';
+import {rxCollapse as rxCollapseExercise} from './src/rxCollapse.exercise';
 import {rxDatePicker as rxDatePickerExercise} from './src/rxDatePicker.exercise';
 import {rxFieldName as rxFieldNameExercise} from './src/rxFieldName.exercise';
 import {rxRadio as rxRadioExercise} from './src/rxRadio.exercise';
@@ -26,6 +28,7 @@ import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise'
 export const exercise: {
     rxCheckbox: typeof rxCheckboxExercise
     rxCharacterCount: typeof rxCharacterCountExercise
+    rxCollapse: typeof rxCollapseExercise
     rxDatePicker: typeof rxDatePickerExercise
     rxFieldName: typeof rxFieldNameExercise
     rxRadio: typeof rxRadioExercise
