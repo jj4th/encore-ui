@@ -26,6 +26,7 @@ src/rxCopy.page.js
 src/rxCopy.exercise.js
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
+src/rxDiskSize.page.js
 src/rxFieldName.page.js
 src/rxFieldName.exercise.js
 src/rxForm.page.js
@@ -49,6 +50,7 @@ test/rxCharacterCount.midway.js
 test/rxCollapse.midway.js
 test/rxCopy.midway.js
 test/rxDatePicker.midway.js
+test/rxDiskSize.midway.js
 test/rxForm.midway.js
 test/rxModalAction.midway.js
 test/rxNotify.midway.js

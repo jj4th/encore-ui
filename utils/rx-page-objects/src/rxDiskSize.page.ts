@@ -1,16 +1,15 @@
+'use strict';
+
 /**
  * @namespace
  */
-exports.rxDiskSize = {
+export namespace rxDiskSize {
 
     /**
-     * @function
-     * @param {String} rxDiskSizeString - The string to convert to bytes
-     * @returns {Number} The number of bytes represented by the human readable byte size string
      * @example
      * expect(encore.rxDiskSize.toBytes('1000 MB')).to.equal(encore.rxDiskSize.toBytes('1 GB'));
      */
-    toBytes: function (rxDiskSizeString) {
+    export function toBytes(rxDiskSizeString:string): number {
         var parts = rxDiskSizeString.split(' ');
         var size = parseFloat(parts[0]);
         var magnitude = {
@@ -22,18 +21,14 @@ exports.rxDiskSize = {
             'P': Math.pow(10, 15)
         }[parts[1].toUpperCase()[0]];
         return size * magnitude;
-    },
+    }
 
     /**
-     * @function
      * @description A shorthand way of converting a bytes string to gigabytes.
-     * @param {String} rxDiskSizeString - The string to convert to gigabytes
-     * @returns {Number} The number of gigabytes represented by the human readable byte size string
      * @example
      * expect(encore.rxDiskSize.toGigabytes('1000 MB')).to.equal(1);
      */
-    toGigabytes: function (rxDiskSizeString) {
+    export function toGigabytes(rxDiskSizeString:string): number {
         return this.toBytes(rxDiskSizeString) / Math.pow(10, 9);
     }
-
 };
