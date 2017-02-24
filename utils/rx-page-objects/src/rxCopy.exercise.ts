@@ -1,22 +1,24 @@
-var _ = require('lodash');
+'use strict';
 
+import {Key} from 'selenium-webdriver';
+import {$, browser, ElementFinder} from 'protractor';
+import {expect} from 'chai';
+import * as component from './rxCopy.page';
+import * as _ from 'lodash';
+
+interface rxCopyExerciseOptions {
+    instance: component.rxCopy
+    isPresent?: boolean
+    isEnabled?: boolean
+    isDisplayed?: boolean
+    expectedText?: string|RegExp
+    testCopyArea?: ElementFinder
+}
 /**
  * @description rxCopy exercises.
  * @see rxCopy
- * @exports exercise/rxCopy
- * @param {Object} options - Test options. Used to build valid tests.
- * @param {rxSelect} options.instance - Component to exercise.
- * @param {Boolean} [options.isPresent=true] - Determines if the component is present.
- * @param {Boolean} [options.isDisabled=false] - Determines if the component is disabled.
- * @param {Boolean} [options.isDisplayed=true] - Determines if the component is displayed.
- * @param {ElementFinder} [testCopyArea=] - An input element somewhere that rxCopy contents can be pasted to.
- * @param {String|Regex} [expectedText=] - The expected text content inside the input element to be copied.
- * Can be a regular expression if the text content is very large.
  */
-exports.rxCopy = function (options) {
-    if (options === undefined) {
-        options = {};
-    }
+export function rxCopy(options: rxCopyExerciseOptions) {
 
     options = _.defaults(options, {
         isPresent: true,
@@ -24,27 +26,26 @@ exports.rxCopy = function (options) {
         isDisplayed: true
     });
 
-    return function () {
-        var component;
+    return () => {
+        let component: component.rxCopy;
 
         /**
-         * @returns {Promise<String>}
+         * pastes a value to `testCopyArea` then returns what was pasted.
          */
-        function getPastedValue () {
-            return options.testCopyArea
-                .clear()
-                .sendKeys(protractor.Key.chord(
-                    (process.platform === 'darwin' ? protractor.Key.META : protractor.Key.CONTROL),
-                    'v'
-                ))
-                .getAttribute('value');
+        let getPastedValue = () => {
+            options.testCopyArea.clear()
+            options.testCopyArea.sendKeys(Key.chord(
+                (process.platform === 'darwin' ? Key.META : Key.CONTROL),
+                'v'
+            ))
+            return options.testCopyArea.getAttribute('value');
         }
 
-        before(function () {
+        before(() => {
             component = options.instance;
         });
 
-        it('should be present', function () {
+        it('should be present', () => {
             expect(component.isPresent()).to.eventually.eq(options.isPresent);
         });
 
@@ -52,7 +53,7 @@ exports.rxCopy = function (options) {
             return;
         }
 
-        it(`should ${options.isDisplayed ? 'be' : 'not be'} displayed`, function () {
+        it(`should ${options.isDisplayed ? 'be' : 'not be'} displayed`, () => {
             expect(component.isDisplayed()).to.eventually.eq(options.isDisplayed);
         });
 
@@ -60,7 +61,7 @@ exports.rxCopy = function (options) {
             return;
         }
 
-        it(`should ${options.isEnabled ? 'be' : 'not be'} enabled`, function () {
+        it(`should ${options.isEnabled ? 'be' : 'not be'} enabled`, () => {
             expect(component.isEnabled()).to.eventually.eq(options.isEnabled);
         });
 
@@ -68,41 +69,41 @@ exports.rxCopy = function (options) {
             return;
         }
 
-        describe('before copying', function () {
+        describe('before copying', () => {
 
-            it('should be waiting', function () {
+            it('should be waiting', () => {
                 expect(component.isWaiting()).to.eventually.be.true;
             });
 
-            it('should not be successful', function () {
+            it('should not be successful', () => {
                 expect(component.isSuccessful()).to.eventually.be.false;
             });
 
-            it('should not have failed', function () {
+            it('should not have failed', () => {
                 expect(component.isFailure()).to.eventually.be.false;
             });
 
             if (options.expectedText) {
                 if (_.isString(options.expectedText)) {
-                    it('should have the expected text', function () {
+                    it('should have the expected text', () => {
                         expect(component.getText()).to.eventually.eq(options.expectedText);
                     });
                 }
 
                 if (_.isRegExp(options.expectedText)) {
-                    it('should match the expected text', function () {
+                    it('should match the expected text', () => {
                         expect(component.getText()).to.eventually.match(options.expectedText);
                     });
                 }
             }
 
-            it('should have a tooltip informing users to click to copy', function () {
+            it('should have a tooltip informing users to click to copy', () => {
                 expect(component.tooltip.getText()).to.eventually.eq('Click to Copy');
             });
 
             // Skip on Chrome for Mac: CMD-V is not working to paste clipboard contents
-            if (options.testCopyArea && !(isMac && isChrome)) {
-                it('should copy text to clipboard', function () {
+            if (options.testCopyArea && !(browser.params.isMac && browser.params.isChrome)) {
+                it('should copy text to clipboard', () => {
                     component.copy();
                     getPastedValue().then(function (pastedValue) {
                         expect(component.getText()).to.eventually.eq(pastedValue);
@@ -110,45 +111,45 @@ exports.rxCopy = function (options) {
                 });
             }
 
-            describe('after copy', function () {
-                before(function () {
+            describe('after copy', () => {
+                before(() => {
                     component.copy();
                 });
 
-                it('should not be waiting', function () {
+                it('should not be waiting', () => {
                     expect(component.isWaiting()).to.eventually.be.false;
                 });
 
-                it('should be successful', function () {
+                it('should be successful', () => {
                     expect(component.isSuccessful()).to.eventually.be.true;
                 });
 
-                it('should not have failed', function () {
+                it('should not have failed', () => {
                     expect(component.isFailure()).to.eventually.be.false;
                 });
 
-                it ('should have success tooltip', function () {
+                it ('should have success tooltip', () => {
                     expect(component.tooltip.getText()).to.eventually.eq('Copied!');
                 });
 
-                describe('and after a short wait', function () {
-                    before(function () {
+                describe('and after a short wait', () => {
+                    before(() => {
                         browser.sleep(3000);
                     });
 
-                    it('should be waiting', function () {
+                    it('should be waiting', () => {
                         expect(component.isWaiting()).to.eventually.be.true;
                     });
 
-                    it('should not be successful', function () {
+                    it('should not be successful', () => {
                         expect(component.isSuccessful()).to.eventually.be.false;
                     });
 
-                    it('should not have failed', function () {
+                    it('should not have failed', () => {
                         expect(component.isFailure()).to.eventually.be.false;
                     });
 
-                    it('should have default tooltip', function () {
+                    it('should have default tooltip', () => {
                         expect(component.tooltip.getText()).to.eventually.eq('Click to Copy');
                     });
                 });

@@ -15,13 +15,15 @@ src/rxActionMenu.page.js
 src/rxAge.page.js
 src/rxBreadcrumbs.page.js
 src/rxBulkSelect.page.js
-srx/rxBulkSelect.exercise.js
+src/rxBulkSelect.exercise.js
 src/rxCheckbox.page.js
 src/rxCheckbox.exercise.js
 src/rxCharacterCount.page.js
 src/rxCharacterCount.exercise.js
 src/rxCollapse.page.js
 src/rxCollapse.exercise.js
+src/rxCopy.page.js
+src/rxCopy.exercise.js
 src/rxDatePicker.page.js
 src/rxDatePicker.exercise.js
 src/rxFieldName.page.js
@@ -34,6 +36,7 @@ src/rxRadio.page.js
 src/rxRadio.exercise.js
 src/rxSelect.page.js
 src/rxSelect.exercise.js
+src/tooltip.page.js
 
 test/rxAccountInfo.midway.js
 test/rxActionMenu.midway.js
@@ -44,6 +47,7 @@ test/rxBulkSelect.midway.js
 test/rxCheckbox.midway.js
 test/rxCharacterCount.midway.js
 test/rxCollapse.midway.js
+test/rxCopy.midway.js
 test/rxForm.midway.js
 test/rxModalAction.midway.js
 test/rxNotify.midway.js

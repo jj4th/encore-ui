@@ -15,8 +15,7 @@
             "node",
             "mocha",
             "lodash",
-            "chai-as-promised",
-            "protractor"
+            "chai-as-promised"
         ]
     },
     "exclude": [],
