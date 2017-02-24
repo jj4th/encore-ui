@@ -207,12 +207,12 @@ export class rxNotify {
      * });
      */
     isPresent(string: string, type?:string): Promise<boolean> {
-        var elementsOfType;
+        let elementsOfType: ElementArrayFinder;
 
         type = type ? '.notification-'.concat(type) : '[class^="notification-"]';
         elementsOfType = this.rootElement.all(by.cssContainingText(type, string));
 
-        return elementsOfType.count().then((count) => count > 0);
+        return elementsOfType.count().then((count) => (count > 0));
     }
 
     /**

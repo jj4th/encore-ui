@@ -10,6 +10,7 @@ export {rxCollapse} from './src/rxCollapse.page';
 export {rxCopy} from './src/rxCopy.page';
 export {rxDatePicker} from './src/rxDatePicker.page';
 export {rxDiskSize} from './src/rxDiskSize.page';
+export {rxFeedback} from './src/rxFeedback.page';
 export {rxFieldName} from './src/rxFieldName.page';
 export {rxForm, textFieldAccessor} from './src/rxForm.page';
 export {rxMisc} from './src/rxMisc.page';
