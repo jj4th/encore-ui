@@ -44,6 +44,8 @@
 *rxFieldName.exercise.js
 *rxForm.page.js
 *rxForm.midway.js
+*rxLocalStorage.page.js
+*rxLocalStorage.midway.js
 *rxMisc.page.js
 *rxModalAction.page.js
 *rxModalAction.midway.js

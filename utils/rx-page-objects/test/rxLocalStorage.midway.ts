@@ -1,25 +1,30 @@
-describe('utilities:rxLocalStorage', function () {
-    var rxLocalStorage = encore.rxLocalStorage;
+'use strict';
 
+import {expect} from 'chai';
+import {rxLocalStorage} from '../index';
+
+let demoPage = require('../../demo.page');
+
+describe('utilities:rxLocalStorage', function () {
     before(function () {
         demoPage.go('#/utilities/rxLocalStorage');
     });
 
     it('should set and return a string', function () {
-        var aString = 'hello world';
+        let aString = 'hello world';
 
         rxLocalStorage.setItem('aString', aString);
         expect(rxLocalStorage.getItem('aString')).to.eventually.equal(aString);
     });
 
     it('should set and return an int', function () {
-        var anInt = 42;
+        let anInt = 42;
 
         rxLocalStorage.setItem('anInt', anInt);
         expect(rxLocalStorage.getItem('anInt')).to.eventually.equal(anInt);
     });
 
-    it.skip('should set and return a float #FRMW-1130', function () {
+    it('should set and return a float', function () {
         var aFloat = 42.0000002;
 
         rxLocalStorage.setItem('aFloat', aFloat);
@@ -27,14 +32,14 @@ describe('utilities:rxLocalStorage', function () {
     });
 
     it('should set and return an array', function () {
-        var anArray = [1, 'cat', 3];
+        let anArray = [1, 'cat', 3];
 
         rxLocalStorage.setItem('anArray', anArray);
         expect(rxLocalStorage.getItem('anArray')).to.eventually.deep.equal(anArray);
     });
 
     it('should set and return an object', function () {
-        var anObject = {
+        let anObject = {
             'foo': 'bar',
             'life': 42
         };
@@ -44,7 +49,7 @@ describe('utilities:rxLocalStorage', function () {
     });
 
     it('should set and return an array of objects', function () {
-        var anArrayOfObjects = [
+        let anArrayOfObjects = [
             {
                 'foo': {
                     'bar': 1,

@@ -13,6 +13,7 @@ export {rxDiskSize} from './src/rxDiskSize.page';
 export {rxFeedback} from './src/rxFeedback.page';
 export {rxFieldName} from './src/rxFieldName.page';
 export {rxForm, textFieldAccessor} from './src/rxForm.page';
+export {rxLocalStorage} from './src/rxLocalStorage.page';
 export {rxMisc} from './src/rxMisc.page';
 export {rxModalAction} from './src/rxModalAction.page';
 export {rxNotify, rxNotification} from './src/rxNotify.page';

@@ -31,6 +31,7 @@ src/rxFeedback.page.js
 src/rxFieldName.page.js
 src/rxFieldName.exercise.js
 src/rxForm.page.js
+src/rxLocalStorage.page.js
 src/rxMisc.page.js
 src/rxModalAction.page.js
 src/rxNotify.page.js
@@ -55,6 +56,7 @@ test/rxDiskSize.midway.js
 test/rxFeedback.midway.js
 test/rxFloatingHeader.midway.js
 test/rxForm.midway.js
+test/rxLocalStorage.midway.js
 test/rxModalAction.midway.js
 test/rxNotify.midway.js
 test/rxRadio.midway.js
