@@ -1,7 +1,8 @@
 'use strict';
 
+import {ILocation} from 'selenium-webdriver';
 import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
+import {$, $$, browser, by, promise} from 'protractor';
 import * as webdriver from 'selenium-webdriver';
 import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
 import * as _ from 'lodash';
@@ -13,6 +14,8 @@ interface scrollToElementOptions {
     elementTargetPoint?: string,
     positionOnScreen?: string
 }
+
+type rxMiscLocationSubject = ElementFinder | ElementArrayFinder | ILocation;
 
 /**
  * @class
@@ -64,7 +67,7 @@ export class rxMisc {
      *    browser.ignoreSynchronization = false;
      * });
      */
-    static scrollToElement(elem: ElementFinder | ElementArrayFinder, options: scrollToElementOptions) {
+    static scrollToElement(elem: ElementFinder | ElementArrayFinder, options?: scrollToElementOptions) {
         if (options === undefined) {
             options = {};
         }
@@ -115,22 +118,22 @@ export class rxMisc {
      * Both `transformLocation($('.element'), 'y')` and `transformLocation({x: 20, y: 0}, 'y')`
      * return a promise representing the y value of the resulting (or provided) location object.
      */
-    static transformLocation(elementOrLocation: any, attribute: string) {
+    static transformLocation(elementOrLocation: rxMiscLocationSubject, attribute: string): Promise<any> {
         if (elementOrLocation instanceof ElementArrayFinder) {
             elementOrLocation = elementOrLocation.first();
         }
 
         if (elementOrLocation instanceof ElementFinder) {
-            var elem = elementOrLocation;
+            let elem = elementOrLocation;
             return elem.getLocation().then(function (loc) {
                 return loc[attribute];
             });
         } else {
-            var location = elementOrLocation;
+            let location = <ILocation> elementOrLocation;
             if (_.has(location, attribute)) {
-                return Promise.resolve(location[attribute]);
+                return promise.fulfilled(location[attribute]);
             } else {
-                return Promise.resolve(location);
+                return promise.fulfilled(location);
             }
         }
     }

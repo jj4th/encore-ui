@@ -1,10 +1,21 @@
+'use strict';
+
+import {expect} from 'chai';
+import {$, $$, promise, browser} from 'protractor';
+import * as moment from 'moment';
+import * as _ from 'lodash';
+
+import {rxCheckbox, rxMisc, exercise} from '../index';
+
+let demoPage = require('../../demo.page');
+
 var yDiff = function (e1, e2) {
     var promises = [
-        encore.rxMisc.transformLocation(e1, 'y'),
-        encore.rxMisc.transformLocation(e2, 'y')
+        rxMisc.transformLocation(e1, 'y'),
+        rxMisc.transformLocation(e2, 'y')
     ];
 
-    return protractor.promise.all(promises).then(function (locations) {
+    return promise.all(promises).then(function (locations) {
         return locations[0] - locations[1];
     });
 };
@@ -131,11 +142,11 @@ describe('rxFloatingHeader', function () {
 
         describe('after scrolling to middle of table', function () {
             before(function () {
-                encore.rxMisc.scrollToElement(singleRowTable.tableBody, { elementTargetPoint: 'middle' });
+                rxMisc.scrollToElement(singleRowTable.tableBody, { elementTargetPoint: 'middle' });
             });
 
             it('should float header', function () {
-                var actual = encore.rxMisc.transformLocation(singleRowTable.trLocation, 'y');
+                var actual = rxMisc.transformLocation(singleRowTable.trLocation, 'y');
                 singleRowTable.rowLocation('middle').then(function (location) {
                     var t = calculateTolerance(location.y);
                     expect(actual).to.eventually.be.within(t.lower, t.upper);
@@ -144,11 +155,11 @@ describe('rxFloatingHeader', function () {
 
             describe('after scrolling back to top', function () {
                 before(function () {
-                    encore.rxMisc.scrollToElement($('body'));
+                    rxMisc.scrollToElement($('body'));
                 });
 
                 it('should put the header back', function () {
-                    var actual = encore.rxMisc.transformLocation(singleRowTable.tr, 'y');
+                    var actual = rxMisc.transformLocation(singleRowTable.tr, 'y');
                     var t = calculateTolerance(initialY);
                     expect(actual).to.eventually.be.within(t.lower, t.upper);
                 });
@@ -183,11 +194,11 @@ describe('rxFloatingHeader', function () {
 
         describe('after scrolling the middle of table to the top of the screen', function () {
             before(function () {
-                encore.rxMisc.scrollToElement(multiRowTable.tableBody, { elementTargetPoint: 'middle' });
+                rxMisc.scrollToElement(multiRowTable.tableBody, { elementTargetPoint: 'middle' });
             });
 
             it('should float the header', function () {
-                var actual = encore.rxMisc.transformLocation(multiRowTable.filtersHeader, 'y');
+                var actual = rxMisc.transformLocation(multiRowTable.filtersHeader, 'y');
                 multiRowTable.rowLocation('middle').then(function (location) {
                     var t = calculateTolerance(location.y);
                     expect(actual).to.eventually.be.within(t.lower, t.upper);
@@ -196,7 +207,7 @@ describe('rxFloatingHeader', function () {
 
             it('should have the correct scrolling location', function () {
                 var middleRow = multiRowTable.rowLocation('middle');
-                encore.rxMisc.transformLocation(middleRow, 'y').then(function (location) {
+                rxMisc.transformLocation(middleRow, 'y').then(function (location) {
                     var t = calculateTolerance(location);
                     expect(scrollPosition.y).to.eventually.be.within(t.lower, t.upper);
                 });
@@ -205,18 +216,18 @@ describe('rxFloatingHeader', function () {
 
         describe('after scrolling past the bottom', function () {
             before(function () {
-                encore.rxMisc.scrollToElement($('body'), { elementTargetPoint: 'bottom', positionOnScreen: 'bottom' });
+                rxMisc.scrollToElement($('body'), { elementTargetPoint: 'bottom', positionOnScreen: 'bottom' });
             });
 
             it('should not float the header', function () {
-                var actual = encore.rxMisc.transformLocation(multiRowTable.filtersHeader, 'y');
+                var actual = rxMisc.transformLocation(multiRowTable.filtersHeader, 'y');
                 expect(actual).to.eventually.equal(initialY);
             });
         });
 
         describe('after scrolling the middle of table to the middle of the screen', function () {
             before(function () {
-                encore.rxMisc.scrollToElement(multiRowTable.tableBody, {
+                rxMisc.scrollToElement(multiRowTable.tableBody, {
                     elementTargetPoint: 'middle',
                     positionOnScreen: 'middle'
                 });
@@ -233,7 +244,7 @@ describe('rxFloatingHeader', function () {
 
         describe('after scrolling the middle of table to the bottom of the screen', function () {
             before(function () {
-                encore.rxMisc.scrollToElement(multiRowTable.tableBody, {
+                rxMisc.scrollToElement(multiRowTable.tableBody, {
                     elementTargetPoint: 'middle',
                     positionOnScreen: 'bottom'
                 });
@@ -242,7 +253,7 @@ describe('rxFloatingHeader', function () {
             it('should be in the correct scrolling location', function () {
                 var middleRowLocation = multiRowTable.rowLocation('middle');
                 var bottomOffset = innerHeight;
-                encore.rxMisc.transformLocation(middleRowLocation, 'y').then(function (location) {
+                rxMisc.transformLocation(middleRowLocation, 'y').then(function (location) {
                     var t = calculateTolerance(location - bottomOffset);
                     expect(scrollPosition.y).to.eventually.be.within(t.lower, t.upper);
                 });
@@ -252,7 +263,7 @@ describe('rxFloatingHeader', function () {
 
         describe('after scrolling the bottom of table to the bottom of the screen', function () {
             before(function () {
-                encore.rxMisc.scrollToElement(multiRowTable.tableBody, {
+                rxMisc.scrollToElement(multiRowTable.tableBody, {
                     elementTargetPoint: 'bottom',
                     positionOnScreen: 'bottom'
                 });
@@ -261,7 +272,7 @@ describe('rxFloatingHeader', function () {
             it('should be in the correct scrolling location', function () {
                 var lastRowLocation = multiRowTable.rowLocation('last');
                 var bottomOffset = innerHeight;
-                encore.rxMisc.transformLocation(lastRowLocation, 'y').then(function (location) {
+                rxMisc.transformLocation(lastRowLocation, 'y').then(function (location) {
                     multiRowTable.rowSize('last').then(function (lastRowSize) {
                         var expectedPosition = location + lastRowSize.height - bottomOffset;
                         var t = calculateTolerance(expectedPosition);
@@ -274,7 +285,7 @@ describe('rxFloatingHeader', function () {
 
         describe('when given an ElementArrayFinder', function () {
             before(function () {
-                encore.rxMisc.scrollToElement(multiRowTable.trs);
+                rxMisc.scrollToElement(multiRowTable.trs);
             });
 
             it('should scroll to the first element', function () {

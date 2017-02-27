@@ -53,6 +53,7 @@ test/rxCopy.midway.js
 test/rxDatePicker.midway.js
 test/rxDiskSize.midway.js
 test/rxFeedback.midway.js
+test/rxFloatingHeader.midway.js
 test/rxForm.midway.js
 test/rxModalAction.midway.js
 test/rxNotify.midway.js
