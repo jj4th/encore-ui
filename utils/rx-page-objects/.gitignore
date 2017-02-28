@@ -32,6 +32,8 @@ src/rxFieldName.page.js
 src/rxFieldName.exercise.js
 src/rxForm.page.js
 src/rxLocalStorage.page.js
+src/rxMetadata.page.js
+src/rxMetadata.exercise.js
 src/rxMisc.page.js
 src/rxModalAction.page.js
 src/rxMultiSelect.page.js
@@ -59,6 +61,7 @@ test/rxFeedback.midway.js
 test/rxFloatingHeader.midway.js
 test/rxForm.midway.js
 test/rxLocalStorage.midway.js
+test/rxMetadata.midway.js
 test/rxModalAction.midway.js
 test/rxMultiSelect.midway.js
 test/rxNotify.midway.js

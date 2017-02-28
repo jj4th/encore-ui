@@ -46,6 +46,9 @@
 *rxForm.midway.js
 *rxLocalStorage.page.js
 *rxLocalStorage.midway.js
+*rxMetadata.page.js
+*rxMetadata.exercise.js
+*rxMetadata.midway.js
 *rxMisc.page.js
 *rxModalAction.page.js
 *rxModalAction.midway.js

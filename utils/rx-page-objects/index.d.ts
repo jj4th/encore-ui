@@ -14,6 +14,7 @@ export {rxFeedback} from './src/rxFeedback.page';
 export {rxFieldName} from './src/rxFieldName.page';
 export {rxForm, textFieldAccessor} from './src/rxForm.page';
 export {rxLocalStorage} from './src/rxLocalStorage.page';
+export {rxMetadata} from './src/rxMetadata.page';
 export {rxMisc} from './src/rxMisc.page';
 export {rxModalAction} from './src/rxModalAction.page';
 export {rxMultiSelect} from './src/rxMultiSelect.page';
@@ -29,6 +30,7 @@ import {rxCollapse as rxCollapseExercise} from './src/rxCollapse.exercise';
 import {rxCopy as rxCopyExercise} from './src/rxCopy.exercise';
 import {rxDatePicker as rxDatePickerExercise} from './src/rxDatePicker.exercise';
 import {rxFieldName as rxFieldNameExercise} from './src/rxFieldName.exercise';
+import {rxMetadata as rxMetadataExercise} from './src/rxMetadata.exercise';
 import {rxMultiSelect as rxMultiSelectExercise} from './src/rxMultiSelect.exercise';
 import {rxRadio as rxRadioExercise} from './src/rxRadio.exercise';
 import {rxSelect as rxSelectExercise} from './src/rxSelect.exercise';
@@ -41,6 +43,7 @@ export const exercise: {
     rxCopy: typeof rxCopyExercise
     rxDatePicker: typeof rxDatePickerExercise
     rxFieldName: typeof rxFieldNameExercise
+    rxMetadata: typeof rxMetadataExercise
     rxMultiSelect: typeof rxMultiSelectExercise
     rxRadio: typeof rxRadioExercise
     rxSelect: typeof rxSelectExercise
