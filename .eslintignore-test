@@ -49,6 +49,9 @@
 *rxMisc.page.js
 *rxModalAction.page.js
 *rxModalAction.midway.js
+*rxMultiSelect.page.js
+*rxMultiSelect.exercise.js
+*rxMultiSelect.midway.js
 *rxNotify.page.js
 *rxNotify.midway.js
 *rxRadio.page.js

@@ -79,7 +79,7 @@ export class rxSelect extends rxComponentElement {
     }
 
     /**
-     * @description {@link rxSelect.option} representing the currently selected `<option>` element.
+     * @description The currently selected `<option>` element.
      * @example
      * it('should already have the username populated', function () {
      *     var dropdown = new encore.rxSelect(element(by.model('username')));
@@ -95,7 +95,7 @@ export class rxSelect extends rxComponentElement {
     }
 
     /**
-     * @description High level access to change an rxSelect component's selected option.ent.
+     * @description High level access to change an rxSelect component's selected option.
      * @example
      * it('should select the United States for the country', function () {
      *     var dropdown = new encore.rxSelect($('#country-select'));

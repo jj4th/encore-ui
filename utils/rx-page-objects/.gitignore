@@ -34,6 +34,8 @@ src/rxForm.page.js
 src/rxLocalStorage.page.js
 src/rxMisc.page.js
 src/rxModalAction.page.js
+src/rxMultiSelect.page.js
+src/rxMultiSelect.exercise.js
 src/rxNotify.page.js
 src/rxRadio.page.js
 src/rxRadio.exercise.js
@@ -58,6 +60,7 @@ test/rxFloatingHeader.midway.js
 test/rxForm.midway.js
 test/rxLocalStorage.midway.js
 test/rxModalAction.midway.js
+test/rxMultiSelect.midway.js
 test/rxNotify.midway.js
 test/rxRadio.midway.js
 test/rxSelect.midway.js
