@@ -19,8 +19,12 @@ export {rxMisc} from './src/rxMisc.page';
 export {rxModalAction} from './src/rxModalAction.page';
 export {rxMultiSelect} from './src/rxMultiSelect.page';
 export {rxNotify, rxNotification} from './src/rxNotify.page';
+export {rxPaginate} from './src/rxPaginate.page';
 export {rxRadio, rxRadioAccessor} from './src/rxRadio.page';
+export {rxSearchBox} from './src/rxSearchBox.page';
 export {rxSelect, rxSelectAccessor} from './src/rxSelect.page';
+export {rxSelectFilter} from './src/rxSelectFilter.page';
+export {rxSortableColumn, SORT_TYPE} from './src/rxSortableColumn.page';
 export {Tooltip} from './src/tooltip.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';
@@ -32,7 +36,9 @@ import {rxDatePicker as rxDatePickerExercise} from './src/rxDatePicker.exercise'
 import {rxFieldName as rxFieldNameExercise} from './src/rxFieldName.exercise';
 import {rxMetadata as rxMetadataExercise} from './src/rxMetadata.exercise';
 import {rxMultiSelect as rxMultiSelectExercise} from './src/rxMultiSelect.exercise';
+import {rxPaginate as rxPaginateExercise} from './src/rxPaginate.exercise';
 import {rxRadio as rxRadioExercise} from './src/rxRadio.exercise';
+import {rxSearchBox as rxSearchBoxExercise} from './src/rxSearchBox.exercise';
 import {rxSelect as rxSelectExercise} from './src/rxSelect.exercise';
 
 export const exercise: {
@@ -45,6 +51,8 @@ export const exercise: {
     rxFieldName: typeof rxFieldNameExercise
     rxMetadata: typeof rxMetadataExercise
     rxMultiSelect: typeof rxMultiSelectExercise
+    rxPaginate: typeof rxPaginateExercise
     rxRadio: typeof rxRadioExercise
+    rxSearchBox: typeof rxSearchBoxExercise
     rxSelect: typeof rxSelectExercise
 }

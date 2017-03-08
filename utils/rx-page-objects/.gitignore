@@ -39,10 +39,16 @@ src/rxModalAction.page.js
 src/rxMultiSelect.page.js
 src/rxMultiSelect.exercise.js
 src/rxNotify.page.js
+src/rxPaginate.page.js
+src/rxPaginate.exercise.js
 src/rxRadio.page.js
 src/rxRadio.exercise.js
+src/rxSearchBox.page.js
+src/rxSearchBox.exercise.js
 src/rxSelect.page.js
 src/rxSelect.exercise.js
+src/rxSelectFilter.page.js
+src/rxSortableColumn.page.js
 src/tooltip.page.js
 
 test/rxAccountInfo.midway.js
@@ -65,5 +71,9 @@ test/rxMetadata.midway.js
 test/rxModalAction.midway.js
 test/rxMultiSelect.midway.js
 test/rxNotify.midway.js
+test/rxPaginate.midway.js
 test/rxRadio.midway.js
+test/rxSearchBox.midway.js
 test/rxSelect.midway.js
+test/rxSelectFilter.midway.js
+test/rxSortableColumn.midway.js
