@@ -67,7 +67,7 @@ test/rxAge.midway.js
 test/rxAutoSave.midway.js
 test/rxBreadcrumbs.midway.js
 test/rxBulkSelect.midway.js
-# test/rxBytesConvert.midway.js
+test/rxBytesConvert.midway.js
 test/rxCheckbox.midway.js
 test/rxCharacterCount.midway.js
 test/rxCollapse.midway.js
