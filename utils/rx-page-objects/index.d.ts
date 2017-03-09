@@ -25,6 +25,7 @@ export {rxSearchBox} from './src/rxSearchBox.page';
 export {rxSelect, rxSelectAccessor} from './src/rxSelect.page';
 export {rxSelectFilter} from './src/rxSelectFilter.page';
 export {rxSortableColumn, SORT_TYPE} from './src/rxSortableColumn.page';
+export {rxStatusColumn, STATUS_COLORS, STATUS_ICONS} from './src/rxStatusColumn.page';
 export {Tooltip} from './src/tooltip.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';

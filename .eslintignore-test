@@ -77,8 +77,8 @@
 *rxSelectFilter.midway.js
 *rxSortableColumn.page.js
 *rxSortableColumn.midway.js
-# *rxStatusColumn.page.js
-# *rxStatusColumn.midway.js
+*rxStatusColumn.page.js
+*rxStatusColumn.midway.js
 # *rxTags.page.js
 # *rxTags.exercise.js
 # *rxTags.midway.js
