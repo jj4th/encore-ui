@@ -86,10 +86,10 @@
 *rxTimePicker.midway.js
 *rxTimePickerUtil.page.js
 *rxTimePickerUtil.midway.js
-# *rxToggle.midway.js
-# *rxToggleSwitch.page.js
-# *rxToggleSwitch.exercise.js
-# *rxToggleSwitch.midway.js
+*rxToggle.midway.js
+*rxToggleSwitch.page.js
+*rxToggleSwitch.exercise.js
+*rxToggleSwitch.midway.js
 # *tabs.page.js
 # *tabs.midway.js
 *tooltip.page.js

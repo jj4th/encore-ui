@@ -29,6 +29,7 @@ export {rxStatusColumn, STATUS_COLORS, STATUS_ICONS} from './src/rxStatusColumn.
 export {rxTags, Tag} from './src/rxTags.page';
 export {rxTimePicker} from './src/rxTimePicker.page';
 export {rxTimePickerUtil} from './src/rxTimePickerUtil.page';
+export {rxToggleSwitch} from './src/rxToggleSwitch.page';
 export {Tooltip} from './src/tooltip.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';
@@ -45,6 +46,7 @@ import {rxRadio as rxRadioExercise} from './src/rxRadio.exercise';
 import {rxSearchBox as rxSearchBoxExercise} from './src/rxSearchBox.exercise';
 import {rxSelect as rxSelectExercise} from './src/rxSelect.exercise';
 import {rxTags as rxTagsExercise} from './src/rxTags.exercise';
+import {rxToggleSwitch as rxToggleSwitchExercise} from './src/rxToggleSwitch.exercise';
 
 export const exercise: {
     rxBulkSelect: typeof rxBulkSelectExercise
@@ -61,4 +63,5 @@ export const exercise: {
     rxSearchBox: typeof rxSearchBoxExercise
     rxSelect: typeof rxSelectExercise
     rxTags: typeof rxTagsExercise
+    rxToggleSwitch: typeof rxToggleSwitchExercise
 }
