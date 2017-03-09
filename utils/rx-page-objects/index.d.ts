@@ -26,6 +26,7 @@ export {rxSelect, rxSelectAccessor} from './src/rxSelect.page';
 export {rxSelectFilter} from './src/rxSelectFilter.page';
 export {rxSortableColumn, SORT_TYPE} from './src/rxSortableColumn.page';
 export {rxStatusColumn, STATUS_COLORS, STATUS_ICONS} from './src/rxStatusColumn.page';
+export {rxTags, Tag} from './src/rxTags.page';
 export {Tooltip} from './src/tooltip.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';
@@ -41,6 +42,7 @@ import {rxPaginate as rxPaginateExercise} from './src/rxPaginate.exercise';
 import {rxRadio as rxRadioExercise} from './src/rxRadio.exercise';
 import {rxSearchBox as rxSearchBoxExercise} from './src/rxSearchBox.exercise';
 import {rxSelect as rxSelectExercise} from './src/rxSelect.exercise';
+import {rxTags as rxTagsExercise} from './src/rxTags.exercise';
 
 export const exercise: {
     rxBulkSelect: typeof rxBulkSelectExercise
@@ -56,4 +58,5 @@ export const exercise: {
     rxRadio: typeof rxRadioExercise
     rxSearchBox: typeof rxSearchBoxExercise
     rxSelect: typeof rxSelectExercise
+    rxTags: typeof rxTagsExercise
 }

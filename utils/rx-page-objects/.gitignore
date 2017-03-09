@@ -50,8 +50,8 @@ src/rxSelect.exercise.js
 src/rxSelectFilter.page.js
 src/rxSortableColumn.page.js
 src/rxStatusColumn.page.js
-# src/rxTags.exercise.js
-# src/rxTags.page.js
+src/rxTags.exercise.js
+src/rxTags.page.js
 # src/rxTimePicker.page.js
 # src/rxTimePickerUtil.page.js
 # src/rxToggleSwitch.exercise.js
@@ -90,7 +90,7 @@ test/rxSelect.midway.js
 test/rxSelectFilter.midway.js
 test/rxSortableColumn.midway.js
 test/rxStatusColumn.midway.js
-# test/rxTags.midway.js
+test/rxTags.midway.js
 # test/rxTimePicker.midway.js
 # test/rxTimePickerUtil.midway.js
 # test/rxToggle.midway.js
