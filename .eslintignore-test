@@ -7,6 +7,8 @@
 # these are typescript now
 # eventually, all src/*.page.js files
 # can be ignored with a glob.
+
+# *hotkeys.midway.js
 *rxAccountInfo.page.js
 *rxAccountInfo.midway.js
 *rxActionMenu.page.js
@@ -19,6 +21,7 @@
 *rxBulkSelect.page.js
 *rxBulkSelect.exercise.js
 *rxBulkSelect.midway.js
+# *rxBytesConvert.midway.js
 *rxCheckbox.page.js
 *rxCheckbox.exercise.js
 *rxCheckbox.midway.js
@@ -60,6 +63,7 @@
 *rxPaginate.page.js
 *rxPaginate.exercise.js
 *rxPaginate.midway.js
+*rxPermission.midway.js
 *rxRadio.page.js
 *rxRadio.exercise.js
 *rxRadio.midway.js
@@ -73,4 +77,23 @@
 *rxSelectFilter.midway.js
 *rxSortableColumn.page.js
 *rxSortableColumn.midway.js
+# *rxStatusColumn.page.js
+# *rxStatusColumn.midway.js
+# *rxTags.page.js
+# *rxTags.exercise.js
+# *rxTags.midway.js
+# *rxTimePicker.page.js
+# *rxTimePicker.midway.js
+# *rxTimePickerUtil.page.js
+# *rxTimePickerUtil.midway.js
+# *rxToggle.midway.js
+# *rxToggleSwitch.page.js
+# *rxToggleSwitch.exercise.js
+# *rxToggleSwitch.midway.js
+# *tabs.page.js
+# *tabs.midway.js
 *tooltip.page.js
+# *typeahead.page.js
+# *typeahead.midway.js
+
+
