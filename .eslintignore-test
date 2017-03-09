@@ -82,10 +82,10 @@
 *rxTags.page.js
 *rxTags.exercise.js
 *rxTags.midway.js
-# *rxTimePicker.page.js
-# *rxTimePicker.midway.js
-# *rxTimePickerUtil.page.js
-# *rxTimePickerUtil.midway.js
+*rxTimePicker.page.js
+*rxTimePicker.midway.js
+*rxTimePickerUtil.page.js
+*rxTimePickerUtil.midway.js
 # *rxToggle.midway.js
 # *rxToggleSwitch.page.js
 # *rxToggleSwitch.exercise.js

@@ -27,6 +27,8 @@ export {rxSelectFilter} from './src/rxSelectFilter.page';
 export {rxSortableColumn, SORT_TYPE} from './src/rxSortableColumn.page';
 export {rxStatusColumn, STATUS_COLORS, STATUS_ICONS} from './src/rxStatusColumn.page';
 export {rxTags, Tag} from './src/rxTags.page';
+export {rxTimePicker} from './src/rxTimePicker.page';
+export {rxTimePickerUtil} from './src/rxTimePickerUtil.page';
 export {Tooltip} from './src/tooltip.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';
