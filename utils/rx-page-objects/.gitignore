@@ -60,7 +60,7 @@ src/rxSortableColumn.page.js
 src/tooltip.page.js
 # src/typeahead.page.js
 
-# test/hotkeys.midway.js
+test/hotkeys.midway.js
 test/rxAccountInfo.midway.js
 test/rxActionMenu.midway.js
 test/rxAge.midway.js
