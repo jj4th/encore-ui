@@ -20,7 +20,7 @@ type rxMiscLocationSubject = ElementFinder | ElementArrayFinder | ILocation;
 /**
  * @class
  */
-export class rxMisc {
+export namespace rxMisc {
     /**
      * @description Equivalent to `browser.actions().mouseDown(elem).mouseUp().perform();`.
      * This function should be used when dealing with odd or unusual behavior while interacting with click events
@@ -36,7 +36,7 @@ export class rxMisc {
      *     expect(encore.rxNotify.all.isPresent('You will be redirected', 'success')).to.eventually.be.true;
      * });
      */
-    static slowClick(elem: ElementFinder): void {
+    export function slowClick(elem: ElementFinder): void {
         browser.actions().mouseDown(elem).mouseUp().perform();
     }
 
@@ -67,7 +67,7 @@ export class rxMisc {
      *    browser.ignoreSynchronization = false;
      * });
      */
-    static scrollToElement(elem: ElementFinder | ElementArrayFinder, options?: scrollToElementOptions) {
+    export function scrollToElement(elem: ElementFinder | ElementArrayFinder, options?: scrollToElementOptions) {
         if (options === undefined) {
             options = {};
         }
@@ -118,7 +118,7 @@ export class rxMisc {
      * Both `transformLocation($('.element'), 'y')` and `transformLocation({x: 20, y: 0}, 'y')`
      * return a promise representing the y value of the resulting (or provided) location object.
      */
-    static transformLocation(elementOrLocation: rxMiscLocationSubject, attribute: string): Promise<any> {
+    export function transformLocation(elementOrLocation: rxMiscLocationSubject, attribute: string): Promise<any> {
         if (elementOrLocation instanceof ElementArrayFinder) {
             elementOrLocation = elementOrLocation.first();
         }
