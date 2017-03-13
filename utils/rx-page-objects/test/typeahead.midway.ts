@@ -1,9 +1,18 @@
+'use strict';
+
+import {expect} from 'chai';
+import {$} from 'protractor';
+
+import {Typeahead} from '../index';
+
+let demoPage = require('../../demo.page');
+
 describe('typeahead', function () {
-    var typeahead;
+    let typeahead: Typeahead;
 
     before(function () {
         demoPage.go('#/elements/Typeahead');
-        typeahead = encore.typeahead.initialize($('#typeahead'));
+        typeahead = new Typeahead($('#typeahead'));
     });
 
     it('should show element', function () {
@@ -15,7 +24,7 @@ describe('typeahead', function () {
     });
 
     it('should show the menu when clicked', function () {
-        typeahead.focus();
+        typeahead.click();
         expect(typeahead.isOpen()).to.eventually.be.true;
     });
 

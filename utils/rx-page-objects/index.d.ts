@@ -32,6 +32,7 @@ export {rxTimePickerUtil} from './src/rxTimePickerUtil.page';
 export {rxToggleSwitch} from './src/rxToggleSwitch.page';
 export {Tabs, Tab} from './src/tabs.page';
 export {Tooltip} from './src/tooltip.page';
+export {Typeahead} from './src/typeahead.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';
 import {rxCheckbox as rxCheckboxExercise} from './src/rxCheckbox.exercise';
