@@ -1,8 +1,8 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$, by} from 'protractor';
 import * as _ from 'lodash';
+import {$, by} from 'protractor';
 
 import {rxSortableColumn, rxStatusColumn, STATUS_COLORS, STATUS_ICONS} from '../index';
 
@@ -39,9 +39,9 @@ class Table {
     }
 
     getStatuses() {
-        return this.tblServers.map((elem) => {
+        return this.tblServers.map(elem => {
             return new Row(elem).status.getStatus();
-        })
+        });
     }
 
     row(rowIndex) {
@@ -66,7 +66,7 @@ let STATUS_TYPES = {
     RESCUE: 'RESCUE',
     RESIZE: 'RESIZE',
     SUSPENDED: 'SUSPENDED',
-    UNKNOWN: 'UNKNOWN'
+    UNKNOWN: 'UNKNOWN',
 };
 
 describe('rxStatusColumn', () => {

@@ -1,9 +1,8 @@
 'use strict';
 
-import {$, $$, browser, by, ElementFinder} from 'protractor';
-import {rxCheckbox} from './rxCheckbox.page';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
 import * as _ from 'lodash';
+import {$, by, ElementFinder} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 export class rxMultiSelectOption extends rxComponentElement {
     /**
@@ -25,7 +24,7 @@ export class rxMultiSelectOption extends rxComponentElement {
      * @description Make sure option is selected.
      */
     select() {
-        return this.isSelected().then((selected) => {
+        return this.isSelected().then(selected => {
             if (!selected) {
                 this.click();
             }
@@ -36,7 +35,7 @@ export class rxMultiSelectOption extends rxComponentElement {
      * @description Make sure option is deselected.
      */
     deselect() {
-        return this.isSelected().then((selected) => {
+        return this.isSelected().then(selected => {
             if (selected) {
                 this.click();
             }
@@ -56,7 +55,7 @@ export class rxMultiSelect extends rxComponentElement {
      * @description Closes the menu.
      */
     close() {
-        this.isOpen().then((isOpen) => {
+        this.isOpen().then(isOpen => {
             if (isOpen) {
                 $('body').click();
             }
@@ -67,7 +66,7 @@ export class rxMultiSelect extends rxComponentElement {
      * @description Opens the menu.
      */
     open() {
-        this.isOpen().then((isOpen) => {
+        this.isOpen().then(isOpen => {
             if (!isOpen) {
                 this.lblPreview.click();
             }
@@ -101,10 +100,11 @@ export class rxMultiSelect extends rxComponentElement {
      * in order that they are defined in the multi select.
      * @example
      * it('should select a few options', function () {
+     *     var selected = ['Canada', 'Latvia', 'United States of America'];
      *     var multiSelect = encore.rxMultiSelect.initialize(element(by.model('countriesVisited')));
-     *     multiSelect.select(['United States of America', 'Canada', 'Latvia']);
+     *     multiSelect.select(selected);
      *     // multi select lists all countries alphabetically
-     *     expect(multiSelect.selectedOptions.getText()).to.eventually.eql(['Canada', 'Latvia', 'United States of America']);
+     *     expect(multiSelect.selectedOptions.getText()).to.eventually.eql(selected);
      * });
      */
     get selectedOptions() {
@@ -141,7 +141,7 @@ export class rxMultiSelect extends rxComponentElement {
      */
     select(optionTexts: string[]) {
         this.open();
-        optionTexts.forEach((optionText) => {
+        optionTexts.forEach(optionText => {
             new rxMultiSelectOption(this.option(optionText)).select();
         });
     }
@@ -159,7 +159,7 @@ export class rxMultiSelect extends rxComponentElement {
      */
     deselect(optionTexts: string[]) {
         this.open();
-        optionTexts.forEach((optionText) => {
+        optionTexts.forEach(optionText => {
             new rxMultiSelectOption(this.option(optionText)).deselect();
         });
     }
@@ -168,7 +168,7 @@ export class rxMultiSelect extends rxComponentElement {
      * @description Whether the '<rx-multi-select>' element is valid.
      */
     isValid() {
-        return this.getAttribute('class').then(function (classes) {
+        return this.getAttribute('class').then(classes => {
             return _.includes(classes.split(' '), 'ng-valid');
         });
     }

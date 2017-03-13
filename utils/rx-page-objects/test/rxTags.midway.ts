@@ -1,8 +1,6 @@
 'use strict';
-
-import {expect} from 'chai';
 import {$} from 'protractor';
-import {rxTags, exercise} from '../index';
+import {exercise, rxTags} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -13,6 +11,6 @@ describe('rxTags', () => {
 
     describe('exercises', exercise.rxTags({
         instance: new rxTags($('#standard-tags')),
-        sampleText: 'orange'
+        sampleText: 'orange',
     }));
 });

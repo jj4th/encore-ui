@@ -1,9 +1,9 @@
 'use strict';
 
-import {$, by, element} from 'protractor';
+import * as _ from 'lodash';
+import {by} from 'protractor';
 import {rxComponentElement} from './rxComponent';
 import {rxMultiSelect} from './rxMultiSelect.page';
-import * as _ from 'lodash';
 
 /**
  * @example
@@ -18,14 +18,14 @@ import * as _ from 'lodash';
  *         }
  *     });
  */
-interface rxMultiSelectFilterData {
-    [id:string]: {
-        [id:string]: boolean
-    }
+interface IRxMultiSelectFilterData {
+    [id: string]: {
+        [id: string]: boolean,
+    };
 }
 
 /**
-   @class
+ * @class
  */
 export class rxSelectFilter extends rxComponentElement {
 
@@ -56,10 +56,10 @@ export class rxSelectFilter extends rxComponentElement {
      *     expect(myPage.myTable.column('Status').data.then(_.uniq)).to.eventually.eql(['Open']);
      * });
      */
-    apply(filterData: rxMultiSelectFilterData) {
+    apply(filterData: IRxMultiSelectFilterData) {
         _.each(filterData, (options, label) => {
             let multiSelect = this.multiSelectByLabel(label);
-            multiSelect.open()
+            multiSelect.open();
             _.each(options, (shouldSelect, option) => {
                 if (shouldSelect) {
                     multiSelect.select([option]);

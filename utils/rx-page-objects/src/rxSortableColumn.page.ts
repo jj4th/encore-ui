@@ -1,15 +1,11 @@
 'use strict';
-
-import * as webdriver from 'selenium-webdriver';
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by, element} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
-import * as _ from 'lodash';
+import {promise} from 'protractor';
+import {Promise, rxComponentElement} from './rxComponent';
 
 export enum SORT_TYPE {
     DESCENDING = -1,
     UNSORTED,
-    ASCENDING
+    ASCENDING,
 }
 
 /**
@@ -82,11 +78,13 @@ export class rxSortableColumn extends rxComponentElement {
     getSortDirection() {
         let sortIcon = this.$('.sort-direction-icon');
 
-        return sortIcon.isPresent().then((present): SORT_TYPE | Promise<SORT_TYPE> => {
+        return sortIcon.isPresent().then(present => {
             if (!present) {
-                return SORT_TYPE.UNSORTED;
+                // Wrapping this in a promise for consistent return types.
+                // necessary to avoid typescript warnings in the simplest possible way.
+                return promise.fulfilled(SORT_TYPE.UNSORTED);
             }
-            return sortIcon.getAttribute('class').then((className) => {
+            return sortIcon.getAttribute('class').then(className => {
                 return (className.indexOf('ascending') > -1 ? SORT_TYPE.ASCENDING : SORT_TYPE.DESCENDING);
             });
         });
@@ -98,10 +96,10 @@ export class rxSortableColumn extends rxComponentElement {
      */
     protected sort(desiredSort: SORT_TYPE): Promise<void> {
         this.btnSort.click();
-        return this.getSortDirection().then((sortDirection) => {
+        return this.getSortDirection().then(sortDirection => {
             if (sortDirection !== desiredSort) {
                 this.btnSort.click();
             }
         });
-    }
+    };
 }

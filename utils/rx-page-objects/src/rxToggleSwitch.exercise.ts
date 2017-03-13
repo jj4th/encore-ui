@@ -2,16 +2,15 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
-import * as component from './rxToggleSwitch.page';
 import {rxMisc} from './rxMisc.page';
+import * as component from './rxToggleSwitch.page';
 
-interface rxToggleSwitchExerciseOptions {
-    instance: component.rxToggleSwitch
-    enabled?: boolean
-    toggledAtStart?: boolean
-    toggledAtEnd?: boolean
+interface IRxToggleSwitchExerciseOptions {
+    instance: component.rxToggleSwitch;
+    enabled?: boolean;
+    toggledAtStart?: boolean;
+    toggledAtEnd?: boolean;
 }
 
 /**
@@ -21,34 +20,35 @@ interface rxToggleSwitchExerciseOptions {
  *     instance: myPage.emailPreference // select one of many widgets from your page objects
  * }));
  */
-export function rxToggleSwitch(options: rxToggleSwitchExerciseOptions) {
+export function rxToggleSwitch(options: IRxToggleSwitchExerciseOptions) {
 
     options = _.defaults(options, {
         enabled: true,
         toggledAtStart: false,
-        toggledAtEnd: true
+        toggledAtEnd: true,
     });
 
     return () => {
-        let toggledAtEnd: boolean, toggledAtStart: boolean;
+        let toggledAtEnd: boolean;
+        let toggledAtStart: boolean;
         let component: component.rxToggleSwitch;
 
-        let positionAsText = (isEnabled) => {
+        let positionAsText = isEnabled => {
             return isEnabled ? 'ON' : 'OFF';
         };
 
         let toggle = () => {
             rxMisc.scrollToElement(component, {
-                positionOnScreen: 'middle'
+                positionOnScreen: 'middle',
             });
-            return component.isToggled().then((toggled) => {
+            return component.isToggled().then(toggled => {
                 toggled ? component.toggleOff() : component.toggleOn();
             });
         };
 
         before(() => {
             component = options.instance;
-            component.isToggled().then((isToggled) => {
+            component.isToggled().then(isToggled => {
                 // use option if available, otherwise use detected state
                 toggledAtStart = _.isNull(options.toggledAtStart) ? isToggled : options.toggledAtStart;
 

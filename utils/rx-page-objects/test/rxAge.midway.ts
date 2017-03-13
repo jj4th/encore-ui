@@ -1,16 +1,17 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$} from 'protractor';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import * as moment from 'moment';
+import {$$, ElementArrayFinder} from 'protractor';
 
 import {rxAge} from '../index';
 
 let demoPage = require('../../demo.page');
 
 describe('rxAge', () => {
-    let momentsTable, isoString;
+    let momentsTable: ElementArrayFinder;
+    let isoDate: Date;
     let oneHour = 1000 * 60 * 60;
     let ageStrings = [
         '10h 26m',
@@ -24,7 +25,7 @@ describe('rxAge', () => {
         '10 hours',
         '1 day, 12 hours',
         '40 days, 4 hours, 48 minutes',
-        '380 days, 2 hours, 24 minutes'
+        '380 days, 2 hours, 24 minutes',
     ];
 
     before(() => {
@@ -32,18 +33,18 @@ describe('rxAge', () => {
         momentsTable = $$('#rxAge-demo ol li');
     });
 
-    _.forEach(ageStrings, function (testData, index) {
+    _.forEach(ageStrings, (testData, index) => {
         it('should still have ' + testData + ' as test data on the page', () => {
-            momentsTable.get(index).getText().then(function (text) {
-                var onPage = text.split('→')[1].trim();
+            momentsTable.get(index).getText().then(text => {
+                let onPage = text.split('→')[1].trim();
                 expect(onPage).to.equal(testData);
             });
         });
 
         it('should convert ' + testData + ' accurate within the hour', () => {
-            momentsTable.get(index).getText().then(function (text) {
-                isoString = new Date(text.split('→')[0].trim());
-                expect(rxAge.toMoment(testData).valueOf()).to.be.closeTo(moment(isoString).valueOf(), oneHour);
+            momentsTable.get(index).getText().then(text => {
+                isoDate = new Date(text.split('→')[0].trim());
+                expect(rxAge.toMoment(testData).valueOf()).to.be.closeTo(moment(isoDate).valueOf(), oneHour);
             });
         });
     });

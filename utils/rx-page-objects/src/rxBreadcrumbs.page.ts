@@ -1,9 +1,7 @@
 'use strict';
-
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
-import * as _ from 'lodash';
+import {ElementFinder} from 'protractor';
+import {by} from 'protractor';
+import {OverrideWebdriver, Promise, rxComponentElement} from './rxComponent';
 
 /**
  * @description Properties around a single breadcrumb.
@@ -78,8 +76,8 @@ export class rxBreadcrumbs extends rxComponentElement {
      * If multiple entries exist with the same name, the first will be returned.
      */
     byName(breadcrumbName: string) {
-        var eleBreadcrumb = this.tblBreadcrumbs.filter((breadcrumbElement: ElementFinder) => {
-            return breadcrumbElement.element(by.exactBinding('breadcrumb.name')).getText().then((name) => {
+        let eleBreadcrumb = this.tblBreadcrumbs.filter((breadcrumbElement: ElementFinder) => {
+            return breadcrumbElement.element(by.exactBinding('breadcrumb.name')).getText().then(name => {
                 return name === breadcrumbName;
             });
         }).get(0);
@@ -110,7 +108,7 @@ export class rxBreadcrumbs extends rxComponentElement {
      * expect(encore.rxBreadcrumbs.initialize().names).to.eventually.eql(['Home', 'More']);
      */
     getNames() {
-        return this.tblBreadcrumbs.map((breadcrumbElement) => {
+        return this.tblBreadcrumbs.map(breadcrumbElement => {
             return breadcrumbElement.element(by.exactBinding('breadcrumb.name')).getText();
         });
     }

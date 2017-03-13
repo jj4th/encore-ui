@@ -1,8 +1,8 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, by, element} from 'protractor';
 import * as _ from 'lodash';
+import {$, by, element} from 'protractor';
 
 import {rxSelectFilter} from '../index';
 
@@ -36,7 +36,7 @@ describe('selectFilter', () => {
     it('shows all the table data', () => {
         selectFilter.apply({
             Account: { All: true },
-            Status: { All: true }
+            Status: { All: true },
         });
 
         expect(table.accounts).to.eventually.eql(['A', 'B']);
@@ -45,7 +45,7 @@ describe('selectFilter', () => {
 
     it('filters the table data by the status', () => {
         selectFilter.apply({
-            Status: { All: false, Transferred: true }
+            Status: { All: false, Transferred: true },
         });
 
         expect(table.accounts).to.eventually.eql(['A', 'B']);
@@ -55,7 +55,7 @@ describe('selectFilter', () => {
     it('filters the table data by the account', () => {
         selectFilter.apply({
             Account: { All: false, B: true },
-            Status: { All: true }
+            Status: { All: true },
         });
 
         expect(table.accounts).to.eventually.eql(['B']);

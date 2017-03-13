@@ -2,22 +2,22 @@
 
 import {expect} from 'chai';
 import {$, by} from 'protractor';
-import {rxBulkSelect, exercise, rxModalAction} from '../index';
+import {exercise, rxBulkSelect, rxModalAction} from '../index';
 
 let demoPage = require('../../demo.page');
+
+class CustomModal extends rxModalAction {
+    selectFirst() {
+        this.all(by.css('tbody tr:nth-child(1) input')).click();
+    }
+}
 
 describe('rxBulkSelect', () => {
 
     let page = {
         get btnSelectDatacenters() {
             return $('rx-modal-action#selectDatacenters a');
-        }
-    };
-
-    class CustomModal extends rxModalAction {
-        selectFirst() {
-            this.all(by.css('tbody tr:nth-child(1) input')).click();
-        }
+        },
     };
 
     before(() => {
@@ -25,7 +25,8 @@ describe('rxBulkSelect', () => {
     });
 
     describe('exercises', exercise.rxBulkSelect({
-        batchActions: ['Shutdown Selected Datacenters']
+        instance: new rxBulkSelect($('[rx-bulk-select]')),
+        batchActions: ['Shutdown Selected Datacenters'],
     }));
 
     describe('rxBulkSelectValidate', () => {

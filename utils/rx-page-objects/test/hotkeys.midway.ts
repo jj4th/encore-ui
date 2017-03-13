@@ -1,17 +1,14 @@
 'use strict';
 
-import {Key} from 'selenium-webdriver';
 import {expect} from 'chai';
-import {element, by} from 'protractor';
-import * as moment from 'moment';
-import * as _ from 'lodash';
-
-import {rxCheckbox, exercise} from '../index';
+import {by, element, ElementFinder} from 'protractor';
+import {Key} from 'selenium-webdriver';
 
 let demoPage = require('../../demo.page');
 
 describe('hotkeys', () => {
-    var volume, body;
+    let volume: ElementFinder;
+    let body: ElementFinder;
 
     before(() => {
         demoPage.go('#/utilities/hotkeys');

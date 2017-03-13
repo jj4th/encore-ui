@@ -8,8 +8,8 @@ export namespace rxTimePickerUtil {
      * the rxTimePickerUtil service.
      */
     export function parseUtcOffset(stringValue: string) {
-        var regex = /([-+]\d{2}:?\d{2})/;
-        var matched = stringValue.match(regex);
+        let regex = /([-+]\d{2}:?\d{2})/;
+        let matched = stringValue.match(regex);
         return (matched ? matched[0] : '');
     }
 };

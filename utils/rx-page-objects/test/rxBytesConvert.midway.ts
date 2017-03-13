@@ -1,8 +1,8 @@
 'use strict';
 
-import {$$} from 'protractor';
 import {expect} from 'chai';
 import * as _ from 'lodash';
+import {$$} from 'protractor';
 
 import {rxDiskSize} from '../index';
 
@@ -16,7 +16,7 @@ describe('rxBytesConvert', () => {
         '171.34 PB',
         '420 GB',
         '125 TB',
-        '171.34 PB'
+        '171.34 PB',
     ];
 
     before(() => {
@@ -24,17 +24,17 @@ describe('rxBytesConvert', () => {
         diskSizesTable = $$('#rx-bytes-convert-demo ul li');
     });
 
-    _.forEach(diskSizeStrings, function (testData, index) {
+    _.forEach(diskSizeStrings, (testData, index) => {
         it('should still have ' + testData + ' as test data on the page', () => {
-            diskSizesTable.get(index).getText().then(function (text) {
-                var onPage = text.split('→')[1].trim();
+            diskSizesTable.get(index).getText().then(text => {
+                let onPage = text.split('→')[1].trim();
                 expect(onPage).to.equal(testData);
             });
         });
 
         it('should convert ' + testData + ' back to bytes', () => {
-            diskSizesTable.get(index).getText().then(function (text) {
-                var gigabytes = parseInt(text.split(' ')[0], 10);
+            diskSizesTable.get(index).getText().then(text => {
+                let gigabytes = parseInt(text.split(' ')[0], 10);
                 expect(rxDiskSize.toBytes(testData)).to.equal(gigabytes);
             });
         });

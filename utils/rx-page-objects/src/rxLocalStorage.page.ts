@@ -2,6 +2,8 @@
 
 import {browser} from 'protractor';
 
+/* tslint:disable no-shadowed-variable */
+
 /**
  * @namespace
  */
@@ -17,7 +19,7 @@ export namespace rxLocalStorage {
      * });
      */
     export function setItem(key: string, value: any) {
-        let command = function (key: string, value: any) {
+        let command = (key: string, value: any) => {
             localStorage.setItem(key, value);
         };
         browser.executeScript(command, key, JSON.stringify(value));
@@ -34,7 +36,7 @@ export namespace rxLocalStorage {
      * });
      */
     export function getItem(key: string) {
-        let command = function (key: string) {
+        let command = (key: string) => {
             return JSON.parse(localStorage.getItem(key));
         };
         return browser.executeScript(command, key);
@@ -50,7 +52,7 @@ export namespace rxLocalStorage {
      * });
      */
     export function removeItem(key: string) {
-        let command = function (key: string) {
+        let command = (key: string) => {
             localStorage.removeItem(key);
         };
         browser.executeScript(command, key);
@@ -66,7 +68,7 @@ export namespace rxLocalStorage {
      * });
      */
     export function isPresent(key: string) {
-        let command = function (key: string) {
+        let command = (key: string) => {
             return localStorage.getItem(key) !== null;
         };
         return browser.executeScript(command, key);

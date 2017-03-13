@@ -2,23 +2,20 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
-
 import * as component from './rxSelect.page';
-import {Promise} from './rxComponent';
 
-interface rxSelectExerciseOptions {
+interface IRxSelectExerciseOptions {
     instance?: component.rxSelect;
-    disabled?: boolean,
-    visible?: boolean,
-    valid?: boolean,
-    selectedText?: string
+    disabled?: boolean;
+    visible?: boolean;
+    valid?: boolean;
+    selectedText?: string;
 }
 
 /**
  * @description rxSelect exercises.
  */
-export function rxSelect (options: rxSelectExerciseOptions) {
+export function rxSelect (options: IRxSelectExerciseOptions) {
     if (options === undefined) {
         options = {};
     }
@@ -26,11 +23,11 @@ export function rxSelect (options: rxSelectExerciseOptions) {
     options = _.defaults(options, {
         disabled: false,
         visible: true,
-        valid: true
+        valid: true,
     });
 
     return () => {
-        var component;
+        let component;
 
         before(() => {
             component = options.instance;

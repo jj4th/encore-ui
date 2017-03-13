@@ -2,10 +2,6 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
-
-import * as component from './rxRadio.page';
-import {Promise} from './rxComponent';
 
 /**
  * @description rxRadio exercises
@@ -19,11 +15,11 @@ export function rxRadio(options) {
         disabled: false,
         selected: false,
         visible: true,
-        valid: true
+        valid: true,
     });
 
     return () => {
-        var component;
+        let component;
 
         before(() => {
             component = options.instance;

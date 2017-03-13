@@ -2,14 +2,13 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 import * as component from './rxSearchBox.page';
 
-interface rxSearchBoxExerciseOptions {
-    instance: component.rxSearchBox
-    disabled?: boolean
-    placeholder?: string
+interface IRxSearchBoxExerciseOptions {
+    instance: component.rxSearchBox;
+    disabled?: boolean;
+    placeholder?: string;
 }
 /**
  * @description rxSearchBox exercises.
@@ -19,11 +18,11 @@ interface rxSearchBoxExerciseOptions {
  *     placeholder: 'Filter by name...'
  * }));
  */
-export function rxSearchBox (options: rxSearchBoxExerciseOptions) {
+export function rxSearchBox (options: IRxSearchBoxExerciseOptions) {
 
     options = _.defaults(options, {
         disabled: false,
-        placeholder: 'Search...'
+        placeholder: 'Search...',
     });
 
     return () => {
@@ -52,7 +51,7 @@ export function rxSearchBox (options: rxSearchBoxExerciseOptions) {
                 it('should not display the clear button', () => {
                     expect(searchBox.isClearable()).to.eventually.be.false;
                 });
-            });//when disabled
+            }); // when disabled
         } else {
             describe('when enabled', () => {
                 it('should be enabled', () => {
@@ -76,7 +75,7 @@ export function rxSearchBox (options: rxSearchBoxExerciseOptions) {
                 it('should not be clearable', () => {
                     expect(searchBox.isClearable()).to.eventually.be.false;
                 });
-            });//when enabled
+            }); // when enabled
         }
     };
 };

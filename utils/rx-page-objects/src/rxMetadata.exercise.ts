@@ -1,19 +1,18 @@
 'use strict';
 
 import {expect} from 'chai';
+import * as _ from 'lodash';
 import {ElementFinder} from 'protractor';
 import {Promise} from './rxComponent';
-import * as _ from 'lodash';
-import * as moment from 'moment';
 
 import * as component from './rxMetadata.page';
 
-interface rxMetadataExerciseOptions {
-    instance: component.rxMetadata
-    present?: boolean
-    visible?: boolean
-    terms: { [id: string]: any }
-    transforms?: { [id:string]: (definition: ElementFinder) => Promise<any> }
+interface IRxMetadataExerciseOptions {
+    instance: component.rxMetadata;
+    present?: boolean;
+    visible?: boolean;
+    terms: { [id: string]: any };
+    transforms?: { [id: string]: (definition: ElementFinder) => Promise<any> };
 }
 /**
  * rxMetadata exercises, with optional transforms to exercising complex metadata
@@ -33,19 +32,19 @@ interface rxMetadataExerciseOptions {
  *     }
  * }));
  */
-export function rxMetadata (options: rxMetadataExerciseOptions) {
+export function rxMetadata (options: IRxMetadataExerciseOptions) {
 
     options = _.defaults(options, {
         present: true,
         visible: true,
-        transforms: {}
+        transforms: {},
     });
 
     return () => {
         let component: component.rxMetadata;
 
         before(() => {
-            component = options.instance
+            component = options.instance;
         });
 
         it('should ' + (options.present ? 'be' : 'not be') + ' present', () => {
@@ -60,7 +59,7 @@ export function rxMetadata (options: rxMetadataExerciseOptions) {
             expect(component.getLabels()).to.eventually.eql(Object.keys(options.terms));
         });
 
-        _.forEach(options.terms, function (expected, term) {
+        _.forEach(options.terms, (expected: string, term: any) => {
             it('should have the correct definition for ' + term, () => {
                 let definition = component.term(term);
                 if (options.transforms[term]) {

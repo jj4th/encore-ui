@@ -1,29 +1,29 @@
 'use strict';
 
-import {Key} from 'selenium-webdriver';
-import {$, browser, ElementFinder} from 'protractor';
 import {expect} from 'chai';
-import * as component from './rxCopy.page';
 import * as _ from 'lodash';
+import {browser, ElementFinder} from 'protractor';
+import {Key} from 'selenium-webdriver';
+import * as component from './rxCopy.page';
 
-interface rxCopyExerciseOptions {
-    instance: component.rxCopy
-    isPresent?: boolean
-    isEnabled?: boolean
-    isDisplayed?: boolean
-    expectedText?: string|RegExp
-    testCopyArea?: ElementFinder
+interface IRxCopyExerciseOptions {
+    instance: component.rxCopy;
+    displayed?: boolean;
+    enabled?: boolean;
+    expectedText?: string|RegExp;
+    present?: boolean;
+    testCopyArea?: ElementFinder;
 }
 /**
  * @description rxCopy exercises.
  * @see rxCopy
  */
-export function rxCopy(options: rxCopyExerciseOptions) {
+export function rxCopy(options: IRxCopyExerciseOptions) {
 
     options = _.defaults(options, {
-        isPresent: true,
-        isEnabled: true,
-        isDisplayed: true
+        displayed: true,
+        enabled: true,
+        present: true,
     });
 
     return () => {
@@ -33,39 +33,39 @@ export function rxCopy(options: rxCopyExerciseOptions) {
          * pastes a value to `testCopyArea` then returns what was pasted.
          */
         let getPastedValue = () => {
-            options.testCopyArea.clear()
+            options.testCopyArea.clear();
             options.testCopyArea.sendKeys(Key.chord(
                 (process.platform === 'darwin' ? Key.META : Key.CONTROL),
-                'v'
-            ))
+                'v',
+            ));
             return options.testCopyArea.getAttribute('value');
-        }
+        };
 
         before(() => {
             component = options.instance;
         });
 
         it('should be present', () => {
-            expect(component.isPresent()).to.eventually.eq(options.isPresent);
+            expect(component.isPresent()).to.eventually.eq(options.present);
         });
 
-        if (!options.isPresent) {
+        if (!options.present) {
             return;
         }
 
-        it(`should ${options.isDisplayed ? 'be' : 'not be'} displayed`, () => {
-            expect(component.isDisplayed()).to.eventually.eq(options.isDisplayed);
+        it(`should ${options.displayed ? 'be' : 'not be'} displayed`, () => {
+            expect(component.isDisplayed()).to.eventually.eq(options.displayed);
         });
 
-        if (!options.isDisplayed) {
+        if (!options.displayed) {
             return;
         }
 
-        it(`should ${options.isEnabled ? 'be' : 'not be'} enabled`, () => {
-            expect(component.isEnabled()).to.eventually.eq(options.isEnabled);
+        it(`should ${options.enabled ? 'be' : 'not be'} enabled`, () => {
+            expect(component.isEnabled()).to.eventually.eq(options.enabled);
         });
 
-        if (!options.isEnabled) {
+        if (!options.enabled) {
             return;
         }
 
@@ -105,7 +105,7 @@ export function rxCopy(options: rxCopyExerciseOptions) {
             if (options.testCopyArea && !(browser.params.isMac && browser.params.isChrome)) {
                 it('should copy text to clipboard', () => {
                     component.copy();
-                    getPastedValue().then(function (pastedValue) {
+                    getPastedValue().then(pastedValue => {
                         expect(component.getText()).to.eventually.eq(pastedValue);
                     });
                 });

@@ -1,11 +1,12 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$} from 'protractor';
+import {$, ElementFinder} from 'protractor';
 let demoPage = require('../../demo.page');
 
 describe('rxToggle', () => {
-    let rxToggle, rxToggleContent;
+    let rxToggle: ElementFinder;
+    let rxToggleContent: ElementFinder;
 
     before(() => {
         demoPage.go('#/utilities/rxToggle');

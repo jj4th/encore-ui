@@ -1,8 +1,6 @@
 'use strict';
-
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
+import {by} from 'protractor';
+import {rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -32,14 +30,9 @@ export class rxAccountInfoBadge extends rxComponentElement {
 };
 
 /**
-   @class
+ * @class
  */
 export class rxAccountInfo extends rxComponentElement {
-
-    constructor(rootElement = $('rx-account-info')) {
-        super(rootElement);
-    }
-
     private get _status() {
         return this.$('.account-status');
     }
@@ -58,7 +51,7 @@ export class rxAccountInfo extends rxComponentElement {
     /**
      * @description The account number.
      */
-    getNumber(){
+    getNumber() {
         return this.element(by.binding('accountNumber')).getText();
     }
 

@@ -1,11 +1,9 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$} from 'protractor';
-import * as moment from 'moment';
-import * as _ from 'lodash';
+import {$} from 'protractor';
 
-import {rxCheckbox, exercise} from '../index';
+import {exercise, rxCheckbox} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -18,84 +16,84 @@ describe('rxCheckbox', () => {
         instance: new rxCheckbox($('#chkValidEnabledOne')),
         disabled: false,
         selected: true,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Enabled UnChecked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkValidEnabledTwo')),
         disabled: false,
         selected: false,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Ng-Disabled Checked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkValidNgDisabledOne')),
         disabled: true,
         selected: true,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Ng-Disabled Unchecked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkValidNgDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Disabled Checked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkValidDisabledOne')),
         disabled: true,
         selected: true,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Disabled Unchecked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkValidDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Invalid Enabled Checked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkInvalidEnabledOne')),
         disabled: false,
         selected: true,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Enabled UnChecked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkInvalidEnabledTwo')),
         disabled: false,
         selected: false,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Ng-Disabled Checked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkInvalidNgDisabledOne')),
         disabled: true,
         selected: true,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Ng-Disabled Unchecked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkInvalidNgDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Disabled Checked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkInvalidDisabledOne')),
         disabled: true,
         selected: true,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Disabled Unchecked', exercise.rxCheckbox({
         instance: new rxCheckbox($('#chkInvalidDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: false
+        valid: false,
     }));
 
     describe('plain HTML checkboxes', () => {
@@ -103,27 +101,28 @@ describe('rxCheckbox', () => {
             instance: new rxCheckbox($('#plainHtmlNormal')),
             disabled: false,
             selected: false,
-            valid: false
+            valid: false,
         }));
 
         describe('Valid Disabled Unchecked', exercise.rxCheckbox({
             instance: new rxCheckbox($('#plainHtmlDisabled')),
             disabled: true,
             selected: false,
-            valid: false
+            valid: false,
         }));
 
         describe('Valid Enabled Checked', exercise.rxCheckbox({
             instance: new rxCheckbox($('#plainHtmlChecked')),
             disabled: false,
             selected: true,
-            valid: false
+            valid: false,
         }));
 
     });
 
     describe('Show/Hide Input', () => {
-        let chkSure: rxCheckbox, chkReallySure: rxCheckbox;
+        let chkSure: rxCheckbox;
+        let chkReallySure: rxCheckbox;
 
         before(() => {
             chkSure = new rxCheckbox($('#chkAmSure'));
@@ -165,7 +164,8 @@ describe('rxCheckbox', () => {
         });
 
         describe('plain HTML checkboxes', () => {
-            let willHide: rxCheckbox, willBeHidden: rxCheckbox;
+            let willHide: rxCheckbox;
+            let willBeHidden: rxCheckbox;
 
             before(() => {
                 willHide = new rxCheckbox($('#plainChkRemoveCheckbox'));
@@ -192,7 +192,8 @@ describe('rxCheckbox', () => {
     });
 
     describe('Destroy Input', () => {
-        let chkRemove: rxCheckbox, chkRemoveable: rxCheckbox;
+        let chkRemove: rxCheckbox;
+        let chkRemoveable: rxCheckbox;
 
         before(() => {
             chkRemove = new rxCheckbox($('#chkRemoveCheckbox'));

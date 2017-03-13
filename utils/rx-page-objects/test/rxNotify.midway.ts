@@ -2,9 +2,9 @@
 'use strict';
 
 import {expect} from 'chai';
-import {browser, $, $$, element, by, ExpectedConditions} from 'protractor';
+import {$, browser, by, element, ExpectedConditions} from 'protractor';
 
-import {rxAccountInfo, rxAccountInfoBadge, rxNotify, rxNotification} from '../index';
+import {rxNotification, rxNotify} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -14,7 +14,7 @@ describe('rxNotify', () => {
     });
 
     describe('auto dismissal', () => {
-        let addToCustomStack = function (type, timeout) {
+        let addToCustomStack = (type, timeout) => {
             let input = $('input[ng-model="options.timeout"]');
             input.clear();
             input.sendKeys(timeout);
@@ -110,19 +110,19 @@ describe('rxNotify', () => {
         });
 
         it('should find a notification with a class and a string', () => {
-            expect(rxNotify.all.isPresent('Under Attack by Aliens','error')).to.eventually.be.true;
+            expect(rxNotify.all.isPresent('Under Attack by Aliens', 'error')).to.eventually.be.true;
         });
 
         it('should find a notification with a class and no string', () => {
-            expect(rxNotify.all.isPresent('','error')).to.eventually.be.true;
+            expect(rxNotify.all.isPresent('', 'error')).to.eventually.be.true;
         });
 
         it('should not find a notification with the wrong class and a string', () => {
-            expect(rxNotify.all.isPresent('Under Attack by Aliens','success')).to.eventually.be.false;
+            expect(rxNotify.all.isPresent('Under Attack by Aliens', 'success')).to.eventually.be.false;
         });
 
         it('should not find a notification with the wrong class and no string', () => {
-            expect(rxNotify.all.isPresent('','abject_failure')).to.eventually.be.false;
+            expect(rxNotify.all.isPresent('', 'abject_failure')).to.eventually.be.false;
         });
 
         it('should not find a notification with no class and a wrong string', () => {
@@ -159,7 +159,7 @@ describe('rxNotify', () => {
 
             before(() => {
                 // https://git.io/vKHN1
-                browser.getCapabilities().then(function (capabilities) {
+                browser.getCapabilities().then(capabilities => {
                     browserName = capabilities.get('browserName');
                     if (browserName !== 'chrome') {
                         let chkOnDismiss = $('input[ng-model="ondismiss.should"]');
@@ -168,7 +168,7 @@ describe('rxNotify', () => {
                         txtMessage.clear();
                         txtMessage.sendKeys(msgText);
 
-                        chkOnDismiss.getAttribute('checked').then(function (isChecked) {
+                        chkOnDismiss.getAttribute('checked').then(isChecked => {
                             if (!isChecked) {
                                 chkOnDismiss.click();
                             }
@@ -184,10 +184,10 @@ describe('rxNotify', () => {
                 if (browserName !== 'chrome') {
                     rxNotify.byStack('custom').byText(msgText).dismiss();
 
-                    var EC = ExpectedConditions;
+                    let EC = ExpectedConditions;
                     browser.wait(EC.alertIsPresent());
-                    browser.switchTo().alert().then(function (alertBox) {
-                        var msg = 'We are dismissing the message: Testing On Dismiss Method';
+                    browser.switchTo().alert().then(alertBox => {
+                        let msg = 'We are dismissing the message: Testing On Dismiss Method';
                         expect(alertBox.getText()).to.eventually.equal(msg);
                         alertBox.accept();
                     });

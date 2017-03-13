@@ -99,12 +99,12 @@ describe('elements:account', () => {
     describe('error messages', () => {
 
         it('should show an error notification when it cannot load badges', () => {
-            var errorMessage = 'Error retrieving badges for this account';
+            let errorMessage = 'Error retrieving badges for this account';
             expect(rxNotify.byStack('badgeError').isPresent(errorMessage)).to.eventually.be.true;
         });
 
         it('should show an error notification when it cannot load account name', () => {
-            var errorMessage = 'Error retrieving account name';
+            let errorMessage = 'Error retrieving account name';
             expect(rxNotify.byStack('nameError').isPresent(errorMessage)).to.eventually.be.true;
         });
     });

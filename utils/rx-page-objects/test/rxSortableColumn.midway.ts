@@ -1,11 +1,9 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$, element, by} from 'protractor';
-import * as moment from 'moment';
-import * as _ from 'lodash';
+import {$, by} from 'protractor';
 
-import {rxSortableColumn, rxComponentElement, SORT_TYPE} from '../index';
+import {rxComponentElement, rxSortableColumn, SORT_TYPE} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -20,12 +18,12 @@ class Table extends rxComponentElement {
     }
 }
 
-describe('rxSortableColumn', function () {
+describe('rxSortableColumn', () => {
     let table: Table;
-    let columnNames = ['Name', 'Occupation'];
-    let nameColumn: rxSortableColumn, roleColumn: rxSortableColumn;
+    let nameColumn: rxSortableColumn;
+    let roleColumn: rxSortableColumn;
 
-    before(function () {
+    before(() => {
         demoPage.go('#/elements/Tables');
         table = new Table($('#sortable-column-testing-table'));
         nameColumn = table.column('Name');
@@ -33,47 +31,47 @@ describe('rxSortableColumn', function () {
     });
     // https://github.com/rackerlabs/encore-ui/issues/694 -- End odd behavior.
 
-    it('should display some sortable columns', function () {
+    it('should display some sortable columns', () => {
         expect(nameColumn.isDisplayed()).to.eventually.be.true;
         expect(roleColumn.isDisplayed()).to.eventually.be.true;
     });
 
-    it('should have an ascending sort shown by default for the name column', function () {
+    it('should have an ascending sort shown by default for the name column', () => {
         expect(nameColumn.getSortDirection()).to.eventually.eq(SORT_TYPE.ASCENDING);
     });
 
-    it('should have no sort shown by default for the job title column', function () {
+    it('should have no sort shown by default for the job title column', () => {
         expect(roleColumn.getSortDirection()).to.eventually.eq(SORT_TYPE.UNSORTED);
     });
 
-    it('should support sorting columns ascending', function () {
+    it('should support sorting columns ascending', () => {
         nameColumn.sortAscending();
         expect(nameColumn.getSortDirection()).to.eventually.eq(SORT_TYPE.ASCENDING);
     });
 
-    it('should have empty names appearing at the top in ascending sort', function () {
-        var names = ['', '', 'Andrew Yurisich', 'Hussam Dawood', 'Kerry Bowley', 'Patrick Deuley'];
+    it('should have empty names appearing at the top in ascending sort', () => {
+        let names = ['', '', 'Andrew Yurisich', 'Hussam Dawood', 'Kerry Bowley', 'Patrick Deuley'];
         nameColumn.sortAscending();
         expect(table.getNameData()).to.eventually.eql(names);
     });
 
-    it('should support sorting columns descending', function () {
+    it('should support sorting columns descending', () => {
         nameColumn.sortDescending();
         expect(nameColumn.getSortDirection()).to.eventually.eq(SORT_TYPE.DESCENDING);
     });
 
-    it('should have empty names appearing at the bottom in descending sort', function () {
+    it('should have empty names appearing at the bottom in descending sort', () => {
         nameColumn.sortDescending();
-        var names = ['Patrick Deuley', 'Kerry Bowley', 'Hussam Dawood', 'Andrew Yurisich', '', ''];
+        let names = ['Patrick Deuley', 'Kerry Bowley', 'Hussam Dawood', 'Andrew Yurisich', '', ''];
         expect(table.getNameData()).to.eventually.eql(names);
     });
 
-    it('should remove all other sorts when sorting an unsorted column', function () {
+    it('should remove all other sorts when sorting an unsorted column', () => {
         roleColumn.sortAscending();
         expect(nameColumn.getSortDirection()).to.eventually.eq(SORT_TYPE.UNSORTED);
     });
 
-    it('should have a name', function () {
+    it('should have a name', () => {
         expect(nameColumn.getName()).to.eventually.eq('Name');
         expect(roleColumn.getName()).to.eventually.eq('Occupation');
     });

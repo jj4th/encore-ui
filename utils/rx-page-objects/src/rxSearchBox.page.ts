@@ -1,7 +1,5 @@
 'use strict';
-
-import {ElementFinder, $} from 'protractor';
-import {rxComponentElement, OverrideWebdriver} from './rxComponent';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -90,7 +88,7 @@ export class rxSearchBox extends rxComponentElement {
      */
     @OverrideWebdriver
     clear() {
-        return this.isClearable().then((clearable) => clearable && this.btnClear.click());
+        return this.isClearable().then(clearable => clearable && this.btnClear.click());
     }
 
 }

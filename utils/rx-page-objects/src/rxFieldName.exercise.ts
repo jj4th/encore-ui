@@ -2,34 +2,28 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
-
 import * as component from './rxFieldName.page';
-import {Promise} from './rxComponent';
 
-interface rxFieldNameExerciseOptions {
-    instance?: component.rxFieldName;
-    visible?: boolean,
-    present?: boolean,
-    required?: boolean
+interface IRxFieldNameExerciseOptions {
+    instance: component.rxFieldName;
+    present?: boolean;
+    required?: boolean;
+    visible?: boolean;
 }
 
 /**
  * rxFieldName exercises.
  */
-export function rxFieldName (options: rxFieldNameExerciseOptions) {
-    if (options === undefined) {
-        options = {};
-    }
+export function rxFieldName (options: IRxFieldNameExerciseOptions) {
 
     options = _.defaults(options, {
         visible: true,
         present: true,
-        required: false
+        required: false,
     });
 
     return () => {
-        var component;
+        let component;
 
         before(() => {
             component = options.instance;

@@ -1,9 +1,8 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
 import * as _ from 'lodash';
+import {by} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 import {rxActionMenu} from './rxActionMenu.page';
 import {rxCheckbox} from './rxCheckbox.page';
@@ -36,7 +35,7 @@ class rxBatchActionMenu extends rxActionMenu {
     // compared to what is seen in rxActionMenu.
     isExpanded() {
         return this.$('.batch-action-menu-container')
-            .getAttribute('class').then(function (className) {
+            .getAttribute('class').then(className => {
                 return className.indexOf('ng-hide') === -1;
             });
     }
@@ -53,7 +52,7 @@ class rxBatchActionMenu extends rxActionMenu {
 
 /**
  * @description Properties for interacting with an rxBulkSelect component.
-*/
+ */
 export class rxBulkSelect extends rxComponentElement {
     rowClass = rxBulkSelectRow;
 
@@ -63,7 +62,7 @@ export class rxBulkSelect extends rxComponentElement {
     @OverrideWebdriver
     isEnabled() {
         return this.element(
-            by.cssContainingText('.btn-link', 'Batch Actions')
+            by.cssContainingText('.btn-link', 'Batch Actions'),
         ).isEnabled();
     }
 
@@ -78,7 +77,7 @@ export class rxBulkSelect extends rxComponentElement {
      * @description The checkbox object used to select all rows in the bulk select component.
      */
     get selectAllCheckbox() {
-        var eleCheckbox = this.$('[rx-bulk-select-header-check]').$('input[type="checkbox"]');
+        let eleCheckbox = this.$('[rx-bulk-select-header-check]').$('input[type="checkbox"]');
         return new rxCheckbox(eleCheckbox);
     }
 
@@ -91,7 +90,7 @@ export class rxBulkSelect extends rxComponentElement {
      * Only appears when some rows are selected. Otherwise, `null`.
      */
     get bulkMessage() {
-        return this.eleBulkMessage.element(by.binding('numSelected')).getText().then(function (text) {
+        return this.eleBulkMessage.element(by.binding('numSelected')).getText().then(text => {
             return _.isEmpty(text) ? null : text;
         });
     }

@@ -28,6 +28,7 @@
     "@types/node": "^7.0.3",
     "@types/selenium-webdriver": "^2.53.40",
     "protractor-console-plugin": "^0.1.1",
+    "tslint": "^4.5.1",
     "typescript": "^2.1.5"
   }
 }

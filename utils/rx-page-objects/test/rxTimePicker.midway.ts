@@ -1,9 +1,8 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$} from 'protractor';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import {$} from 'protractor';
 
 import {rxTimePicker} from '../index';
 
@@ -31,7 +30,7 @@ describe('rxTimePicker', () => {
             $('body').click();
             expect(picker.isOpen()).to.eventually.eq(false);
         });
-    });//predefined picker
+    }); // predefined picker
 
     describe('empty picker', () => {
         before(() => {
@@ -70,7 +69,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//alpha characters
+                }); // alpha characters
 
                 describe('entering a negative number', () => {
                     before(() => {
@@ -89,7 +88,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//negative number
+                }); // negative number
 
                 describe('leaving a blank input', () => {
                     before(() => {
@@ -109,7 +108,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//leaving blank input
+                }); // leaving blank input
 
                 describe('entering an out of bound value (13)', () => {
                     before(() => {
@@ -128,10 +127,10 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//out of bound value
+                }); // out of bound value
 
                 // VALID INPUT
-                _.map(_.range(1, 13), function (validHour) {
+                _.map(_.range(1, 13), validHour => {
                     describe('entering a value of ' + validHour, () => {
                         before(() => {
                             picker.open();
@@ -161,7 +160,7 @@ describe('rxTimePicker', () => {
                 it('should be error free', () => {
                     expect(picker.getErrors()).to.eventually.be.empty;
                 });
-            });//hours
+            }); // hours
 
             describe('minutes', () => {
                 it('should default to empty', () => {
@@ -185,7 +184,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//alpha characters
+                }); // alpha characters
 
                 describe('entering a negative number', () => {
                     before(() => {
@@ -204,7 +203,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//negative number
+                }); // negative number
 
                 describe('leaving a blank input', () => {
                     before(() => {
@@ -224,7 +223,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//leaving blank input
+                }); // leaving blank input
 
                 describe('entering an out of bound value (60)', () => {
                     before(() => {
@@ -243,7 +242,7 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//out of bound value
+                }); // out of bound value
 
                 describe('entering single digit minutes value (5)', () => {
                     before(() => {
@@ -262,10 +261,10 @@ describe('rxTimePicker', () => {
                     it('should be able to cancel', () => {
                         expect(picker.canCancel()).to.eventually.eq(true);
                     });
-                });//single digit minutes
+                }); // single digit minutes
 
                 // VALID INPUT
-                _.map(['00', '01', '15', '30', '45', '59'], function (validMinute) {
+                _.map(['00', '01', '15', '30', '45', '59'], validMinute => {
                     describe('entering a value of ' + validMinute, () => {
                         before(() => {
                             picker.open();
@@ -287,14 +286,14 @@ describe('rxTimePicker', () => {
                         it('should be able to cancel', () => {
                             expect(picker.canCancel()).to.eventually.eq(true);
                         });
-                    });//enter value of NN
+                    }); // enter value of NN
                 });
 
                 // ensure we can continue with remaining tests
                 it('should be error free', () => {
                     expect(picker.getErrors()).to.eventually.be.empty;
                 });
-            });//minutes
+            }); // minutes
 
             describe('period', () => {
                 it('should default to AM', () => {
@@ -309,13 +308,13 @@ describe('rxTimePicker', () => {
                 it('should be error free', () => {
                     expect(picker.getErrors()).to.eventually.be.empty;
                 });
-            });//period
+            }); // period
 
             describe('UTC Offset', () => {
                 it('should default to "+00:00"', () => {
                     expect(picker.utcOffset).to.eventually.eq('+00:00');
                 });
-            });//utc offset
+            }); // utc offset
         });
 
         describe('time', () => {
@@ -328,5 +327,5 @@ describe('rxTimePicker', () => {
                 expect(picker.time).to.eventually.eq('20:00-04:00');
             });
         });
-    });//empty picker
+    }); // empty picker
 });

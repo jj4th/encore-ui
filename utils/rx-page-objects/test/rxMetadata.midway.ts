@@ -1,12 +1,9 @@
 
 'use strict';
-
-import {expect} from 'chai';
-import {$, $$, ElementFinder, promise, browser} from 'protractor';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import {$, browser, ElementFinder, promise} from 'protractor';
 
-import {rxMetadata, exercise} from '../index';
+import {exercise, rxMetadata} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -14,8 +11,8 @@ let transformService = (definition: ElementFinder) => {
     return definition.getText().then(text => _.zipObject(['current', 'proposed'], text.split(' → ')));
 };
 let transformAmount = (definition: ElementFinder) => {
-    return definition.getText().then((currencyString) => {
-        var resFloat = parseFloat(currencyString.split(' ')[0].replace(/[,$()]/g, '').trim());
+    return definition.getText().then(currencyString => {
+        let resFloat = parseFloat(currencyString.split(' ')[0].replace(/[,$()]/g, '').trim());
 
         // Negative number
         if (_.head(currencyString) === '(' && _.last(currencyString) === ')') {
@@ -30,20 +27,20 @@ let transformDateField = (definition: ElementFinder) => {
 };
 let transformLink = (definition: ElementFinder) => {
     let promises = [definition.getText(), definition.$('a').getAttribute('href')];
-    return promise.all(promises).then((results) => {
+    return promise.all(promises).then(results => {
         return { text: results[0], href: results[1] };
     });
 };
 let transformDataAndLink = (definition: ElementFinder) => {
     let promises = [definition.getText(), definition.$('a').getAttribute('href')];
-    return promise.all(promises).then((results) => {
+    return promise.all(promises).then(results => {
         // 'Some data (Link)' -> ['Some data', 'link']
         let text = results[0].split('(')[0].trim();
         let linkText = results[0].split('(')[1].replace(')', '');
         return {
-            text: text,
+            text,
             href: results[1],
-            linkText: linkText
+            linkText,
         };
     });
 };
@@ -76,8 +73,8 @@ describe('rxMetadata', () => {
             'Data and Link Field': {
                 text: 'Some data',
                 href: browser.baseUrl + '/#',
-                linkText: 'Link'
-            }
+                linkText: 'Link',
+            },
         },
         transforms: {
             'Service Level': transformService,
@@ -85,7 +82,7 @@ describe('rxMetadata', () => {
             'Amount': transformAmount,
             'Date Field': transformDateField,
             'Link Field': transformLink,
-            'Data and Link Field': transformDataAndLink
-        }
+            'Data and Link Field': transformDataAndLink,
+        },
     }));
 });

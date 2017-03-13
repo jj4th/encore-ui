@@ -3,7 +3,7 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import {Tabs, Tab} from '../index';
+import {Tab, Tabs} from '../index';
 
 let demoPage = require('../../demo.page');
 

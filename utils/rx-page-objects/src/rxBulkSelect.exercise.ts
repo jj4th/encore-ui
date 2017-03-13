@@ -1,17 +1,16 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$} from 'protractor';
 import * as _ from 'lodash';
-import * as moment from 'moment';
+import {$} from 'protractor';
 import {rxModalAction} from './rxModalAction.page';
 
 import * as component from './rxBulkSelect.page';
 
-interface rxBulkSelectOptions {
-    instance?: component.rxBulkSelect;
-    count?: number,
-    batchActions?: string []
+interface IRxBulkSelectExerciseOptions {
+    instance: component.rxBulkSelect;
+    batchActions?: string [];
+    count?: number;
 }
 
 /**
@@ -22,15 +21,10 @@ interface rxBulkSelectOptions {
  *     batchActions: ['Create', 'Read', 'Update', 'Delete']
  * }));
  */
-export function rxBulkSelect(options?: rxBulkSelectOptions) {
-    if (options === undefined) {
-        options = {};
-    }
-
+export function rxBulkSelect(options?: IRxBulkSelectExerciseOptions) {
     options = _.defaults(options, {
-        instance: new component.rxBulkSelect($('[rx-bulk-select]')),
+        batchActions: [],
         count: 10,
-        batchActions: []
     });
 
     return () => {
@@ -64,7 +58,7 @@ export function rxBulkSelect(options?: rxBulkSelectOptions) {
         });
 
         it('selects all rows via the header checkbox', () => {
-            var selExp = new RegExp('^' + options.count + ' \\w+s are selected.$');
+            let selExp = new RegExp('^' + options.count + ' \\w+s are selected.$');
 
             component.selectAllCheckbox.select();
             expect(component.tblSelectedRows.count()).to.eventually.eql(options.count);
@@ -80,7 +74,7 @@ export function rxBulkSelect(options?: rxBulkSelectOptions) {
         });
 
         it('selects all rows via the button in the message', () => {
-            var selExp = new RegExp('^' + options.count + ' \\w+s are selected.$');
+            let selExp = new RegExp('^' + options.count + ' \\w+s are selected.$');
 
             component.row(0).select();
             component.selectAll();
@@ -121,7 +115,7 @@ export function rxBulkSelect(options?: rxBulkSelectOptions) {
                 expect(component.batchActions.actionCount()).to.eventually.eql(options.batchActions.length);
             });
 
-            _.each(options.batchActions, function (action) {
+            _.each(options.batchActions, action => {
                 it('should have the batch action "' + action + '"', () => {
                     expect(component.batchActions.hasAction(action)).to.eventually.be.true;
                 });

@@ -3,12 +3,14 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import {rxActionMenu, rxAction, rxNotify} from '../index';
+import {rxAction, rxActionMenu} from '../index';
 
 let demoPage = require('../../demo.page');
 
 describe('rxActionMenu', () => {
-    let globalDismiss: rxActionMenu, localDismiss: rxActionMenu, customActions: rxActionMenu;
+    let globalDismiss: rxActionMenu;
+    let localDismiss: rxActionMenu;
+    let customActions: rxActionMenu;
 
     let clickSomewhereElse = () => {
         $('#typical-usage').click();

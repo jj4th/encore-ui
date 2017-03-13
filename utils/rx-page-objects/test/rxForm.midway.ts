@@ -3,8 +3,8 @@
 import {expect} from 'chai';
 import {$} from 'protractor';
 
-import {rxForm, textFieldAccessor, rxRadioAccessor, rxCheckboxAccessor, rxSelectAccessor} from '../index';
-import {rxFieldName, rxCheckbox, exercise} from '../index';
+import {rxCheckboxAccessor, rxForm, rxRadioAccessor, rxSelectAccessor, textFieldAccessor} from '../index';
+import {exercise, rxCheckbox, rxFieldName} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -45,17 +45,18 @@ describe('rxForm', () => {
         describe('"Plain Textbox"', exercise.rxFieldName({
             instance: new rxFieldName($('#fieldNamePlainTextbox')),
             visible: true,
-            required: false
+            required: false,
         }));
 
         describe('"Required Textarea"', exercise.rxFieldName({
             instance: new rxFieldName($('#fieldNameRequiredTextarea')),
             visible: true,
-            required: true
+            required: true,
         }));
 
         describe('Example', () => {
-            let checkbox: rxCheckbox, subject: rxFieldName;
+            let checkbox: rxCheckbox;
+            let subject: rxFieldName;
 
             before(() => {
                 checkbox = new rxCheckbox($('#chkVolumeNameRequired'));
@@ -90,13 +91,13 @@ describe('rxForm', () => {
             requireName: false,
             options: {
                 first: true,
-                second: false
+                second: false,
             },
             volumeTypeSelect: {
-                type: 'PUNCHCARDS'
+                type: 'PUNCHCARDS',
             },
             radioTable: [{ Name: 'Option #2' }],
-            checkboxTable: [{ Name: 'Item 1' }, { Name: 'Item 2' }]
+            checkboxTable: [{ Name: 'Item 1' }, { Name: 'Item 2' }],
         };
 
         before(() => {

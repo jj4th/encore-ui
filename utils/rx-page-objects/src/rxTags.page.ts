@@ -1,8 +1,8 @@
 'use strict';
 
+import {browser, by, promise} from 'protractor';
 import {Key} from 'selenium-webdriver';
-import {$, $$, browser, promise, by} from 'protractor';
-import {rxComponentElement, OverrideWebdriver} from './rxComponent';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -60,7 +60,7 @@ export class Tag extends rxComponentElement {
      * });
      */
     getCategory() {
-        return this.$('.category').getText().then((text) => {
+        return this.$('.category').getText().then(text => {
             // Strip the bounding parens
             return text.slice(1, -1);
         });
@@ -132,7 +132,7 @@ export class rxTags extends rxComponentElement {
             */
         let chordBackspace = Key.chord(
             Key.SHIFT,
-            Key.BACK_SPACE
+            Key.BACK_SPACE,
         );
         return this.newTagInput.sendKeys(chordBackspace);
     }

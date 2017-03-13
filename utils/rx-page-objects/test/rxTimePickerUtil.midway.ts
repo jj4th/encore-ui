@@ -1,7 +1,6 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$} from 'protractor';
 
 import {rxTimePickerUtil} from '../index';
 
@@ -17,12 +16,12 @@ describe('utilities:rxTimePickerUtil', () => {
         [
             ['8:00 (-06:00)', '-06:00'],
             ['13:00 (UTC-0800)', '-0800'],
-            ['20:00-04:00','-04:00'],
+            ['20:00-04:00', '-04:00'],
             ['non-time string', ''],
             ['20:00-0400', '-0400'],
             ['20:00-400', ''],
             ['20:00-4', ''],
-        ].forEach((strPair) => {
+        ].forEach(strPair => {
             let strInput = strPair[0];
             let strOutput = strPair[1];
 
@@ -31,5 +30,5 @@ describe('utilities:rxTimePickerUtil', () => {
                 expect(result).to.eq(strOutput);
             });
         });
-    });//parseUtcOffset()
+    }); // parseUtcOffset()
 });

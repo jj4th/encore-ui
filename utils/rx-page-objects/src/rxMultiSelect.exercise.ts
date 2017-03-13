@@ -1,17 +1,16 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, browser} from 'protractor';
 import * as _ from 'lodash';
-import * as moment from 'moment';
+import {$} from 'protractor';
 
 import * as component from './rxMultiSelect.page';
 
-interface rxMultiSelectOptions {
-    instance: component.rxMultiSelect
-    inputs?: string[]
-    disabled?: boolean
-    valid?: boolean
+interface IRxMultiSelectOptions {
+    instance: component.rxMultiSelect;
+    inputs?: string[];
+    disabled?: boolean;
+    valid?: boolean;
 }
 /**
  * rxMultiSelect exercises.
@@ -21,15 +20,15 @@ interface rxMultiSelectOptions {
  *     inputs: ['Texas', 'California', 'Virginia', 'Georgia']
  * }));
  */
-export function rxMultiSelect(options: rxMultiSelectOptions) {
+export function rxMultiSelect(options: IRxMultiSelectOptions) {
     options = _.defaults(options, {
         inputs: [],
         disabled: false,
-        valid: true
+        valid: true,
     });
 
     return () => {
-        var component: component.rxMultiSelect;
+        let component: component.rxMultiSelect;
 
         before(() => {
             component = options.instance;
@@ -67,7 +66,7 @@ export function rxMultiSelect(options: rxMultiSelectOptions) {
             });
 
             it('should select a single option', () => {
-                var input = _.head(options.inputs);
+                let input = _.head(options.inputs);
                 component.select([input]);
                 expect(component.selectedOptions.getText()).to.eventually.eql([input]);
                 expect(component.getPreviewText()).to.eventually.equal(input);
@@ -75,7 +74,7 @@ export function rxMultiSelect(options: rxMultiSelectOptions) {
 
             if (options.inputs.length > 2) {
                 it('should select multiple options', () => {
-                    var inputs = options.inputs.slice(0, 2);
+                    let inputs = options.inputs.slice(0, 2);
                     component.select(inputs);
                     expect(component.selectedOptions.getText()).to.eventually.eql(inputs);
                     expect(component.getPreviewText()).to.eventually.equal('2 Selected');
@@ -93,7 +92,7 @@ export function rxMultiSelect(options: rxMultiSelectOptions) {
                 expect(component.selectedOptions.getText()).to.eventually.be.empty;
                 expect(component.getPreviewText()).to.eventually.equal('None');
             });
-        }//if options.disabled
+        }// if options.disabled
 
         it('hides the menu when another element is clicked', () => {
             $('body').click();

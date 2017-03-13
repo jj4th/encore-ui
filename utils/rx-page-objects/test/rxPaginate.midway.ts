@@ -1,12 +1,10 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$, by, element} from 'protractor';
-import * as moment from 'moment';
-import * as _ from 'lodash';
+import {$, by} from 'protractor';
 
-import {rxPaginate, rxSortableColumn, rxSelectFilter, rxSearchBox} from '../index';
-import {rxComponentElement, rxMisc, exercise} from '../index';
+import {rxPaginate, rxSearchBox, rxSelectFilter, rxSortableColumn} from '../index';
+import {exercise, rxComponentElement, rxMisc} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -22,7 +20,7 @@ class Row extends rxComponentElement {
 }
 
 class Table extends rxComponentElement {
-    private repeaterString = 'server in pagedServers.items'
+    private repeaterString = 'server in pagedServers.items';
 
     get tblResults() {
         return this.all(by.repeater(this.repeaterString));
@@ -33,7 +31,7 @@ class Table extends rxComponentElement {
     }
 
     column(columnName: string) {
-        var column = this.element(by.cssContainingText('rx-sortable-column', columnName));
+        let column = this.element(by.cssContainingText('rx-sortable-column', columnName));
         return new rxSortableColumn(column);
     }
 
@@ -56,19 +54,19 @@ describe('rxPaginate', () => {
 
     describe('Non present pagination exercise', exercise.rxPaginate({
         instance: new rxPaginate($('#does-not-exist')),
-        isPresent: false
+        isPresent: false,
     }));
 
     describe('Non displayed pagination exercise', exercise.rxPaginate({
         instance: new rxPaginate($('#rx-paginate-hidden')),
-        isDisplayed: false
+        isDisplayed: false,
     }));
 
     describe('UI pagination exercises', exercise.rxPaginate({
         pageSizes: [3, 50, 200, 350, 500],
         defaultPageSize: 3,
         totalItems: 21,
-        instance: new rxPaginate($('.table-demo--ui-pagination .rx-paginate'))
+        instance: new rxPaginate($('.table-demo--ui-pagination .rx-paginate')),
     }));
 
     describe('API pagination exercises', exercise.rxPaginate({
@@ -76,11 +74,12 @@ describe('rxPaginate', () => {
         defaultPageSize: 25,
         pages: 29,
         totalItems: 701,
-        instance: new rxPaginate($('.table-demo--api-pagination .rx-paginate'))
+        instance: new rxPaginate($('.table-demo--api-pagination .rx-paginate')),
     }));
 
     describe('Filter and sort tests', () => {
-        let nameColumn: rxSortableColumn, osColumn: rxSortableColumn;
+        let nameColumn: rxSortableColumn;
+        let osColumn: rxSortableColumn;
 
         beforeEach(() => {
             nameColumn = table.column('Name');
@@ -88,11 +87,11 @@ describe('rxPaginate', () => {
 
             table.searchBox.search('');
             table.selectFilter.apply({
-                Os: { All: true }
+                Os: { All: true },
             });
             nameColumn.sortAscending();
             rxMisc.scrollToElement(table.tblResults, {
-                positionOnScreen: 'middle'
+                positionOnScreen: 'middle',
             });
         });
 
@@ -106,8 +105,8 @@ describe('rxPaginate', () => {
             table.selectFilter.apply({
                 Os: {
                     All: false,
-                    Centos: true
-                }
+                    Centos: true,
+                },
             });
             expect(table.row(0).getName()).to.eventually.equal('Server 2');
             expect(table.row(0).getOS()).to.eventually.equal('CentOS 6.4');

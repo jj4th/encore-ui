@@ -1,11 +1,9 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$} from 'protractor';
-import * as moment from 'moment';
-import * as _ from 'lodash';
+import {$} from 'protractor';
 
-import {rxSelect, rxCheckbox, rxRadio, exercise} from '../index';
+import {exercise, rxCheckbox, rxRadio, rxSelect} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -21,7 +19,7 @@ describe('rxSelect', () => {
         disabled: false,
         visible: true,
         valid: true,
-        selectedText: 'Third'
+        selectedText: 'Third',
     }));
 
     describe('(State) Valid NG-Disabled', exercise.rxSelect({
@@ -29,7 +27,7 @@ describe('rxSelect', () => {
         disabled: true,
         visible: true,
         valid: true,
-        selectedText: 'Disabled by \'ng-disabled\' attribute'
+        selectedText: 'Disabled by \'ng-disabled\' attribute',
     }));
 
     describe('(State) Valid Disabled', exercise.rxSelect({
@@ -37,7 +35,7 @@ describe('rxSelect', () => {
         disabled: true,
         visible: true,
         valid: true,
-        selectedText: 'Disabled by \'disabled\' attribute'
+        selectedText: 'Disabled by \'disabled\' attribute',
     }));
 
     describe('(State) Invalid Enabled', exercise.rxSelect({
@@ -45,7 +43,7 @@ describe('rxSelect', () => {
         disabled: false,
         visible: true,
         valid: false,
-        selectedText: 'Fourth'
+        selectedText: 'Fourth',
     }));
 
     describe('(State) Invalid NG-Disabled', exercise.rxSelect({
@@ -53,7 +51,7 @@ describe('rxSelect', () => {
         disabled: true,
         visible: true,
         valid: false,
-        selectedText: 'Disabled by \'ng-disabled\' attribute'
+        selectedText: 'Disabled by \'ng-disabled\' attribute',
     }));
 
     describe('(State) Invalid Disabled', exercise.rxSelect({
@@ -61,7 +59,7 @@ describe('rxSelect', () => {
         disabled: true,
         visible: true,
         valid: false,
-        selectedText: 'Disabled by \'disabled\' attribute'
+        selectedText: 'Disabled by \'disabled\' attribute',
     }));
 
     describe('plain HTML select elements', () => {
@@ -69,21 +67,21 @@ describe('rxSelect', () => {
             instance: new rxSelect($('#plainSelNormal')),
             disabled: false,
             valid: false,
-            selectedText: 'Plain HTML Select Option'
+            selectedText: 'Plain HTML Select Option',
         }));
 
         describe('Disabled', exercise.rxSelect({
             instance: new rxSelect($('#plainSelDisabled')),
             disabled: true,
             valid: false,
-            selectedText: 'Disabled HTML Select Option'
+            selectedText: 'Disabled HTML Select Option',
         }));
 
         describe('Valid Enabled Non-Default Starting Value', exercise.rxSelect({
             instance: new rxSelect($('#plainSelSecondSelected')),
             disabled: false,
             valid: true,
-            selectedText: 'Non Default Starting Option'
+            selectedText: 'Non Default Starting Option',
         }));
     });
 
@@ -225,7 +223,8 @@ describe('rxSelect', () => {
     });
 
     describe('Destroy Select', () => {
-        let radDestroyed: rxRadio, radCreated: rxRadio;
+        let radDestroyed: rxRadio;
+        let radCreated: rxRadio;
 
         before(() => {
             radDestroyed = new rxRadio($('#radDestroyed'));

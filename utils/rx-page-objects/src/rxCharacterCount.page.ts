@@ -1,9 +1,6 @@
 'use strict';
-
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
-import * as _ from 'lodash';
+import {by} from 'protractor';
+import {AccessorPromiseString, rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -51,7 +48,7 @@ export class rxCharacterCount extends rxComponentElement {
      * @description Whether or not the 'near-limit' class is displayed.
      */
     isNearLimit() {
-        return this.lblRemaining.getAttribute('class').then(function (classNames) {
+        return this.lblRemaining.getAttribute('class').then(classNames => {
             return classNames.indexOf('near-limit') > -1;
         });
     }
@@ -60,7 +57,7 @@ export class rxCharacterCount extends rxComponentElement {
      * @description Whether or not the 'over-limit' class is displayed.
      */
     isOverLimit() {
-        return this.lblRemaining.getAttribute('class').then(function (classNames) {
+        return this.lblRemaining.getAttribute('class').then(classNames => {
             return classNames.indexOf('over-limit') > -1;
         });
     }

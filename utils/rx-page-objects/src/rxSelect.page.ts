@@ -1,10 +1,9 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
-import {rxMisc} from './rxMisc.page';
 import * as _ from 'lodash';
+import {ElementFinder} from 'protractor';
+import {by} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -24,9 +23,9 @@ export class rxSelect extends rxComponentElement {
      */
     @OverrideWebdriver
     isEnabled() {
-        return this.eleFakeSelect.isPresent().then((isFakeSelect) => {
-            if(isFakeSelect) {
-                return this.eleWrapper.getAttribute('class').then(function (classes) {
+        return this.eleFakeSelect.isPresent().then(isFakeSelect => {
+            if (isFakeSelect) {
+                return this.eleWrapper.getAttribute('class').then(classes => {
                     return !_.includes(classes.split(' '), 'rx-disabled');
                 });
             }
@@ -51,7 +50,7 @@ export class rxSelect extends rxComponentElement {
      */
     @OverrideWebdriver
     isPresent() {
-        return this.eleFakeSelect.isPresent().then((isFakeSelect) => {
+        return this.eleFakeSelect.isPresent().then(isFakeSelect => {
             return isFakeSelect || this.originalElement.isPresent();
         });
     }
@@ -60,10 +59,10 @@ export class rxSelect extends rxComponentElement {
      * @description Whether the `<select>` element is valid.
      */
     isValid() {
-        return this.getAttribute('class').then(function (classes) {
+        return this.getAttribute('class').then(classes => {
             return _.includes(classes.split(' '), 'ng-valid');
         });
-     }
+    }
 
     /**
      * @description The options in the dropdown.
@@ -124,16 +123,16 @@ export class rxSelect extends rxComponentElement {
  *     expect(form.state).to.eventually.equal('Indiana');
  * });
  */
-export function rxSelectAccessor(elem: ElementFinder) {
-    return function (target, propertyKey): any {
+export function rxSelectAccessor(elem: ElementFinder): PropertyDecorator {
+    return (target, propertyKey): PropertyDescriptor => {
         let select = new rxSelect(elem);
         return {
-            get: function () {
+            get() {
                 return select.selectedOption.getText();
             },
-            set: function (optionText) {
+            set(optionText) {
                 select.select(optionText);
-            }
+            },
         };
-    }
+    };
 };

@@ -1,9 +1,6 @@
 'use strict';
-
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
-import {rxMisc} from './rxMisc.page';
-import * as _ from 'lodash';
+import {by} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -29,7 +26,7 @@ export class Tab extends rxComponentElement {
      */
     @OverrideWebdriver
     getText() {
-        return this.originalElement.getText().then((text) => text.trim());
+        return this.originalElement.getText().then(text => text.trim());
     }
 
     /**
@@ -39,9 +36,9 @@ export class Tab extends rxComponentElement {
      * });
      */
     getName() {
-        return this.getSubtitle().then((subtitle) => {
+        return this.getSubtitle().then(subtitle => {
             if (subtitle !== null) {
-                return this.getText().then((name) => {
+                return this.getText().then(name => {
                     return name.split(subtitle)[0].trim();
                 });
             }
@@ -57,10 +54,10 @@ export class Tab extends rxComponentElement {
      * });
      */
     getSubtitle() {
-        var subtitle = this.$('.subdued');
-        return subtitle.isPresent().then((present) => {
+        let subtitle = this.$('.subdued');
+        return subtitle.isPresent().then(present => {
             if (present) {
-                return subtitle.getText().then((text) => text.trim());
+                return subtitle.getText().then(text => text.trim());
             }
             return null;
         });
@@ -116,7 +113,7 @@ export class Tabs extends rxComponentElement {
      * });
      */
     getTabs() {
-        return this.tblTabs.map((tabElement) => {
+        return this.tblTabs.map(tabElement => {
             return new Tab(tabElement).getText();
         });
     }

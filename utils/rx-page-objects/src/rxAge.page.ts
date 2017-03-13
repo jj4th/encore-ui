@@ -1,10 +1,8 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import * as moment from 'moment';
+import {rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -35,9 +33,9 @@ export class rxAge extends rxComponentElement {
             rxAgeParts = [rxAgeString];
         }
 
-        let ageParts = _.map(rxAgeParts, function (agePart) {
+        let ageParts = _.map(rxAgeParts, agePart => {
             // ['10d'] -> ['10d', '10', undefined, 'd']
-            var matches = (<string>agePart).match(completeAgePart);
+            let matches = (<string> agePart).match(completeAgePart);
             // Duration type goes first, then the duration amount.
             return [matches[3], matches[1]];
         });

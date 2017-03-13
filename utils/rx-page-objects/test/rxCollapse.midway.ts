@@ -1,26 +1,24 @@
 'use strict';
+import {$} from 'protractor';
 
-import {expect} from 'chai';
-import {$, $$} from 'protractor';
-
-import {rxCollapse, exercise} from '../index';
+import {exercise, rxCollapse} from '../index';
 
 let demoPage = require('../../demo.page');
 
-describe('rxCollapse', function () {
+describe('rxCollapse', () => {
 
-    before(function () {
+    before(() => {
         demoPage.go('#/elements/Collapse');
     });
 
     describe('custom title', exercise.rxCollapse({
         instance: new rxCollapse($('.demo-with-title')),
         title: 'A Custom Title',
-        expanded: true
+        expanded: true,
     }));
 
     describe('default title', exercise.rxCollapse({
         instance: new rxCollapse($('.demo-no-title')),
-        expanded: false
+        expanded: false,
     }));
 });

@@ -1,9 +1,6 @@
 'use strict';
-
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by, ExpectedConditions as EC} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
-import * as _ from 'lodash';
+import {browser, ExpectedConditions as EC} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @description By default, every modal will have a title, subtitle, a submit button, a cancel button, and more.

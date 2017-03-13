@@ -1,12 +1,12 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder, promise} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
+import {ElementFinder} from 'protractor';
+import {$, browser, by} from 'protractor';
+import {AccessorPromiseString} from './rxComponent';
 
-import {rxSelect} from './rxSelect.page';
-import {rxNotify} from './rxNotify.page';
 import {rxModalAction} from './rxModalAction.page';
+import {rxNotify} from './rxNotify.page';
+import {rxSelect} from './rxSelect.page';
 
 /**
  * @namespace
@@ -33,7 +33,7 @@ export class rxFeedback extends rxModalAction {
      * @description Opens the feedback modal.
      */
     open() {
-        return this.isDisplayed().then((isDisplayed) => {
+        return this.isDisplayed().then(isDisplayed => {
             if (!isDisplayed) {
                 this.lnkFeedback.$('a').click();
             }
@@ -116,4 +116,4 @@ export class rxFeedback extends rxModalAction {
 
         return browser.wait(fn, within, 'Feedback submission did not confirm success within ' + within + ' msecs');
     }
-}//rxFeedback
+}// rxFeedback

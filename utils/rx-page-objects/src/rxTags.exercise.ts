@@ -2,13 +2,12 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 import * as component from './rxTags.page';
 
-interface rxTagsExerciseOptions {
-    instance?: component.rxTags
-    sampleText?: string
+interface IRxTagsExerciseOptions {
+    instance?: component.rxTags;
+    sampleText?: string;
 }
 
 /**
@@ -19,21 +18,21 @@ interface rxTagsExerciseOptions {
  *     sampleText: 'Tag text to use when creating and testing your tags'
  * }));
  */
-export function rxTags (options: rxTagsExerciseOptions) {
+export function rxTags (options: IRxTagsExerciseOptions) {
 
     options = _.defaults(options, {
-        sampleText: undefined
+        sampleText: undefined,
     });
 
     return () => {
-        let component: component.rxTags,
-            tag: component.Tag,
-            numTags: number;
+        let component: component.rxTags;
+        let tag: component.Tag;
+        let numTags: number;
 
         before(() => {
             component = options.instance;
 
-            component.count().then(function (num) {
+            component.count().then(num => {
                 numTags = num;
             });
         });

@@ -2,20 +2,19 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
-import * as component from './rxPaginate.page';
 import {rxMisc} from './rxMisc.page';
+import * as component from './rxPaginate.page';
 
-interface rxPaginateExerciseOptions {
-    instance: component.rxPaginate
-    isPresent?: boolean
-    isDisplayed?: boolean
-    pages?: number
-    pageSizes?: number[]
-    totalItems?: number
-    valid?: boolean
-    defaultPageSize?: number
+interface IRxPaginateExerciseOptions {
+    instance: component.rxPaginate;
+    present?: boolean;
+    displayed?: boolean;
+    pages?: number;
+    pageSizes?: number[];
+    totalItems?: number;
+    valid?: boolean;
+    defaultPageSize?: number;
 }
 /**
  * rxPaginate exercises.
@@ -26,20 +25,20 @@ interface rxPaginateExerciseOptions {
  *     totalItems: 300 // some tests require the total number of items to be specified in advance.
  * }));
  */
-export function rxPaginate (options: rxPaginateExerciseOptions) {
+export function rxPaginate (options: IRxPaginateExerciseOptions) {
     options = _.defaults(options, {
-        isPresent: true,
-        isDisplayed: true,
+        present: true,
+        displayed: true,
         pages: 6,
         pageSizes: [50, 200, 350, 500],
         defaultPageSize: 50,
-        totalItems: 251
+        totalItems: 251,
     });
 
     return () => {
         let pagination: component.rxPaginate;
 
-        if (!options.isPresent) {
+        if (!options.present) {
             return;
         }
 
@@ -47,11 +46,11 @@ export function rxPaginate (options: rxPaginateExerciseOptions) {
             pagination = options.instance;
         });
 
-        it(`should ${options.isDisplayed ? 'be' : 'not be'} displayed`, () => {
-            expect(pagination.isDisplayed()).to.eventually.equal(options.isDisplayed);
+        it(`should ${options.displayed ? 'be' : 'not be'} displayed`, () => {
+            expect(pagination.isDisplayed()).to.eventually.equal(options.displayed);
         });
 
-        if (!options.isDisplayed) {
+        if (!options.displayed) {
             return;
         }
 
@@ -62,14 +61,14 @@ export function rxPaginate (options: rxPaginateExerciseOptions) {
 
         it('should allow attempting to navigate to the next page when already on the last page', () => {
             pagination.last();
-            pagination.getPage().then((page) => {
+            pagination.getPage().then(page => {
                 pagination.next();
                 expect(pagination.getPage()).to.eventually.equal(page);
             });
-        })
+        });
         it('should allow attempting to navigate to the last page when already on the last page', () => {
             pagination.last();
-            pagination.getPage().then((page) => {
+            pagination.getPage().then(page => {
                 pagination.last();
                 expect(pagination.getPage()).to.eventually.equal(page);
             });
@@ -86,11 +85,10 @@ export function rxPaginate (options: rxPaginateExerciseOptions) {
         });
 
         it('should allow attempting to navigate to the previous page when already on the first page', () => {
-            let currentPage;
             pagination.first();
             pagination.previous();
             expect(pagination.getPage()).to.eventually.equal(1);
-        })
+        });
 
         it('should allow attempting to navigate to the first page when already on the first page', () => {
             pagination.first();
@@ -117,11 +115,11 @@ export function rxPaginate (options: rxPaginateExerciseOptions) {
             });
 
             it('should navigate to the last page', () => {
-                pagination.getPage().then((page) => {
-                    var firstPage = page;
+                pagination.getPage().then(page => {
+                    let firstPage = page;
                     pagination.last();
                     rxMisc.scrollToElement(pagination, {
-                        positionOnScreen: 'middle'
+                        positionOnScreen: 'middle',
                     });
                     expect(pagination.getPage()).to.eventually.be.above(firstPage);
                     pagination.first();

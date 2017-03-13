@@ -2,34 +2,29 @@
 
 import {expect} from 'chai';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 
 import * as component from './rxCheckbox.page';
 
-interface rxCheckboxExerciseOptions {
-    instance?: component.rxCheckbox;
-    selected?: boolean,
-    disabled?: boolean,
-    visible?: boolean,
-    valid?: boolean
+interface IRxCheckboxExerciseOptions {
+    instance: component.rxCheckbox;
+    disabled?: boolean;
+    selected?: boolean;
+    valid?: boolean;
+    visible?: boolean;
 }
 /**
  * @description rxCheckbox exercises
  */
-export function rxCheckbox(options: rxCheckboxExerciseOptions) {
-    if (options === undefined) {
-        options = {};
-    }
-
+export function rxCheckbox(options: IRxCheckboxExerciseOptions) {
     options = _.defaults(options, {
         disabled: false,
         selected: false,
+        valid: true,
         visible: true,
-        valid: true
     });
 
     return () => {
-        var component;
+        let component;
 
         before(() => {
             component = options.instance;
@@ -57,7 +52,7 @@ export function rxCheckbox(options: rxCheckboxExerciseOptions) {
 
         if (options.disabled) {
             it('should not respond to selecting and unselecting', () => {
-                component.isSelected().then(function (selected) {
+                component.isSelected().then(selected => {
                     selected ? component.deselect() : component.select();
                     expect(component.isSelected()).to.eventually.equal(selected);
                     // even though it "doesn't respond to selecting and unselecting"
@@ -70,7 +65,7 @@ export function rxCheckbox(options: rxCheckboxExerciseOptions) {
             });
         } else {
             it('should respond to selecting and unselecting', () => {
-                component.isSelected().then(function (selected) {
+                component.isSelected().then(selected => {
                     selected ? component.deselect() : component.select();
                     expect(component.isSelected()).to.eventually.not.equal(selected);
                     // exercises should never alter the state of a page.

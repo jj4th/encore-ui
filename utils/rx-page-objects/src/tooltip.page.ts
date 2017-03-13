@@ -1,7 +1,7 @@
 'use strict';
 
 import {$, browser} from 'protractor';
-import {rxComponentElement, OverrideWebdriver, Promise} from './rxComponent';
+import {OverrideWebdriver, Promise, rxComponentElement} from './rxComponent';
 
 /* CSS HIERARCHY
  * ----------------------------------------
@@ -35,10 +35,10 @@ export class Tooltip extends rxComponentElement {
         // Tooltips, when left open, can obscure other hover/click
         // events on the page. Avoid this by getting the text, stop
         // hovering, then return the text value back to the user.
-        return this.$('.tooltip-inner').getText().then((txt) => {
+        return this.$('.tooltip-inner').getText().then(txt => {
             browser.actions().mouseMove($('body')).perform();
             return txt;
         }, () => null);
-    }//get text()
+    }// get text()
 
-}//Tooltip
+}// Tooltip

@@ -1,12 +1,12 @@
 'use strict';
 
-import {$, $$, by} from 'protractor';
-import {rxComponentElement, Promise, OverrideWebdriver, AccessorPromiseString} from './rxComponent';
-import {rxSelect, rxSelectAccessor} from './rxSelect.page';
+import {by} from 'protractor';
+import {AccessorPromiseString, OverrideWebdriver, rxComponentElement} from './rxComponent';
+import {rxSelect} from './rxSelect.page';
 import {rxTimePickerUtil} from './rxTimePickerUtil.page';
 
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 /**
  * @class
@@ -115,11 +115,11 @@ export class rxTimePicker extends rxComponentElement {
     }
     set time(timeString) {
         // Accept ISO 8601 Standard Time Format OR custom display format
-        var date = moment(<string>timeString, 'HH:mmZ');
+        let date = moment(<string> timeString, 'HH:mmZ');
 
         // `date` is currently in local TZ (not expected TZ)
         // extract the expected TZ to update `date`
-        var offset = rxTimePickerUtil.parseUtcOffset(<string>timeString);
+        let offset = rxTimePickerUtil.parseUtcOffset(<string> timeString);
         // force to time zone from input
         date.utcOffset(offset);
 

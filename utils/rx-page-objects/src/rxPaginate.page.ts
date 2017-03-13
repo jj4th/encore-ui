@@ -1,11 +1,11 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString} from './rxComponent';
-import {Promise, OverrideWebdriver} from './rxComponent';
-import {rxMisc} from './rxMisc.page';
 import * as _ from 'lodash';
+import {ElementFinder} from 'protractor';
+import {by} from 'protractor';
+import {rxComponentElement} from './rxComponent';
+import {Promise} from './rxComponent';
+import {rxMisc} from './rxMisc.page';
 
 /**
  * @class
@@ -69,7 +69,7 @@ export class rxPaginate extends rxComponentElement {
      */
     protected scrollAndClickIfDisplayed(elem: ElementFinder): Promise<void> {
         return elem.isDisplayed().then(displayed => {
-            if(displayed) {
+            if (displayed) {
                 rxMisc.scrollToElement(elem, {positionOnScreen: 'middle'});
                 return elem.click();
             }
@@ -92,7 +92,7 @@ export class rxPaginate extends rxComponentElement {
             if (index === -1) {
                 // If the page is less than min visible pages, we need to click the first link,
                 // otherwise we should click the last.
-                index = _.min(pages) > page ? 0 : pages.length -1;
+                index = _.min(pages) > page ? 0 : pages.length - 1;
                 this.scrollAndClickIfDisplayed(this.pages.get(index));
                 // Then call this function recursively.
                 return this.jumpToPage(page);
@@ -216,8 +216,8 @@ export class rxPaginate extends rxComponentElement {
      * @see {@link rxPaginate#getPageSize}
      */
     changePageSize(pageSize: number) {
-        let lnkPage = this.pageSizes.filter((elem) => {
-            return elem.getText().then(text => (parseInt(text) === pageSize));
+        let lnkPage = this.pageSizes.filter(elem => {
+            return elem.getText().then(text => (parseInt(text, 10) === pageSize));
         }).first();
         return this.scrollAndClickIfDisplayed(lnkPage);
     }

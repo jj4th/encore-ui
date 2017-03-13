@@ -1,11 +1,9 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$} from 'protractor';
-import * as moment from 'moment';
-import * as _ from 'lodash';
+import {$} from 'protractor';
 
-import {rxRadio, exercise} from '../index';
+import {exercise, rxRadio} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -20,84 +18,84 @@ describe('rxRadio', () => {
         instance: new rxRadio($('#radValidEnabledOne')),
         disabled: false,
         selected: true,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Enabled Unselected', exercise.rxRadio({
         instance: new rxRadio($('#radValidEnabledTwo')),
         disabled: false,
         selected: false,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Disabled Selected', exercise.rxRadio({
         instance: new rxRadio($('#radValidDisabledOne')),
         disabled: true,
         selected: true,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid Disabled Unselected', exercise.rxRadio({
         instance: new rxRadio($('#radValidDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid NG-Disabled Selected', exercise.rxRadio({
         instance: new rxRadio($('#radValidNgDisabledOne')),
         disabled: true,
         selected: true,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Valid NG-Disabled Unselected', exercise.rxRadio({
         instance: new rxRadio($('#radValidNgDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: true
+        valid: true,
     }));
 
     describe('(State) Invalid Enabled Selected', exercise.rxRadio({
         instance: new rxRadio($('#radInvalidEnabledOne')),
         disabled: false,
         selected: true,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Enabled Unselected', exercise.rxRadio({
         instance: new rxRadio($('#radInvalidEnabledTwo')),
         disabled: false,
         selected: false,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Disabled Selected', exercise.rxRadio({
         instance: new rxRadio($('#radInvalidDisabledOne')),
         disabled: true,
         selected: true,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid Disabled Unselected', exercise.rxRadio({
         instance: new rxRadio($('#radInvalidDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid NG-Disabled Selected', exercise.rxRadio({
         instance: new rxRadio($('#radInvalidNgDisabledOne')),
         disabled: true,
         selected: true,
-        valid: false
+        valid: false,
     }));
 
     describe('(State) Invalid NG-Disabled Unselected', exercise.rxRadio({
         instance: new rxRadio($('#radInvalidNgDisabledTwo')),
         disabled: true,
         selected: false,
-        valid: false
+        valid: false,
     }));
 
     describe('plain HTML radio buttons', () => {
@@ -105,24 +103,26 @@ describe('rxRadio', () => {
             instance: new rxRadio($('#plainRadNormal')),
             disabled: false,
             selected: false,
-            valid: false
+            valid: false,
         }));
 
         describe('Valid Disabled Unchecked', exercise.rxRadio({
             instance: new rxRadio($('#plainRadDisabled')),
             disabled: true,
-            selected: false
+            selected: false,
         }));
 
         describe('Valid Enabled Checked', exercise.rxRadio({
             instance: new rxRadio($('#plainRadChecked')),
             disabled: false,
-            selected: false
+            selected: false,
         }));
     });
 
     describe('Show/Hide Input', () => {
-        let radHate: rxRadio, radLike: rxRadio, radLove: rxRadio;
+        let radHate: rxRadio;
+        let radLike: rxRadio;
+        let radLove: rxRadio;
 
         before(() => {
             radHate = new rxRadio($('#radHateBacon'));
@@ -203,7 +203,9 @@ describe('rxRadio', () => {
         });
 
         describe('plain HTML radio buttons', () => {
-            let willHide: rxRadio, willBeHidden: rxRadio, otherRadio: rxRadio;
+            let willHide: rxRadio;
+            let willBeHidden: rxRadio;
+            let otherRadio: rxRadio;
 
             before(() => {
                 willHide = new rxRadio($('#plainRadRemoveRadio'));
@@ -227,10 +229,12 @@ describe('rxRadio', () => {
             });
 
         });
-    });//Show/Hide Input
+    }); // Show/Hide Input
 
     describe('Destroy Input', () => {
-        let radCreated: rxRadio, radDestroyed: rxRadio, radTargetCreated: rxRadio;
+        let radCreated: rxRadio;
+        let radDestroyed: rxRadio;
+        let radTargetCreated: rxRadio;
 
         before(() => {
             radCreated = new rxRadio($('#radCreated'));
@@ -280,5 +284,5 @@ describe('rxRadio', () => {
                 expect(radTargetCreated.isPresent()).to.eventually.be.false;
             });
         });
-    });//Destroy Input
+    }); // Destroy Input
 });

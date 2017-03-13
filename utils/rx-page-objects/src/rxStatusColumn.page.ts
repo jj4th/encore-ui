@@ -1,9 +1,7 @@
 'use strict';
-
-import {$, browser} from 'protractor';
-import {rxComponentElement, Promise} from './rxComponent';
+import {browser} from 'protractor';
+import {Promise, rxComponentElement} from './rxComponent';
 import {Tooltip} from './tooltip.page';
-import * as _ from 'lodash';
 
 /**
  * @description Lookup of human-readable versions of the color class names used in the HTML templates.
@@ -14,8 +12,8 @@ export const STATUS_COLORS = {
     ERROR: 'ERROR',
     INFO: 'INFO',
     PENDING: 'PENDING',
-    WARNING: 'WARNING'
-}
+    WARNING: 'WARNING',
+};
 export type STATUS_COLORS = keyof typeof STATUS_COLORS;
 
 /**
@@ -24,8 +22,8 @@ export type STATUS_COLORS = keyof typeof STATUS_COLORS;
 export const STATUS_ICONS = {
     ERROR: 'ERROR',
     INFO: 'INFO',
-    WARNING: 'WARNING'
-}
+    WARNING: 'WARNING',
+};
 export type STATUS_ICONS = keyof typeof STATUS_ICONS;
 
 /**
@@ -34,7 +32,7 @@ export type STATUS_ICONS = keyof typeof STATUS_ICONS;
 const ICON_CLASS_STATUS = {
     'fa-ban': STATUS_ICONS.ERROR,
     'fa-exclamation-triangle': STATUS_ICONS.WARNING,
-    'fa-info-circle': STATUS_ICONS.INFO
+    'fa-info-circle': STATUS_ICONS.INFO,
 };
 
 /**
@@ -128,7 +126,7 @@ export class rxStatusColumn extends rxComponentElement {
      * });
      */
     getIcon(): Promise<STATUS_ICONS> | Promise<null> {
-        return this.$('i').getAttribute('class').then((classes) => {
+        return this.$('i').getAttribute('class').then(classes => {
             classes = classes.replace(/fa fa-lg/, '').trim();
             return ICON_CLASS_STATUS[classes] || null;
         });
@@ -144,7 +142,7 @@ export class rxStatusColumn extends rxComponentElement {
      * });
      */
     getColor(): Promise<STATUS_COLORS> {
-        return this.getAttribute('class').then(function (classes) {
+        return this.getAttribute('class').then(classes => {
             classes = classes.match(/status-(\w+)/)[1].toUpperCase();
             return STATUS_COLORS[classes];
         });
@@ -156,7 +154,7 @@ export class rxStatusColumn extends rxComponentElement {
      * or look at the rxStatusColumn component demo. This attribute is not typical used by most projects.
      */
     getApi(): Promise<string> | Promise<null> {
-        return this.getAttribute('api').then(function (api) {
+        return this.getAttribute('api').then(api => {
             return (api ? api : null);
         });
     }

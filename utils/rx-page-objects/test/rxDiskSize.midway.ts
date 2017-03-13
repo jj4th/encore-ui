@@ -1,10 +1,10 @@
 'use strict';
 
-import {$$} from 'protractor';
 import {expect} from 'chai';
 import * as _ from 'lodash';
+import {$$} from 'protractor';
 
-import {rxDiskSize as diskSize, exercise} from '../index';
+import {rxDiskSize as diskSize} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -16,7 +16,7 @@ describe('rxDiskSize', () => {
         '171.337 PB',
         '420 GB',
         '125 TB',
-        '171.337 PB'
+        '171.337 PB',
     ];
 
     before(() => {
@@ -24,16 +24,16 @@ describe('rxDiskSize', () => {
         diskSizesTable = $$('#rx-disk-size-demo ul li');
     });
 
-    _.forEach(diskSizeStrings, function (testData, index) {
+    _.forEach(diskSizeStrings, (testData, index) => {
         it('should still have ' + testData + ' as test data on the page', () => {
-            diskSizesTable.get(index).getText().then(function (text) {
+            diskSizesTable.get(index).getText().then(text => {
                 let onPage = text.split('→')[1].trim();
                 expect(onPage).to.equal(testData);
             });
         });
 
         it('should convert ' + testData + ' back to gigabytes', () => {
-            diskSizesTable.get(index).getText().then(function (text) {
+            diskSizesTable.get(index).getText().then(text => {
                 let gigabytes = parseInt(text.split(' ')[0], 10);
                 expect(diskSize.toGigabytes(testData)).to.equal(gigabytes);
             });

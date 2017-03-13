@@ -4,17 +4,17 @@ import {expect} from 'chai';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
-import * as component from './rxDatePicker.page';
 import {Promise} from './rxComponent';
+import * as component from './rxDatePicker.page';
 
-interface rxDatePickerExerciseOptions {
-    instance: component.rxDatePicker
-    isPresent?: boolean
-    isDisplayed?: boolean
-    isEnabled?: boolean
-    isValid?: boolean
-    isOpen?: boolean
-    selectedDate?: string | null
+interface IRxDatePickerExerciseOptions {
+    instance: component.rxDatePicker;
+    displayed?: boolean;
+    enabled?: boolean;
+    open?: boolean;
+    present?: boolean;
+    selectedDate?: string | null;
+    valid?: boolean;
 };
 
 /**
@@ -22,18 +22,18 @@ interface rxDatePickerExerciseOptions {
  * @example
  * describe('default exercises', encore.exercise.rxDatePicker({
  *     instance: myPage.datepicker, // select one of many pagination instances from your page objects
- *     isValid: false,
+ *     valid: false,
  *     selectedDate: moment().format('YYYY-MM-DD')
  * }));
  */
-export function rxDatePicker (options: rxDatePickerExerciseOptions) {
+export function rxDatePicker (options: IRxDatePickerExerciseOptions) {
     options = _.defaults(options, {
-        isPresent: true,
-        isDisplayed: true,
-        isEnabled: true,
-        isValid: true,
-        isOpen: false,
-        selectedDate: null
+        displayed: true,
+        enabled: true,
+        open: false,
+        present: true,
+        selectedDate: null,
+        valid: true,
     });
 
     // avoid mangling mocha's `this` context by not using fat-arrow syntax
@@ -68,19 +68,19 @@ export function rxDatePicker (options: rxDatePickerExerciseOptions) {
             datepicker = options.instance;
         });
 
-        it(`should ${options.isPresent ? '' : 'not '}be present`, () => {
-            expect(datepicker.isPresent()).to.eventually.equal(options.isPresent);
+        it(`should ${options.present ? '' : 'not '}be present`, () => {
+            expect(datepicker.isPresent()).to.eventually.equal(options.present);
         });
 
-        if (!options.isPresent) {
+        if (!options.present) {
             return;
         }
 
-        it(`should ${options.isDisplayed ? '' : 'not '}be displayed`, () => {
-            expect(datepicker.isDisplayed()).to.eventually.equal(options.isDisplayed);
+        it(`should ${options.displayed ? '' : 'not '}be displayed`, () => {
+            expect(datepicker.isDisplayed()).to.eventually.equal(options.displayed);
         });
 
-        if (!options.isDisplayed) {
+        if (!options.displayed) {
             return;
         }
 
@@ -90,19 +90,19 @@ export function rxDatePicker (options: rxDatePickerExerciseOptions) {
             });
         }
 
-        it(`should ${options.isValid ? '' : 'not '}be valid`, () => {
-            expect(datepicker.isValid()).to.eventually.equal(options.isValid);
+        it(`should ${options.valid ? '' : 'not '}be valid`, () => {
+            expect(datepicker.isValid()).to.eventually.equal(options.valid);
         });
 
-        it(`should ${options.isEnabled ? '' : 'not '}be enabled`, () => {
-            expect(datepicker.isEnabled()).to.eventually.equal(options.isEnabled);
+        it(`should ${options.enabled ? '' : 'not '}be enabled`, () => {
+            expect(datepicker.isEnabled()).to.eventually.equal(options.enabled);
         });
 
-        it(`should ${options.isOpen ? '' : 'not '}already have the calendar open`, () => {
-            expect(datepicker.isOpen()).to.eventually.equal(options.isOpen);
+        it(`should ${options.open ? '' : 'not '}already have the calendar open`, () => {
+            expect(datepicker.isOpen()).to.eventually.equal(options.open);
         });
 
-        if (!options.isEnabled) {
+        if (!options.enabled) {
             return;
         }
 
@@ -114,14 +114,14 @@ export function rxDatePicker (options: rxDatePickerExerciseOptions) {
             expect(datepicker.year).to.eventually.equal(selectedYear);
         });
 
-        it(`should ${options.isOpen ? 'close ' : 'open '}the calendar`, () => {
-            options.isOpen ? datepicker.close() : datepicker.open();
-            expect(datepicker.isOpen()).to.eventually.equal(!options.isOpen);
+        it(`should ${options.open ? 'close ' : 'open '}the calendar`, () => {
+            options.open ? datepicker.close() : datepicker.open();
+            expect(datepicker.isOpen()).to.eventually.equal(!options.open);
         });
 
         it('should return the calendar back to its original state', () => {
-            options.isOpen ? datepicker.open() : datepicker.close();
-            expect(datepicker.isOpen()).to.eventually.equal(options.isOpen);
+            options.open ? datepicker.open() : datepicker.close();
+            expect(datepicker.isOpen()).to.eventually.equal(options.open);
         });
 
         it('should have some days that are in the current month', () => {
@@ -175,9 +175,9 @@ export function rxDatePicker (options: rxDatePickerExerciseOptions) {
             });
 
             it('should update the date to one month ago', () => {
-                let previousMonth = moment().subtract(1, 'months').format(isoFormat);
-                datepicker.date = previousMonth;
-                expect(datepicker.date).to.eventually.equal(previousMonth);
+                let oneMonthAgo = moment().subtract(1, 'months').format(isoFormat);
+                datepicker.date = oneMonthAgo;
+                expect(datepicker.date).to.eventually.equal(oneMonthAgo);
             });
 
             it('should return the date back to its original date', () => {
@@ -207,13 +207,13 @@ export function rxDatePicker (options: rxDatePickerExerciseOptions) {
             });
 
             it('should update the date to the first of the month', () => {
-                var firstOfMonth = moment().startOf('month').format(isoFormat);
+                let firstOfMonth = moment().startOf('month').format(isoFormat);
                 datepicker.date = firstOfMonth;
                 expect(datepicker.date).to.eventually.equal(firstOfMonth);
             });
 
             it('should update the date to the last of the month', () => {
-                var lastOfMonth = moment().endOf('month').format(isoFormat);
+                let lastOfMonth = moment().endOf('month').format(isoFormat);
                 datepicker.date = lastOfMonth;
                 expect(datepicker.date).to.eventually.equal(lastOfMonth);
             });
@@ -225,7 +225,7 @@ export function rxDatePicker (options: rxDatePickerExerciseOptions) {
         });
 
         after(() => {
-            options.isOpen ? datepicker.open() : datepicker.close();
+            options.open ? datepicker.open() : datepicker.close();
         });
 
     };

@@ -1,9 +1,7 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
 import * as _ from 'lodash';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @class

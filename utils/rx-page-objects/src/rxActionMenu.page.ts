@@ -1,10 +1,6 @@
 'use strict';
-
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
-import {rxModalAction} from './rxModalAction.page';
-import * as _ from 'lodash';
+import {by} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 export class rxAction extends rxComponentElement {
     @OverrideWebdriver
@@ -26,10 +22,6 @@ export class rxActionMenu extends rxComponentElement {
      */
     cssFirstAny = '.actions-area > *';
 
-    constructor(rootElement: ElementFinder) {
-        super(rootElement);
-    }
-
     get icoCog() {
         return this.$('.fa-cog');
     }
@@ -38,7 +30,7 @@ export class rxActionMenu extends rxComponentElement {
      * @description Whether or not the action cog is showing its underlying menu.
      */
     isExpanded() {
-        return this.$('.action-list').getAttribute('class').then(function (className) {
+        return this.$('.action-list').getAttribute('class').then(className => {
             return className.indexOf('ng-hide') === -1;
         });
     }
@@ -47,7 +39,7 @@ export class rxActionMenu extends rxComponentElement {
      * @description Clicks the action cog to expand the action menu, unless it's already open.
      */
     expand(): void {
-        this.isExpanded().then((expanded) => {
+        this.isExpanded().then(expanded => {
             if (!expanded) {
                 this.icoCog.click();
             }
@@ -58,7 +50,7 @@ export class rxActionMenu extends rxComponentElement {
      * @description Clicks the action cog to collapse the action menu, unless it's already closed.
      */
     collapse(): void {
-        this.isExpanded().then((expanded) => {
+        this.isExpanded().then(expanded => {
             if (expanded) {
                 this.icoCog.click();
             }
@@ -69,15 +61,15 @@ export class rxActionMenu extends rxComponentElement {
      * @description Whether or not the action menu has an item matching the text `actionName`.
      * Will expand the action menu to determine if the action is available.
      */
-    hasAction(actionName) {
+    hasAction(actionName: string) {
         this.expand();
-        return this.action(actionName).isDisplayed().then((displayed) => displayed, () => false);
+        return this.action(actionName).isDisplayed().then(displayed => displayed, () => false);
     }
 
     /**
      * @description Returns an action's element.
      */
-    action(actionName) {
+    action(actionName: string) {
         this.expand();
         return new rxAction(this.element(by.cssContainingText(this.cssFirstAny, actionName)));
     }

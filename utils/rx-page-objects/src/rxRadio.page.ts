@@ -1,9 +1,9 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
 import * as _ from 'lodash';
+import {ElementFinder} from 'protractor';
+import {by} from 'protractor';
+import {OverrideWebdriver, rxComponentElement} from './rxComponent';
 
 /**
  * @class
@@ -54,7 +54,7 @@ export class rxRadio extends rxComponentElement {
     isEnabled() {
         return this.eleFakeRadio.isPresent().then(isFakeRadio => {
             if (isFakeRadio) {
-                return this.eleWrapper.getAttribute('class').then((classes) => {
+                return this.eleWrapper.getAttribute('class').then(classes => {
                     return !_.includes(classes.split(' '), 'rx-disabled');
                 });
             }
@@ -75,19 +75,19 @@ export class rxRadio extends rxComponentElement {
     }
 }
 
-export function rxRadioAccessor(elem: ElementFinder) {
-    return (target, propertyKey): any => {
+export function rxRadioAccessor(elem: ElementFinder): PropertyDecorator {
+    return (target, propertyKey): PropertyDescriptor => {
         let radio = new rxRadio(elem);
         return {
-            get: function () {
+            get() {
                 return radio.isSelected();
             },
             // passing `false` to this will do nothing.
-            set: function (enable) {
+            set(enable: boolean) {
                 if (enable) {
                     radio.select();
                 }
-            }
+            },
         };
-    }
+    };
 };

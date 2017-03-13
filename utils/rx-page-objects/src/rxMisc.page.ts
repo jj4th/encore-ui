@@ -1,18 +1,17 @@
 'use strict';
 
-import {ILocation} from 'selenium-webdriver';
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by, promise} from 'protractor';
-import * as webdriver from 'selenium-webdriver';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
 import * as _ from 'lodash';
+import {ElementArrayFinder, ElementFinder} from 'protractor';
+import {browser, promise} from 'protractor';
+import {ILocation} from 'selenium-webdriver';
+import {Promise} from './rxComponent';
 
 /**
  * @interface
  */
-interface scrollToElementOptions {
-    elementTargetPoint?: string,
-    positionOnScreen?: string
+interface IScrollToElementOptions {
+    elementTargetPoint?: string;
+    positionOnScreen?: string;
 }
 
 type rxMiscLocationSubject = ElementFinder | ElementArrayFinder | ILocation;
@@ -67,7 +66,7 @@ export namespace rxMisc {
      *    browser.ignoreSynchronization = false;
      * });
      */
-    export function scrollToElement(elem: ElementFinder | ElementArrayFinder, options?: scrollToElementOptions) {
+    export function scrollToElement(elem: ElementFinder | ElementArrayFinder, options?: IScrollToElementOptions) {
         if (options === undefined) {
             options = {};
         }
@@ -77,7 +76,7 @@ export namespace rxMisc {
             positionOnScreen: 'top', // 'middle', 'bottom'
         });
 
-        return Promise.all([elem.getSize(), elem.getLocation()]).then((info) => {
+        return Promise.all([elem.getSize(), elem.getLocation()]).then(info => {
             // Using 'any' type because TypeScript doesn't understand that info[0] and info[1] might be arrays.
             let size: any = info[0];
             let loc: any = info[1];
@@ -90,17 +89,17 @@ export namespace rxMisc {
                 loc = _.minBy(loc, 'y');
             }
 
-            return browser.executeScript('return window.innerHeight;').then((height) => {
+            return browser.executeScript('return window.innerHeight;').then(height => {
                 let positionOnScreen = {
                     top: 0,
                     middle: height / 2,
-                    bottom: height
+                    bottom: height,
                 }[options.positionOnScreen];
 
                 let elementTargetPoint = {
                     top: loc.y,
                     middle: loc.y + size.height / 2,
-                    bottom: loc.y + size.height
+                    bottom: loc.y + size.height,
                 }[options.elementTargetPoint];
 
                 let yLocation = elementTargetPoint - positionOnScreen;
@@ -125,7 +124,7 @@ export namespace rxMisc {
 
         if (elementOrLocation instanceof ElementFinder) {
             let elem = elementOrLocation;
-            return elem.getLocation().then(function (loc) {
+            return elem.getLocation().then(loc => {
                 return loc[attribute];
             });
         } else {

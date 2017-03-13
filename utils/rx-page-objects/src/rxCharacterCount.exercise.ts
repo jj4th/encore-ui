@@ -5,12 +5,12 @@ import * as _ from 'lodash';
 
 import * as component from './rxCharacterCount.page';
 
-interface rxCharacterCountExerciseOptions {
-    instance: component.rxCharacterCount
-    maxCharacters?: number
-    nearLimit?: number
-    ignoreInsignificantWhitespace?: boolean
-    highlight?: boolean
+interface IRxCharacterCountExerciseOptions {
+    instance: component.rxCharacterCount;
+    highlight?: boolean;
+    ignoreInsignificantWhitespace?: boolean;
+    maxCharacters?: number;
+    nearLimit?: number;
 }
 /**
  * @description rxCharacterCount exercises.
@@ -22,13 +22,12 @@ interface rxCharacterCountExerciseOptions {
  *     ignoreInsignificantWhitespace: false
  * }));
  */
-export function rxCharacterCount (options: rxCharacterCountExerciseOptions) {
-
+export function rxCharacterCount (options: IRxCharacterCountExerciseOptions) {
     options = _.defaults(options, {
+        highlight: false,
+        ignoreInsignificantWhitespace: true,
         maxCharacters: 254,
         nearLimit: 10,
-        ignoreInsignificantWhitespace: true,
-        highlight: false
     });
 
     let belowNearLimitLength = options.maxCharacters - options.nearLimit;
@@ -91,7 +90,6 @@ export function rxCharacterCount (options: rxCharacterCountExerciseOptions) {
             });
         });
 
-
         describe('when ' + belowNearLimitLength + ' characters are entered', () => {
 
             beforeEach(() => {
@@ -114,7 +112,6 @@ export function rxCharacterCount (options: rxCharacterCountExerciseOptions) {
             });
         });
 
-
         describe('when ' + aboveNearLimitLength + ' above limit characters are entered', () => {
 
             beforeEach(() => {
@@ -125,7 +122,6 @@ export function rxCharacterCount (options: rxCharacterCountExerciseOptions) {
                 expect(characterCount.isNearLimit()).to.eventually.be.true;
             });
         });
-
 
         describe('when ' + options.maxCharacters + ' characters are entered', () => {
 
@@ -141,7 +137,6 @@ export function rxCharacterCount (options: rxCharacterCountExerciseOptions) {
                 expect(characterCount.remaining).to.eventually.equal(0);
             });
         });
-
 
         describe('when ' + overLimit + ' characters are entered', () => {
 
@@ -188,7 +183,7 @@ export function rxCharacterCount (options: rxCharacterCountExerciseOptions) {
                     () => {
                         characterCount.comment = 'f'.repeat(options.maxCharacters);
                         expect(characterCount.getOverLimitText()).to.eventually.equal('');
-                    }
+                    },
                 );
 
                 it('should highlight a single characters when ' + overLimit + ' characters are entered', () => {

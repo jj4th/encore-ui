@@ -1,9 +1,9 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$$, $, element, by, browser} from 'protractor';
-import {rxNotify} from '../index';
 import * as _ from 'lodash';
+import {browser, by, element} from 'protractor';
+import {rxNotify} from '../index';
 import {rxCheckbox, rxForm} from '../index';
 
 let demoPage = require('../../demo.page');
@@ -86,7 +86,7 @@ describe('utilities:rxAutoSave', () => {
                           'In order to prevent your outfit from soaking',
                           '(later risking hypothermia) you must wear the least',
                           'amount of clothes possible to stay dry through the night.'].join(' '),
-            sensitiveData: 'Only Jay Parlar knows where the Candian Armed Forces lie in wait!'
+            sensitiveData: 'Only Jay Parlar knows where the Candian Armed Forces lie in wait!',
         };
 
         let leavePage = () => {
@@ -99,7 +99,7 @@ describe('utilities:rxAutoSave', () => {
             leavePage();
         });
 
-        _.forEach(autoSavedData, function (data, property) {
+        _.forEach(autoSavedData, (data, property) => {
             it('should remember the form data for ' + property, () => {
                 if (property === 'sensitiveData') {
                     expect(autoSave[property]).to.eventually.equal('');
@@ -116,7 +116,7 @@ describe('utilities:rxAutoSave', () => {
                 leavePage();
             });
 
-            _.forEach(_.keys(autoSavedData), function (property) {
+            _.forEach(_.keys(autoSavedData), property => {
                 it('should not remember the form data for ' + property, () => {
                     expect(autoSave[property]).to.eventually.be.not.ok;
                 });
@@ -132,7 +132,7 @@ describe('utilities:rxAutoSave', () => {
                 leavePage();
             });
 
-            _.forEach(_.keys(autoSavedData), function (property) {
+            _.forEach(_.keys(autoSavedData), property => {
                 it('should not remember the form data for ' + property, () => {
                     expect(autoSave[property]).to.eventually.be.not.ok;
                 });

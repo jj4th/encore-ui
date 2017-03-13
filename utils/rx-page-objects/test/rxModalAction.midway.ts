@@ -3,7 +3,7 @@
 import {expect} from 'chai';
 import {$, by} from 'protractor';
 
-import {rxModalAction, rxNotify, exercise, AccessorPromiseString} from '../index';
+import {AccessorPromiseString, rxModalAction, rxNotify} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -88,7 +88,7 @@ describe('rxModalAction', () => {
             changePasswordModal.submit();
             expect(changePasswordModal.isDisplayed()).to.eventually.be.false;
         });
-    });//when triggered
+    }); // when triggered
 
     describe('when triggered and closed', () => {
         beforeEach(() => {
@@ -111,7 +111,7 @@ describe('rxModalAction', () => {
             it('should display an info notification', () => {
                 expect(rxNotify.all.isPresent('Password Unchanged', 'info')).to.eventually.be.true;
             });
-        });//when closed with "X"
+        }); // when closed with "X"
 
         describe('when closed via the "cancel" button', () => {
             beforeEach(() => {
@@ -125,8 +125,8 @@ describe('rxModalAction', () => {
             it('should display an info notification', () => {
                 expect(rxNotify.all.isPresent('Password Unchanged', 'info')).to.eventually.be.true;
             });
-        });//when closed via "cancel"
-    });//when triggered and closed
+        }); // when closed via "cancel"
+    }); // when triggered and closed
 
     describe('default modal behavior', () => {
         let defaultModal: rxModalAction;

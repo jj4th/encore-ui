@@ -1,10 +1,8 @@
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise} from './rxComponent';
-import {rxFieldName} from './rxFieldName.page';
 import * as _ from 'lodash';
+import {ElementFinder} from 'protractor';
+import {rxFieldName} from './rxFieldName.page';
 
 /**
  * @description
@@ -20,17 +18,17 @@ import * as _ from 'lodash';
  *     expect(yourPage.plainTextbox).to.eventually.equal('My Username'); // getter
  * });
  */
-export function textFieldAccessor(elem: ElementFinder) {
-    return function (target, propertyKey): any {
+export function textFieldAccessor(elem: ElementFinder): PropertyDecorator {
+    return (target, propertyKey): PropertyDescriptor => {
         return {
-            get: function () {
+            get() {
                 return elem.getAttribute('value');
             },
-            set: function (input) {
+            set(input) {
                 elem.clear();
                 elem.sendKeys(input);
-            }
-        }
+            },
+        };
     };
 }
 

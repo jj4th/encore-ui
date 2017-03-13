@@ -1,9 +1,9 @@
 
 'use strict';
 
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$, $$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
+import {ElementArrayFinder, ElementFinder} from 'protractor';
+import {$, browser, by} from 'protractor';
+import {OverrideWebdriver, Promise, rxComponentElement} from './rxComponent';
 
 /**
  * @description Functions for interacting with a single notification.
@@ -27,7 +27,7 @@ export class rxNotification extends rxComponentElement {
      */
     getType() {
         let notificationTypes = /error|info|success|warning/;
-        return this.getAttribute('class').then((className) => {
+        return this.getAttribute('class').then(className => {
             return className.match(notificationTypes)[0];
         });
     }
@@ -42,7 +42,7 @@ export class rxNotification extends rxComponentElement {
      */
     @OverrideWebdriver
     getText() {
-        return this.element(by.xpath('.')).getText().then((text) => {
+        return this.element(by.xpath('.')).getText().then(text => {
             // Remove any lingering '× ' characters.
             return text.split('\n')[0].trim();
         });
@@ -59,14 +59,14 @@ export class rxNotification extends rxComponentElement {
      * });
      */
     dismiss() {
-        return this.isDismissable().then((dismissable) => {
+        return this.isDismissable().then(dismissable => {
             if (dismissable) {
                 this.btnDismiss.click();
 
                 // hack for chrome support -- this is for any possible
                 // alerts that are opened by closing this notification.
                 // also, before you check, EC.isAlertPresent does not work here.
-                return browser.getCapabilities().then((capabilities) => {
+                return browser.getCapabilities().then(capabilities => {
                     if (capabilities.get('browserName') === 'chrome') {
                         browser.sleep(500);
                     }
@@ -159,7 +159,7 @@ export class rxNotify {
      * });
      */
     byText(notificationText: string) {
-        var rootElement = this.rootElement.element(by.cssContainingText('.rx-notification', notificationText));
+        let rootElement = this.rootElement.element(by.cssContainingText('.rx-notification', notificationText));
         return new rxNotification(rootElement);
     }
 
@@ -177,13 +177,13 @@ export class rxNotify {
     dismiss() {
         return this.tblNotifications.map((notificationElement, index) => {
             let notification = new rxNotification(notificationElement);
-            return notification.isDismissable().then((dismissable) => {
+            return notification.isDismissable().then(dismissable => {
                 if (dismissable) {
                     return index;
                 }
             });
-        }).then((dismissableIndexes) => {
-            dismissableIndexes.reverse().forEach((index) => {
+        }).then(dismissableIndexes => {
+            dismissableIndexes.reverse().forEach(index => {
                 // The above `.map` call will populate the list with `undefined` if undismissable. Ignore those.
                 if (index !== undefined) {
                     let notification = new rxNotification(this.tblNotifications.get(index));
@@ -194,7 +194,7 @@ export class rxNotify {
     }
 
     /**
-     * @description Whether or not the notification matching text `string` exists in the current
+     * @description Whether or not the notification matching text `message` exists in the current
      * scope of notifications. If no `type` is specified, all notifications are searched. If a
      * `type` is specified, only those types of notifications will be searched. See {@link rxNotify.types}
      * to see the list of notification types supported.
@@ -206,13 +206,13 @@ export class rxNotify {
      *     expect(encore.rxNotify.all.isPresent('My message', encore.rxNotify.types.info)).to.eventually.be.true;
      * });
      */
-    isPresent(string: string, type?:string): Promise<boolean> {
+    isPresent(message: string, type?: string): Promise<boolean> {
         let elementsOfType: ElementArrayFinder;
 
         type = type ? '.notification-'.concat(type) : '[class^="notification-"]';
-        elementsOfType = this.rootElement.all(by.cssContainingText(type, string));
+        elementsOfType = this.rootElement.all(by.cssContainingText(type, message));
 
-        return elementsOfType.count().then((count) => (count > 0));
+        return elementsOfType.count().then(count => (count > 0));
     }
 
     /**
@@ -227,6 +227,6 @@ export class rxNotify {
         error: 'error',
         info: 'info',
         success: 'success',
-        warning: 'warning'
-    }
-};
+        warning: 'warning',
+    };
+}

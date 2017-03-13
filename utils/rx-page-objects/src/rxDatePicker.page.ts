@@ -1,11 +1,10 @@
 'use strict';
 
-import * as moment from 'moment';
 import * as _ from 'lodash';
-import * as webdriver from 'selenium-webdriver';
-import {ElementFinder, ElementArrayFinder} from 'protractor';
-import {$$, browser, by} from 'protractor';
-import {rxComponentElement, AccessorPromiseString, Promise, OverrideWebdriver} from './rxComponent';
+import * as moment from 'moment';
+import {ElementFinder} from 'protractor';
+import {by} from 'protractor';
+import {AccessorPromiseString, OverrideWebdriver, Promise, rxComponentElement} from './rxComponent';
 import {rxSelect} from './rxSelect.page';
 
 /**
@@ -26,7 +25,7 @@ export class rxDatePicker extends rxComponentElement {
     @OverrideWebdriver
     isEnabled() {
         return this.getAttribute('disabled')
-            .then((disabled) => !disabled);
+            .then(disabled => !disabled);
     }
 
     /**
@@ -38,8 +37,8 @@ export class rxDatePicker extends rxComponentElement {
         return this.isOpen().then(isOpen => {
             this.open(); // you have to in order to get to the dropdown
 
-            let month = new rxSelect(this.currentMonth).selectedOption.getText().then(month => {
-                return moment(month, 'MMM').format('MM');
+            let month = new rxSelect(this.currentMonth).selectedOption.getText().then(text => {
+                return moment(text, 'MMM').format('MM');
             });
 
             // if datepicker was closed before starting, put it back
@@ -52,10 +51,10 @@ export class rxDatePicker extends rxComponentElement {
     }
     set month(value: AccessorPromiseString) {
         this.open();
-        let dropdownExpectedValue = moment(<string>value, 'MM').format('MMM');
+        let dropdownExpectedValue = moment(<string> value, 'MM').format('MMM');
         if (dropdownExpectedValue === 'Invalid date') {
             throw new Error(
-                `Unexpected month value for month number "${value}". Months are not zero-indexed!`
+                `Unexpected month value for month number "${value}". Months are not zero-indexed!`,
             );
         }
 
@@ -142,7 +141,7 @@ export class rxDatePicker extends rxComponentElement {
      * picker.open(); // does nothing
      */
     open(): Promise<void> {
-        return this.isOpen().then((open) => {
+        return this.isOpen().then(open => {
             if (!open) {
                 return this.$('.control').click();
             }
@@ -159,7 +158,7 @@ export class rxDatePicker extends rxComponentElement {
      * picker.close(); // does nothing
      */
     close(): Promise<void> {
-        return this.isOpen().then((isOpen) => {
+        return this.isOpen().then(isOpen => {
             if (isOpen) {
                 return this.$('.control').click();
             }

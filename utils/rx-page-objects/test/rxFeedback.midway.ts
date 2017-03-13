@@ -1,11 +1,10 @@
 'use strict';
 
 import {expect} from 'chai';
-import {$, $$, promise, browser} from 'protractor';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import {$, browser} from 'protractor';
 
-import {rxFeedback, exercise} from '../index';
+import {rxFeedback} from '../index';
 
 let demoPage = require('../../demo.page');
 
@@ -30,28 +29,28 @@ describe('rxFeedback', () => {
     });
 
     it('should have the default feedback placeholder text for "' + defaultFeedback + '"', () => {
-        var placeholder = 'Please be as descriptive as possible so we can track it down for you.';
+        let placeholder = 'Please be as descriptive as possible so we can track it down for you.';
         expect(successfulFeedback.getDescriptionPlaceholder()).to.eventually.equal(placeholder);
     });
 
     describe('feedback types and labels', () => {
-        var typesAndLabels = {
+        let typesAndLabels = {
             'Incorrect Data': {
                 descriptionLabel: 'Problem Description:',
                 descriptionPlaceholder: ['Please be as descriptive as possible ',
-                                         'so we can figure it out for you.'].join('')
+                                         'so we can figure it out for you.'].join(''),
             },
             'Feature Request': {
                 descriptionLabel: 'Feature Description:',
                 descriptionPlaceholder: ['Please be as descriptive as possible ',
-                                         'so we can make your feature awesome.'].join('')
+                                         'so we can make your feature awesome.'].join(''),
             },
             'Kudos': {
                 descriptionLabel: 'What made you happy?:',
                 descriptionPlaceholder: ['We love to hear that you\'re enjoying Encore! ',
                                          'Tell us what you like, and what we can do to ',
-                                         'make it even better'].join('')
-            }
+                                         'make it even better'].join(''),
+            },
         };
 
         it('should have all feedback types', () => {

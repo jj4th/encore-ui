@@ -5,10 +5,10 @@ import * as _ from 'lodash';
 
 import * as component from './rxCollapse.page';
 
-interface rxCollapseExerciseOptions {
-    instance: component.rxCollapse
-    title?: string
-    expanded?: boolean
+interface IRxCollapseExerciseOptions {
+    instance: component.rxCollapse;
+    expanded?: boolean;
+    title?: string;
 }
 
 /**
@@ -20,10 +20,10 @@ interface rxCollapseExerciseOptions {
  *     expanded: true
  * }));
  */
-export function rxCollapse(options: rxCollapseExerciseOptions) {
+export function rxCollapse(options: IRxCollapseExerciseOptions) {
     options = _.defaults(options, {
-        title: undefined,
         expanded: false,
+        title: undefined,
     });
 
     return () => {
