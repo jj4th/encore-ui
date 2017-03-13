@@ -56,7 +56,7 @@ src/rxTimePicker.page.js
 src/rxTimePickerUtil.page.js
 src/rxToggleSwitch.exercise.js
 src/rxToggleSwitch.page.js
-# src/tabs.page.js
+src/tabs.page.js
 src/tooltip.page.js
 # src/typeahead.page.js
 
@@ -95,5 +95,5 @@ test/rxTimePicker.midway.js
 test/rxTimePickerUtil.midway.js
 test/rxToggle.midway.js
 test/rxToggleSwitch.midway.js
-# test/tabs.midway.js
+test/tabs.midway.js
 # test/typeahead.midway.js

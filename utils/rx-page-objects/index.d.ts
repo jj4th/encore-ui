@@ -30,6 +30,7 @@ export {rxTags, Tag} from './src/rxTags.page';
 export {rxTimePicker} from './src/rxTimePicker.page';
 export {rxTimePickerUtil} from './src/rxTimePickerUtil.page';
 export {rxToggleSwitch} from './src/rxToggleSwitch.page';
+export {Tabs, Tab} from './src/tabs.page';
 export {Tooltip} from './src/tooltip.page';
 
 import {rxBulkSelect as rxBulkSelectExercise} from './src/rxBulkSelect.exercise';
