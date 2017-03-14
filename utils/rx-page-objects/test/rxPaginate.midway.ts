@@ -54,12 +54,12 @@ describe('rxPaginate', () => {
 
     describe('Non present pagination exercise', exercise.rxPaginate({
         instance: new rxPaginate($('#does-not-exist')),
-        isPresent: false,
+        present: false,
     }));
 
     describe('Non displayed pagination exercise', exercise.rxPaginate({
         instance: new rxPaginate($('#rx-paginate-hidden')),
-        isDisplayed: false,
+        displayed: false,
     }));
 
     describe('UI pagination exercises', exercise.rxPaginate({
