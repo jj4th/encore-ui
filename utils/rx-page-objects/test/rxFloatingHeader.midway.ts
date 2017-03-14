@@ -2,6 +2,7 @@
 
 import {expect} from 'chai';
 import {$, browser, promise} from 'protractor';
+import {ISize, Window} from 'selenium-webdriver';
 
 import {rxMisc} from '../index';
 
@@ -19,12 +20,12 @@ let yDiff = (e1, e2) => {
 };
 
 let singleRowTable = {
-    isDisplayed: () => {
+    isDisplayed () {
         return this.table.isDisplayed();
     },
 
     get table () {
-        return $('table[rx-floating-header].e2e-no-filter');
+        return $('rx-example[name="table.floatingHeader"] table');
     },
 
     get tr () {
@@ -43,12 +44,12 @@ let singleRowTable = {
         return this.tableBody.getSize();
     },
 
-    rowLocation: position => {
+    rowLocation (position) {
         // first, middle or last
         return this.table.$('.' + position + '-row').getLocation();
     },
 
-    rowSize: position => {
+    rowSize (position) {
         // first, middle or last
         return this.table.$('.' + position + '-row').getSize();
     },
@@ -56,7 +57,7 @@ let singleRowTable = {
 };
 
 let multiRowTable = {
-    isDisplayed: () => {
+    isDisplayed() {
         return this.table.isDisplayed();
     },
 
@@ -92,12 +93,12 @@ let multiRowTable = {
         return this.trs.get(1).getLocation();
     },
 
-    rowLocation: position => {
+    rowLocation (position) {
         // first, middle or last
         return this.table.$('.' + position + '-row').getLocation();
     },
 
-    rowSize: position => {
+    rowSize (position) {
         // first, middle or last
         return this.table.$('.' + position + '-row').getSize();
     },
@@ -121,7 +122,7 @@ let scrollPosition = {
 };
 
 describe('rxFloatingHeader', () => {
-    let initialY;
+    let initialY: number;
 
     before(() => {
         demoPage.go('#/elements/Tables');
@@ -166,9 +167,9 @@ describe('rxFloatingHeader', () => {
     }); // Single-row header table
 
     describe('Multi-row floating header at top of table', () => {
-        let windowSize;
-        let window;
-        let innerHeight;
+        let windowSize: ISize;
+        let window: Window;
+        let innerHeight: number;
 
         before(() => {
             multiRowTable.trLocation.then(trLocation => {
