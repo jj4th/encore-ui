@@ -1,5 +1,4 @@
 export {rxComponentElement, AccessorPromiseString, OverrideWebdriver, Promise} from './src/rxComponent';
-export {rxAccountInfo, rxAccountInfoBadge} from './src/rxAccountInfo.page';
 export {rxActionMenu, rxAction} from './src/rxActionMenu.page';
 export {rxAge} from './src/rxAge.page';
 export {rxBreadcrumbs, rxBreadcrumb} from './src/rxBreadcrumbs.page';
