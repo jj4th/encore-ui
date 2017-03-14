@@ -30,7 +30,7 @@ describe('selectFilter', () => {
 
     before(() => {
         demoPage.go('#/elements/Tables');
-        selectFilter = new rxSelectFilter($('[name="rxSelectFilter.simple"] rx-select-filter'));
+        selectFilter = new rxSelectFilter($('[name="selectFilter.simple"] rx-select-filter'));
     });
 
     it('shows all the table data', () => {
