@@ -1,7 +1,6 @@
 export {rxComponentElement, AccessorPromiseString, OverrideWebdriver, Promise} from './src/rxComponent';
 export {rxActionMenu, rxAction} from './src/rxActionMenu.page';
 export {rxAge} from './src/rxAge.page';
-export {rxBreadcrumbs, rxBreadcrumb} from './src/rxBreadcrumbs.page';
 export {rxBulkSelect, rxBulkSelectRow} from './src/rxBulkSelect.page';
 export {rxCheckbox, rxCheckboxAccessor} from './src/rxCheckbox.page';
 export {rxCharacterCount} from './src/rxCharacterCount.page';
